@@ -34,11 +34,9 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(600, 450);
+			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Name = "MainForm";
-			this.Style = MetroFramework.MetroColorStyle.White;
-			this.Text = "Anzu";
-			this.TextAlign = System.Windows.Forms.VisualStyles.HorizontalAlign.Center;
+			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.ResumeLayout(false);
 
