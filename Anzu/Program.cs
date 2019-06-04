@@ -6,14 +6,20 @@ using System.Windows.Forms;
 
 namespace Anzu
 {
-	static class Program
+	internal static class Program
 	{
 		/// <summary>
 		/// Главная точка входа для приложения.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		private static void Main(string[] args)
 		{
+			if (args.Length > 0)
+			{
+				var Con = new ControllerCommand(args);
+				return;
+			}
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
