@@ -21,8 +21,11 @@ namespace AnzuW
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
-		{
+		{//SUDA KOD 
 			InitializeComponent();
+            Transport.FileTransport("D:\\SteamLibrary","D:\\trash");
+            Transport.GetListFolder("D:\\SteamLibrary");
+
 		}
 
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
