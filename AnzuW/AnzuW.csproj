@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\ProgressController.cs" />
-    <Compile Include="Functions\Desktop\DesktopBackup.cs" />
+    <Compile Include="Functions\Desktop\Desktop.cs" />
     <Compile Include="Functions\SearchFile.cs" />
     <Compile Include="Functions\Transport.cs" />
     <Compile Include="ValidatorPar\Command.cs" />
@@ -101,10 +101,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\img\close.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\img\drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

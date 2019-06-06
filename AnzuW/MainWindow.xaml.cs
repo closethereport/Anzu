@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using WinForms = System.Windows.Forms;
 
 namespace AnzuW
@@ -18,7 +19,7 @@ namespace AnzuW
 		/// MainWindow
 		/// </summary>
 		///
-		public static List<Thread> PoolThread = new List<Thread>();
+		public static Thread BGThread;
 
 		public MainWindow()
 		{
@@ -30,7 +31,8 @@ namespace AnzuW
 			{
 				InitializeComponent();
 				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-				Application.Current.MainWindow = this;
+				ProgressPanel.Visibility = Visibility.Collapsed;
+				ProgressController.MainWindow = this;
 			}
 		}
 
@@ -94,14 +96,23 @@ namespace AnzuW
 
 		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
 		{
-			//	var TDD = new TESTED();
-			//	TDD.BA(this);
+			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
+			{
+				MessageBox.Show("You need to install the main backup folder in the settings", "Error",
+				MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			else
+			{
+				var bk = new Desktop();
+				bk.Backup();
+			}
 		}
 
 		private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)
 		{
-			for (int i = 0; i < PoolThread.Count; i++)
-				PoolThread[i].Abort();
+			ProgressText.Content = "Wait for closing....";
+			ProgressStopbtn.IsEnabled = false;
+			BGThread.Abort();
 		}
 	}
 }
