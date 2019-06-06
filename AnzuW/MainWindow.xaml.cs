@@ -76,15 +76,13 @@ namespace AnzuW
 		/// <param name="e"></param>
 		private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
 		{
-			string folderName = String.Empty;
 			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
 			{
 				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
-					folderName = dlg.SelectedPath;
+					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath;
 			}
-
-			MainBackupFolderTextBox.Text = folderName;
-			Properties.Settings.Default.MainBackupFolder = folderName;
+			MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+			Properties.Settings.Default.Save();
 		}
 	}
 }
