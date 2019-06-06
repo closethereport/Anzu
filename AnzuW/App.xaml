@@ -4,5 +4,7 @@
              xmlns:local="clr-namespace:AnzuW"
              StartupUri="MainWindow.xaml">
 	<Application.Resources>
+		<Style x:Key="ButtonContext" TargetType="{x:Type Button}">
+		</Style>
 	</Application.Resources>
 </Application>
