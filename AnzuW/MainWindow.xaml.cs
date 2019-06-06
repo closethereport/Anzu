@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,6 +17,9 @@ namespace AnzuW
 		/// <summary>
 		/// MainWindow
 		/// </summary>
+		///
+		public static List<Thread> PoolThread = new List<Thread>;
+
 		public MainWindow()
 		{
 			if (Environment.GetCommandLineArgs().Length > 1)
@@ -92,6 +96,12 @@ namespace AnzuW
 		{
 			var TDD = new TESTED();
 			TDD.BA(this);
+		}
+
+		private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)
+		{
+			for (int i = 0; i < PoolThread.Count; i++)
+				PoolThread[i].Abort();
 		}
 	}
 }
