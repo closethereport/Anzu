@@ -77,7 +77,7 @@
 
 			<StackPanel Height="436" Grid.Row="1" VerticalAlignment="Bottom" Width="196" Margin="0,-5">
 
-				<Button x:Name="Desktopbtn" Content="Desktop" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" Click="Button_Click_Desktop" />
+				<Button Content="Desktop" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" Click="Button_Click_Desktop" />
 
 				<Button Content="Sub" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" />
 
@@ -120,6 +120,7 @@
 				<!--SETTING-->
 				<Border BorderThickness="1" HorizontalAlignment="Left" Height="86" Margin="10,47,0,0" VerticalAlignment="Top" Width="582" BorderBrush="Black" />
 
+				<!--SETTING-->
 				<Label Content="Main backup folder:" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="28,55,395,0" Width="179" />
 				<Label Content="Setting" HorizontalAlignment="Center"   VerticalAlignment="Top"  FontSize="24" />
 
@@ -133,19 +134,20 @@
 				<!--Desktop-->
 				<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="573" />
 
+				<!--MAIN-->
 				<Label Content="Desktop backup" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="20,20,404,0" Width="178" />
 				<Button Content="Backup" HorizontalAlignment="Left" Margin="472,20,0,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="White" Background="#FF17191D" Foreground="White" Click="Button_Click_DesktopBackup" />
-				<Label Content="*after backup the desktop will be cleared" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="180,38,158,0" Width="264" Height="33" FontSize="14" />
+				<Label Content="*after backup the desktop will be cleared" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="203,33,135,0" Width="264" Height="33" FontSize="14" />
 			</Grid>
 
-			<Grid x:Name="ProgressPanel"  x:FieldModifier="public" Grid.Column="1" Grid.Row="1">
+			<Grid Visibility="Collapsed" x:Name="ProgressPanel"  x:FieldModifier="public" Grid.Column="1" Grid.Row="1">
 
-				<Border Background="#FF282E36" BorderThickness="1" HorizontalAlignment="Center" Height="436" VerticalAlignment="Center" Width="602" Opacity="0.6" BorderBrush="#FF282E36" />
+				<Border BorderBrush="White" Background="#FF282E36" BorderThickness="1" HorizontalAlignment="Center" Height="436" VerticalAlignment="Center" Width="602" Opacity="0.6" />
 
-				<Label Content="Pease wait" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="0" FontSize="36" Width="174" Height="54" FontFamily="Candara" Background="{x:Null}" Foreground="White" FontWeight="Bold" />
-				<ProgressBar x:FieldModifier="public" x:Name="ProgressBar" HorizontalAlignment="Left" Height="24" Margin="22,250,0,0" VerticalAlignment="Top" Width="560" Foreground="#FF249538" Value="10" />
+				<Label Content="Progress" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="259,284,254,0" FontSize="20" Width="89" />
+				<ProgressBar x:FieldModifier="public" x:Name="ProgressBar" HorizontalAlignment="Left" Height="32" Margin="10,335,0,0" VerticalAlignment="Top" Width="582" />
 
-				<Button Content="Stop" HorizontalAlignment="Left" Margin="232,304,0,0" VerticalAlignment="Top" Width="135" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="#FF17191D" Background="#FF17191D" Foreground="White" Click="Button_Click_StopOtherThread" />
+				<Button Content="Stop" HorizontalAlignment="Left" Margin="492,372,0,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="White" Background="#FF17191D" Foreground="White" />
 				<!-- Visibility="Collapsed"-->
 				<!--ProgressPanel-->
 			</Grid>

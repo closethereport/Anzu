@@ -1,43 +1,97 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WinForms = System.Windows.Forms;
 
 namespace AnzuW
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {//SUDA KOD 
-            InitializeComponent();
-            //Transport.FileTransport("D:\\SteamLibrary", "D:\\trash");
-            //Transport.GetListFolder("D:\\SteamLibrary");
-            var ControllerSearch = new SearchFile();
-            ControllerSearch.FileSearch();
+	/// <summary>
+	/// Логика взаимодействия для MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		/// <summary>
+		/// MainWindow
+		/// </summary>
+		public MainWindow()
+		{
+			if (Environment.GetCommandLineArgs().Length > 1)
+			{
+				var CommandLinePasre = new ControllerCommand(Environment.GetCommandLineArgs());
+			}
+			else
+			{
+				InitializeComponent();
+				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+				Application.Current.MainWindow = this;
+			}
+		}
 
-        }
+		/// <summary>
+		/// Drag and drop for program header
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			this.DragMove();
+		}
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
+		/// <summary>
+		/// Exit button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Exit(object sender, RoutedEventArgs e)
+		{
+			System.Windows.Application.Current.Shutdown();
+		}
 
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-    }
+		/// <summary>
+		/// Button in the left side menu to enable the tab desktop
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_Desktop(object sender, RoutedEventArgs e)
+		{
+			SettingGrid.Visibility = Visibility.Collapsed;
+			DesktopGrid.Visibility = Visibility.Visible;
+		}
+
+		/// <summary>
+		/// Button in the left side menu to enable the tab setting
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_Setting(object sender, RoutedEventArgs e)
+		{
+			SettingGrid.Visibility = Visibility.Visible;
+			DesktopGrid.Visibility = Visibility.Collapsed;
+		}
+
+		/// <summary>
+		/// Button in settings (Select folder)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
+		{
+			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
+			{
+				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath;
+			}
+			MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+			Properties.Settings.Default.Save();
+		}
+
+		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
+		{
+			var TDD = new TESTED();
+			TDD.BA(this);
+		}
+	}
 }

@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,7 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Functions\SearchFile.cs" />
+    <Compile Include="Common\ProgressController.cs" />
+    <Compile Include="Functions\TESTED.cs" />
     <Compile Include="Functions\Transport.cs" />
     <Compile Include="ValidatorPar\Command.cs" />
     <Compile Include="ValidatorPar\ControllerCommand.cs" />
@@ -102,5 +104,6 @@
   <ItemGroup>
     <Resource Include="Resources\img\close.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
