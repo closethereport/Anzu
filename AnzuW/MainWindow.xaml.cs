@@ -94,6 +94,11 @@ namespace AnzuW
 			Properties.Settings.Default.Save();
 		}
 
+		/// <summary>
+		/// Button in Desktop (Desktop Backup)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
 		{
 			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
@@ -108,6 +113,11 @@ namespace AnzuW
 			}
 		}
 
+		/// <summary>
+		/// Button in progress bar (STOP)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)
 		{
 			ProgressText.Content = "Wait for closing....";
