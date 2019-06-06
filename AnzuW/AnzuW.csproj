@@ -103,5 +103,8 @@
   <ItemGroup>
     <Resource Include="Resources\img\close.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Functions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
