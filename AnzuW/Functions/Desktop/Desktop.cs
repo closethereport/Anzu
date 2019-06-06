@@ -49,7 +49,7 @@ internal class Desktop
 				{
 					FileInfo temp = (FileInfo)FileList[i];
 
-					//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзеров в настройках проги (Папка бэкапа)
+					//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
 
 					temp.CopyTo(AnzuW.Properties.Settings.Default.MainBackupFolder + "\\" + temp.Name); //копирование
 
