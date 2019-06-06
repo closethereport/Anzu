@@ -37,6 +37,8 @@ internal class Desktop
 			try
 			{
 				//КОПИРУЕМ
+				//Environment.SpecialFolder.DesktopDirectory - это путь до рабочего стола
+
 				DirectoryInfo dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
 				var FileList = dir.GetFiles();
 
@@ -46,6 +48,8 @@ internal class Desktop
 				for (int i = 0; i < FileList.Length; i++) //Проход по списку файлов
 				{
 					FileInfo temp = (FileInfo)FileList[i];
+
+					//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзеров в настройках проги (Папка бэкапа)
 
 					temp.CopyTo(AnzuW.Properties.Settings.Default.MainBackupFolder + "\\" + temp.Name); //копирование
 
