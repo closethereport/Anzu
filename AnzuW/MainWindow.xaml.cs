@@ -18,7 +18,7 @@ namespace AnzuW
 		/// MainWindow
 		/// </summary>
 		///
-		public static List<Thread> PoolThread = new List<Thread>;
+		public static List<Thread> PoolThread = new List<Thread>();
 
 		public MainWindow()
 		{
@@ -94,8 +94,8 @@ namespace AnzuW
 
 		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
 		{
-			var TDD = new TESTED();
-			TDD.BA(this);
+			//	var TDD = new TESTED();
+			//	TDD.BA(this);
 		}
 
 		private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)

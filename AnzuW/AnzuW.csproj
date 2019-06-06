@@ -57,7 +57,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\ProgressController.cs" />
-    <Compile Include="Functions\TESTED.cs" />
     <Compile Include="Functions\Transport.cs" />
     <Compile Include="ValidatorPar\Command.cs" />
     <Compile Include="ValidatorPar\ControllerCommand.cs" />
