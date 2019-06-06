@@ -23,6 +23,7 @@ namespace AnzuW
 			else
 			{
 				InitializeComponent();
+				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
 			}
 		}
 
@@ -68,6 +69,11 @@ namespace AnzuW
 			DesktopGrid.Visibility = Visibility.Collapsed;
 		}
 
+		/// <summary>
+		/// Button in settings (Select folder)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
 		{
 			string folderName = String.Empty;
