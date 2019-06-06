@@ -65,6 +65,7 @@ namespace AnzuW
 		{
 			SettingGrid.Visibility = Visibility.Collapsed;
 			DesktopGrid.Visibility = Visibility.Visible;
+			DownloadGrid.Visibility = Visibility.Collapsed;
 		}
 
 		/// <summary>
@@ -76,6 +77,7 @@ namespace AnzuW
 		{
 			SettingGrid.Visibility = Visibility.Visible;
 			DesktopGrid.Visibility = Visibility.Collapsed;
+			DownloadGrid.Visibility = Visibility.Collapsed;
 		}
 
 		/// <summary>
@@ -123,6 +125,13 @@ namespace AnzuW
 			ProgressText.Content = "Wait for closing....";
 			ProgressStopbtn.IsEnabled = false;
 			BGThread.Abort();
+		}
+
+		private void Button_Click_Download(object sender, RoutedEventArgs e)
+		{
+			SettingGrid.Visibility = Visibility.Collapsed;
+			DesktopGrid.Visibility = Visibility.Collapsed;
+			DownloadGrid.Visibility = Visibility.Visible;
 		}
 	}
 }

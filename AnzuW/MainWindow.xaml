@@ -122,7 +122,8 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="Sub"
+					Click="Button_Click_Download"
+					Content="Download"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -412,7 +413,8 @@
 			<Grid
 				x:Name="DesktopGrid"
 				Grid.Row="1"
-				Grid.Column="1">
+				Grid.Column="1"
+				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
 
 				<!--  Desktop  -->
@@ -488,7 +490,123 @@
 					FontSize="20"
 					Foreground="White" />
 			</Grid>
-			<!--  ============================/DesktopGrid============================  -->
+
+			<!--  ============================Download Grid============================  -->
+			<Grid
+				x:Name="DownloadGrid"
+				Grid.Row="1"
+				Grid.Column="1">
+
+				<!--  Visibility="Collapsed"  -->
+
+				<!--  Desktop  -->
+
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
+					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
+				</Border>
+
+				<!--  Desktop  -->
+
+				<Label
+					Width="243"
+					Margin="15,13,344,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Sort download folder"
+					FontFamily="Candara Light"
+					FontSize="25" />
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+					<Label Margin="349,-1,-1,50" Content="*FFFFFFFFFFFF" />
+				</Border>
+				<Button
+					Width="100"
+					Height="36"
+					Margin="482,42,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF17191D"
+					BorderBrush="White"
+					Click="Button_Click_DesktopBackup"
+					Content="Sort"
+					FontFamily="Candara Light"
+					FontSize="20"
+					Foreground="White" />
+
+				<Label
+					Width="274"
+					Margin="12,96,316,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Delete old file"
+					FontFamily="Candara Light"
+					FontSize="20" />
+
+				<Label
+					Width="69"
+					Margin="222,135,311,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Vaule"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<Label
+					Width="82"
+					Margin="15,135,505,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Type"
+					FontFamily="Candara Light"
+					FontSize="15" />
+
+				<Button
+					Width="100"
+					Height="36"
+					Margin="482,124,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF17191D"
+					BorderBrush="White"
+					Content="Delete"
+					FontFamily="Candara Light"
+					FontSize="20"
+					Foreground="White" />
+				<ComboBox
+					Width="120"
+					Margin="97,138,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top" />
+				<ComboBox
+					Width="120"
+					Margin="286,138,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top" />
+				<Label
+					Width="138"
+					Margin="15,118,449,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Remove older"
+					FontFamily="Candara Light"
+					FontSize="13" />
+			</Grid>
 
 			<!--  ============================ProgressPanel============================  -->
 			<Grid
