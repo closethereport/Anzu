@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WinForms = System.Windows.Forms;
@@ -24,6 +26,7 @@ namespace AnzuW
 			{
 				InitializeComponent();
 				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+				Application.Current.MainWindow = this;
 			}
 		}
 
@@ -83,6 +86,12 @@ namespace AnzuW
 			}
 			MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
 			Properties.Settings.Default.Save();
+		}
+
+		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
+		{
+			var TDD = new TESTED();
+			TDD.BA(this);
 		}
 	}
 }

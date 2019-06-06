@@ -56,6 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\ProgressController.cs" />
+    <Compile Include="Functions\TESTED.cs" />
     <Compile Include="Functions\Transport.cs" />
     <Compile Include="ValidatorPar\Command.cs" />
     <Compile Include="ValidatorPar\ControllerCommand.cs" />
@@ -102,8 +104,6 @@
   <ItemGroup>
     <Resource Include="Resources\img\close.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Functions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -136,8 +136,20 @@
 
 				<!--MAIN-->
 				<Label Content="Desktop backup" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="20,20,404,0" Width="178" />
-				<Button Content="Backup" HorizontalAlignment="Left" Margin="472,20,0,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="White" Background="#FF17191D" Foreground="White" />
+				<Button Content="Backup" HorizontalAlignment="Left" Margin="472,20,0,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="White" Background="#FF17191D" Foreground="White" Click="Button_Click_DesktopBackup" />
 				<Label Content="*after backup the desktop will be cleared" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="203,33,135,0" Width="264" Height="33" FontSize="14" />
+			</Grid>
+
+			<Grid Visibility="Collapsed" x:Name="ProgressPanel"  x:FieldModifier="public" Grid.Column="1" Grid.Row="1">
+
+				<Border BorderBrush="White" Background="#FF282E36" BorderThickness="1" HorizontalAlignment="Center" Height="436" VerticalAlignment="Center" Width="602" Opacity="0.6" />
+
+				<Label Content="Progress" HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="259,284,254,0" FontSize="20" Width="89" />
+				<ProgressBar x:FieldModifier="public" x:Name="ProgressBar" HorizontalAlignment="Left" Height="32" Margin="10,335,0,0" VerticalAlignment="Top" Width="582" />
+
+				<Button Content="Stop" HorizontalAlignment="Left" Margin="492,372,0,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="White" Background="#FF17191D" Foreground="White" />
+				<!-- Visibility="Collapsed"-->
+				<!--ProgressPanel-->
 			</Grid>
 		</Grid>
 	</Grid>
