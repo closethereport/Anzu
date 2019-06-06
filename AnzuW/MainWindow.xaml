@@ -68,6 +68,7 @@
 	<Grid>
 
 		<Grid>
+			<!-- btnSide -->
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="99*" />
 				<ColumnDefinition Width="301*" />
@@ -75,9 +76,9 @@
 
 			<Border Background="#FF2F3640" />
 
-			<StackPanel Height="436" Grid.Row="1" VerticalAlignment="Bottom" Width="196" Margin="0,-10">
+			<StackPanel Height="436" Grid.Row="1" VerticalAlignment="Bottom" Width="196" Margin="0,-5">
 
-				<Button Content="Main" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" />
+				<Button Content="Desktop" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" Click="Button_Click_Desktop" />
 
 				<Button Content="Sub" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" />
 
@@ -87,11 +88,11 @@
 
 				<Button Content="Other" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" />
 
-				<Button Content="Setting" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" />
+				<Button Content="Setting" Margin="0,4" Height="50" Background="#FF17191D" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontSize="24" BorderBrush="#FF17191D" Click="Button_Click_Setting" />
 			</StackPanel>
 		</Grid>
-
 		<Grid MouseLeftButtonDown="Window_MouseLeftButtonDown">
+			<!-- HEDER -->
 			<Grid.RowDefinitions>
 				<RowDefinition Height="16*" />
 				<RowDefinition Height="109*" />
@@ -100,6 +101,45 @@
 			<Label Content="Anzu" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="34" FontFamily="Segoe UI Light" Foreground="White" />
 
 			<Button Name="CloseButton" Content="x" Click="Exit" Width="32" Height="32" VerticalAlignment="Top" HorizontalAlignment="Right" FontFamily="Consolas" FontSize="22" Background="#FF26334F" Foreground="White" BorderBrush="{x:Null}" Margin="0,5,5,0" />
+		</Grid>
+
+		<Grid>
+			<!-- CONTEXT -->
+			<Grid.RowDefinitions>
+				<RowDefinition Height="16*" />
+				<RowDefinition Height="109*" />
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="99*" />
+				<ColumnDefinition Width="301*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid Visibility="Collapsed" x:Name="SettingGrid" Grid.Column="1" Grid.Row="1">
+				<!-- Visibility="Collapsed"-->
+
+				<!--SETTING-->
+				<Border BorderThickness="1" HorizontalAlignment="Left" Height="86" Margin="10,47,0,0" VerticalAlignment="Top" Width="582" BorderBrush="Black" />
+
+				<!--SETTING-->
+				<Label Content="Main backup folder:" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="28,55,395,0" Width="179" />
+				<Label Content="Setting" HorizontalAlignment="Center"   VerticalAlignment="Top"  FontSize="24" />
+
+				<TextBox Name="MainBackupFolderTextBox" HorizontalAlignment="Center" Height="28" Margin="28,87,150,0" TextWrapping="NoWrap" Text="Folder..." VerticalAlignment="Top" Width="424" IsEnabled="False" Background="#FFCDCDCD" FontSize="18" />
+				<Button Content="Select folder" HorizontalAlignment="Left" Margin="475,87,0,0" VerticalAlignment="Top" Width="95" Height="28" Style="{StaticResource ButtonContext}" FontSize="14" Click="Button_Click_SelectMainBackupFolder" />
+			</Grid>
+
+			<Grid x:Name="DesktopGrid" Grid.Column="1" Grid.Row="1">
+				<!-- Visibility="Collapsed"-->
+
+				<!--Desktop-->
+				<Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="573" />
+
+				<!--MAIN-->
+				<Label Content="Desktop backup" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="20,20,404,0" Width="178" />
+				<Button Content="Backup" HorizontalAlignment="Left" Margin="472,20,0,0" VerticalAlignment="Top" Width="100" Height="36" FontSize="20" FontFamily="Bahnschrift Light" BorderBrush="White" Background="#FF17191D" Foreground="White" />
+				<Label Content="*after backup the desktop will be cleared" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Margin="203,33,135,0" Width="264" Height="33" FontSize="14" />
+			</Grid>
 		</Grid>
 	</Grid>
 </Window>

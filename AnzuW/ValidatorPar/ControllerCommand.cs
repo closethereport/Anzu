@@ -13,12 +13,12 @@ internal class ControllerCommand
 
 	public ControllerCommand(string[] args)
 	{
-		Commands = new Command[] {
-			new Command(new string[]{"--NoGUI", "-nogui"}, Execute)
-		};
+		//Commands = new Command[] {
+		//	new Command(new string[]{"--NoGUI", "-nogui"}, Execute)
+		//};
 	}
 
-	private void Execute()
+	public void Parse()
 	{
 	}
 }
