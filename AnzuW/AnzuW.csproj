@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Functions\SearchFile.cs" />
     <Compile Include="Functions\Transport.cs" />
     <Compile Include="ValidatorPar\Command.cs" />
     <Compile Include="ValidatorPar\ControllerCommand.cs" />

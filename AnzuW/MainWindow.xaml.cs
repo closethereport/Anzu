@@ -15,27 +15,29 @@ using System.Windows.Shapes;
 
 namespace AnzuW
 {
-	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		public MainWindow()
-		{//SUDA KOD 
-			InitializeComponent();
-            Transport.FileTransport("D:\\SteamLibrary","D:\\trash");
-            Transport.GetListFolder("D:\\SteamLibrary");
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {//SUDA KOD 
+            InitializeComponent();
+            //Transport.FileTransport("D:\\SteamLibrary", "D:\\trash");
+            //Transport.GetListFolder("D:\\SteamLibrary");
+            var ControllerSearch = new SearchFile();
+            ControllerSearch.FileSearch();
 
-		}
+        }
 
-		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			this.DragMove();
-		}
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
 
-		private void Exit(object sender, RoutedEventArgs e)
-		{
-			System.Windows.Application.Current.Shutdown();
-		}
-	}
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+    }
 }
