@@ -169,7 +169,6 @@
 					Foreground="White" />
 			</StackPanel>
 		</Grid>
-		<!--  ==========================/Button Side============================  -->
 
 		<!--  ==========================HEDER============================  -->
 		<Grid MouseLeftButtonDown="Window_MouseLeftButtonDown">
@@ -178,7 +177,15 @@
 				<RowDefinition Height="16*" />
 				<RowDefinition Height="109*" />
 			</Grid.RowDefinitions>
-			<Border Background="#FF1B1E23" />
+			<Border Background="#FF1B1E23">
+				<Border.Effect>
+					<DropShadowEffect
+						BlurRadius="10"
+						Direction="-90"
+						RenderingBias="Quality"
+						ShadowDepth="2" />
+				</Border.Effect>
+			</Border>
 			<Label
 				HorizontalAlignment="Center"
 				VerticalAlignment="Center"
@@ -189,23 +196,20 @@
 
 			<Button
 				Name="CloseButton"
-				Width="32"
-				Height="32"
+				Width="48"
+				Height="48"
 				Margin="0,5,5,0"
 				HorizontalAlignment="Right"
 				VerticalAlignment="Top"
-				Background="#FF26334F"
-				BorderBrush="#FF26334F"
+				Background="{x:Null}"
+				BorderBrush="{x:Null}"
 				Click="Exit"
 				Content="x"
-				FontFamily="Consolas"
-				FontSize="22"
+				FontFamily="Bahnschrift Light"
+				FontSize="34"
 				Foreground="White" />
 		</Grid>
-		<!--  ==========================/HEDER============================  -->
 
-		<!--  ============================================================  -->
-		<!--  ============================================================  -->
 		<!--  =========================== CONTEXT ========================  -->
 		<!--  ============================================================  -->
 
@@ -232,6 +236,7 @@
 
 				<!--  SETTING  -->
 
+				<!--  Main Backup Folder  -->
 				<Label
 					Width="179"
 					Margin="20,14,403,0"
@@ -262,7 +267,7 @@
 					Background="Transparent"
 					BorderBrush="#FF383838"
 					BorderThickness="1">
-					<Border.ToolTip>This is a test tooltip! Woohoo!</Border.ToolTip>
+					<Border.ToolTip>Backups will be made to this folder.</Border.ToolTip>
 				</Border>
 				<Button
 					Width="113"
@@ -276,8 +281,132 @@
 					FontSize="18"
 					Foreground="#FF4B4A4A"
 					Style="{StaticResource ButtonContext}" />
+
+				<!--  Степень сжатия  -->
+				<Label
+					Width="108"
+					Margin="247,112,247,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="18" />
+
+				<Border
+					Width="582"
+					Height="93"
+					Margin="10,108,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>Different algorithms and compression ratios affect compression speed and compressed file size.</Border.ToolTip>
+				</Border>
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="33,173,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="432,149,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="ТАкое сжатие что пиздец"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="33,154,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="ну так нормально"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="247,149,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="247,173,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="432,173,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
+
+				<!--  Приоритет  -->
+				<Label
+					Width="108"
+					Margin="247,209,247,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="File handling"
+					FontFamily="Candara Light"
+					FontSize="18" />
+
+				<Border
+					Width="582"
+					Height="93"
+					Margin="10,209,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>Different algorithms and compression ratios affect compression speed and compressed file size.</Border.ToolTip>
+				</Border>
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="33,268,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="247,274,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<CheckBox
+					Width="138"
+					Height="19"
+					Margin="454,268,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Compression"
+					FontFamily="Candara Light"
+					FontSize="15" />
 			</Grid>
-			<!--  ============================/SETTING============================  -->
 
 			<!--  ============================DesktopGrid============================  -->
 			<Grid
@@ -321,6 +450,43 @@
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
+
+				<Label
+					Width="274"
+					Margin="12,96,316,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Desktop backup and sorting"
+					FontFamily="Candara Light"
+					FontSize="22" />
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
+					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
+				</Border>
+				<Label
+					Margin="15,130,257,276"
+					Content="Files will be divided into folders according to their extension"
+					Opacity="0.7" />
+				<Button
+					Width="100"
+					Height="36"
+					Margin="482,124,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF17191D"
+					BorderBrush="White"
+					Content="Backup"
+					FontFamily="Candara Light"
+					FontSize="20"
+					Foreground="White" />
 			</Grid>
 			<!--  ============================/DesktopGrid============================  -->
 
@@ -331,7 +497,7 @@
 				Grid.Column="1"
 				x:FieldModifier="public"
 				Visibility="Collapsed">
-
+				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
 					Height="157"
@@ -341,7 +507,15 @@
 					Background="#FF282E36"
 					BorderBrush="#FF282E36"
 					BorderThickness="1"
-					Opacity="0.6" />
+					Opacity="0.6">
+					<Border.Effect>
+						<DropShadowEffect
+							BlurRadius="15"
+							Direction="90"
+							RenderingBias="Quality"
+							ShadowDepth="2" />
+					</Border.Effect>
+				</Border>
 
 				<Border
 					Width="602"
@@ -371,6 +545,8 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					x:FieldModifier="public"
+					Background="{x:Null}"
+					BorderBrush="#FF938F8F"
 					Opacity="0.65" />
 
 				<Button
