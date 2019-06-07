@@ -86,8 +86,8 @@
     <Compile Include="Functions\Desktop\Desktop.cs" />
     <Compile Include="Functions\SearchFile.cs" />
     <Compile Include="Functions\Transport.cs" />
-    <Compile Include="ValidatorPar\Command.cs" />
-    <Compile Include="ValidatorPar\ControllerCommand.cs" />
+    <Compile Include="CommandLine\Command.cs" />
+    <Compile Include="CommandLine\ControllerCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
