@@ -16,11 +16,13 @@ namespace AnzuW
 	public partial class MainWindow : Window
 	{
 		/// <summary>
-		/// MainWindow
+		/// BG Thread
 		/// </summary>
-		///
 		public static Thread BGThread;
 
+		/// <summary>
+		/// MainWindow
+		/// </summary>
 		public MainWindow()
 		{
 			if (Environment.GetCommandLineArgs().Length > 1)

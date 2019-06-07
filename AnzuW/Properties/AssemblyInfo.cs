@@ -7,12 +7,12 @@ using System.Windows;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("AnzuW")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Anzu")]
+[assembly: AssemblyDescription("A set of tools for organizing files on Windows")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AnzuW")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("Nelu")]
+[assembly: AssemblyProduct("Anzu")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Nelu & 601")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
