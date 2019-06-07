@@ -1,3 +1,10 @@
+#region copyright
+
+// (c) 2019 Nelu & 601 (github.com/NeluQi)
+// This code is licensed under MIT license (see LICENSE for details)
+
+#endregion copyright
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
