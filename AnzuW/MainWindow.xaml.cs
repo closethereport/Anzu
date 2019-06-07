@@ -135,5 +135,10 @@ namespace AnzuW
 			DesktopGrid.Visibility = Visibility.Collapsed;
 			DownloadGrid.Visibility = Visibility.Visible;
 		}
+
+		private void Minimized(object sender, RoutedEventArgs e)
+		{
+			this.WindowState = WindowState.Minimized;
+		}
 	}
 }

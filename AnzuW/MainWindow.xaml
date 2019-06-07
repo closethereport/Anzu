@@ -13,6 +13,7 @@
 	WindowStyle="None"
 	mc:Ignorable="d">
 	<Window.Resources>
+
 		<Style x:Key="FocusVisual">
 			<Setter Property="Control.Template">
 				<Setter.Value>
@@ -97,7 +98,15 @@
 				<ColumnDefinition Width="301*" />
 			</Grid.ColumnDefinitions>
 
-			<Border Background="#FF2F3640" />
+			<Border Background="#FF2F3640" BorderThickness="0,10,0,0">
+				<Border.Effect>
+					<DropShadowEffect
+						BlurRadius="10"
+						Direction="90"
+						RenderingBias="Quality"
+						ShadowDepth="2" />
+				</Border.Effect>
+			</Border>
 
 			<StackPanel
 				Grid.Row="1"
@@ -133,7 +142,7 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="File"
+					Content="NULL"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -143,7 +152,7 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="Folder"
+					Content="NULL"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -153,7 +162,7 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="Other"
+					Content="NULL"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -190,9 +199,9 @@
 			<Label
 				HorizontalAlignment="Center"
 				VerticalAlignment="Center"
-				Content="Anzu"
-				FontFamily="Segoe UI Light"
-				FontSize="34"
+				Content="Anzu [by Nelu and 601]"
+				FontFamily="Candara Light"
+				FontSize="35"
 				Foreground="White" />
 
 			<Button
@@ -206,6 +215,20 @@
 				BorderBrush="{x:Null}"
 				Click="Exit"
 				Content="x"
+				FontFamily="Bahnschrift Light"
+				FontSize="34"
+				Foreground="White" />
+			<Button
+				Name="MinButton"
+				Width="48"
+				Height="48"
+				Margin="0,5,56,0"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Top"
+				Background="{x:Null}"
+				BorderBrush="{x:Null}"
+				Click="Minimized"
+				Content="-"
 				FontFamily="Bahnschrift Light"
 				FontSize="34"
 				Foreground="White" />
