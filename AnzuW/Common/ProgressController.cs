@@ -76,6 +76,7 @@ public class ProgressController
 			MainWindow.ProgressBar.Value = 0;
 			MainWindow.ProgressText.Content = "";
 			MainWindow.ProgressStopbtn.IsEnabled = true;
+			MainWindow.OutputBlock.Text = "";
 			MainWindow.ProgressPanel.Visibility = Visibility.Visible;
 		}));
 	}
@@ -101,6 +102,15 @@ public class ProgressController
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
 			MainWindow.ProgressBar.Value++;
+		}));
+	}
+
+	public void AddLog(string log)
+	{
+		MainWindow.Dispatcher.Invoke(new Action(() =>
+		{
+			MainWindow.OutputBlock.Text += log + Environment.NewLine;
+			MainWindow.OutputBlockScroll.ScrollToEnd();
 		}));
 	}
 }

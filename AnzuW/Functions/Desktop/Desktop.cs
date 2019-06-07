@@ -31,6 +31,7 @@ internal class Desktop
 			var Progress = new ProgressController();
 
 			Progress.ShowProgressBar(); //ПОКАЗАТЬ БАР
+			Progress.AddLog("Begin backup"); //Добавить строку в лог
 
 			// try catch Нужно для остановки потока кнопкой STOP из UI
 			// Если юзер нажмет STOP на интерфейсе будет переход в catch (Так же если возникнут исключения)
@@ -49,15 +50,19 @@ internal class Desktop
 				{
 					FileInfo temp = (FileInfo)FileList[i];
 
+					Progress.AddLog("Copy " + temp.FullName);   //Добавить строку в лог
+
 					//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
 
-					temp.CopyTo(AnzuW.Properties.Settings.Default.MainBackupFolder + "\\" + temp.Name); //копирование
+					temp.CopyTo(AnzuW.Properties.Settings.Default.MainBackupFolder + "\\" + temp.Name, true); //копирование
 
 					//File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
 					//File.Delete(temp.FullName.ToString());
 
 					Progress.Inc(); //увеличиваем прогресс бар на 1
 					Progress.SetText(i + "/" + FileList.Length); //Ставим новый текст над баром
+
+					Progress.AddLog("done " + temp.FullName); //Добавить строку в лог
 				}
 
 				Progress.HideProgressBar(); //СКРЫВАЕМ БАР

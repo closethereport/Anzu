@@ -142,7 +142,8 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="NULL"
+					Click="Button_Click_Folder"
+					Content="Folder"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -152,7 +153,7 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="NULL"
+					Content="Soon..."
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -162,7 +163,7 @@
 					Margin="0,4"
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
-					Content="NULL"
+					Content="Soon..."
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
@@ -406,10 +407,10 @@
 				<CheckBox
 					Width="138"
 					Height="19"
-					Margin="33,268,0,0"
+					Margin="33,274,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="Small size first"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
@@ -418,16 +419,16 @@
 					Margin="247,274,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="First large"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
 					Width="138"
 					Height="19"
-					Margin="454,268,0,0"
+					Margin="441,274,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="Clever algorithm"
 					FontFamily="Candara Light"
 					FontSize="15" />
 			</Grid>
@@ -439,6 +440,22 @@
 				Grid.Column="1"
 				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
+
+				<!--  Desktop  -->
+
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,174,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+
+					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
+					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
+				</Border>
 
 				<!--  Desktop  -->
 
@@ -493,9 +510,11 @@
 					Background="Transparent"
 					BorderBrush="#FF383838"
 					BorderThickness="1">
+
 					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
 					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
 				</Border>
+
 				<Label
 					Margin="15,130,257,276"
 					Content="Files will be divided into folders according to their extension"
@@ -512,17 +531,71 @@
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
+
+				<CheckBox
+					Width="117"
+					Margin="360,145,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Use more nesting" />
+
+				<Label
+					Width="274"
+					Margin="10,174,318,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Sort Desktop"
+					FontFamily="Candara Light"
+					FontSize="22" />
+
+				<Label
+					Margin="10,211,262,195"
+					Content="Files will be divided into folders according to their extension"
+					Opacity="0.7" />
+				<Button
+					Width="100"
+					Height="36"
+					Margin="482,205,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF17191D"
+					BorderBrush="White"
+					Content="Sort"
+					FontFamily="Candara Light"
+					FontSize="20"
+					Foreground="White" />
+
+				<CheckBox
+					Width="117"
+					Margin="360,226,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Use more nesting" />
 			</Grid>
 
 			<!--  ============================Download Grid============================  -->
 			<Grid
 				x:Name="DownloadGrid"
 				Grid.Row="1"
-				Grid.Column="1">
+				Grid.Column="1"
+				Visibility="Collapsed">
 
 				<!--  Visibility="Collapsed"  -->
 
 				<!--  Desktop  -->
+
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+					<Label Margin="9,32,322,-1" Content="Files will be divided into folders &#xD;&#xA;according to their extensions" />
+				</Border>
 
 				<Border
 					Width="582"
@@ -537,28 +610,14 @@
 					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
 				</Border>
 
-				<!--  Desktop  -->
-
 				<Label
 					Width="243"
-					Margin="15,13,344,0"
+					Margin="10,10,349,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Sort download folder"
 					FontFamily="Candara Light"
 					FontSize="25" />
-				<Border
-					Width="582"
-					Height="77"
-					Margin="10,10,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
-					<Label Margin="349,-1,-1,50" Content="*FFFFFFFFFFFF" />
-				</Border>
 				<Button
 					Width="100"
 					Height="36"
@@ -567,7 +626,6 @@
 					VerticalAlignment="Top"
 					Background="#FF17191D"
 					BorderBrush="White"
-					Click="Button_Click_DesktopBackup"
 					Content="Sort"
 					FontFamily="Candara Light"
 					FontSize="20"
@@ -575,7 +633,7 @@
 
 				<Label
 					Width="274"
-					Margin="12,96,316,0"
+					Margin="10,94,318,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Delete old file"
@@ -583,16 +641,16 @@
 					FontSize="20" />
 
 				<Label
-					Width="69"
-					Margin="222,135,311,0"
+					Width="45"
+					Margin="288,135,269,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Vaule"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<Label
-					Width="82"
-					Margin="15,135,505,0"
+					Width="42"
+					Margin="98,135,462,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Type"
@@ -613,22 +671,82 @@
 					Foreground="White" />
 				<ComboBox
 					Width="120"
-					Margin="97,138,0,0"
+					Margin="146,138,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top" />
 				<ComboBox
 					Width="120"
-					Margin="286,138,0,0"
+					Margin="338,138,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top" />
 				<Label
-					Width="138"
-					Margin="15,118,449,0"
+					Width="83"
+					Margin="15,135,504,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Remove older"
 					FontFamily="Candara Light"
 					FontSize="13" />
+				<CheckBox
+					Width="122"
+					Margin="336,63,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Use more nesting" />
+			</Grid>
+
+			<!--  ============================Folder Grid============================  -->
+			<Grid
+				x:Name="FolderGrid"
+				Grid.Row="1"
+				Grid.Column="1">
+
+				<!--  Visibility="Collapsed"  -->
+
+				<!--  Desktop  -->
+
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+				</Border>
+
+				<Label
+					Width="243"
+					Margin="10,10,349,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Archive folder"
+					FontFamily="Candara Light"
+					FontSize="25" />
+
+				<Label
+					Width="148"
+					Margin="228,32,226,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="drag and drop folder"
+					FontFamily="Candara Light"
+					FontSize="15"
+					Opacity="0.5" />
+				<Button
+					Width="127"
+					Height="36"
+					Margin="455,42,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF17191D"
+					BorderBrush="White"
+					Content="Select Folder"
+					FontFamily="Candara Light"
+					FontSize="20"
+					Foreground="White" />
 			</Grid>
 
 			<!--  ============================ProgressPanel============================  -->
@@ -636,13 +754,23 @@
 				x:Name="ProgressPanel"
 				Grid.Row="1"
 				Grid.Column="1"
-				x:FieldModifier="public"
-				Visibility="Collapsed">
+				x:FieldModifier="public">
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
-					Height="157"
-					Margin="0,279,0,0"
+					Height="436"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Background="#FF282E36"
+					BorderBrush="#FF282E36"
+					BorderThickness="1"
+					Opacity="0.6" />
+
+				<!--  Visibility="Collapsed"  -->
+				<Border
+					Width="602"
+					Height="240"
+					Margin="0,196,0,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center"
 					Background="#FF282E36"
@@ -657,21 +785,10 @@
 							ShadowDepth="2" />
 					</Border.Effect>
 				</Border>
-
-				<Border
-					Width="602"
-					Height="436"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					Background="#FF282E36"
-					BorderBrush="#FF282E36"
-					BorderThickness="1"
-					Opacity="0.6" />
-
 				<Label
 					Width="140"
 					Height="43"
-					Margin="0,279,0,0"
+					Margin="0,190,0,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Please, wait"
@@ -688,7 +805,8 @@
 					x:FieldModifier="public"
 					Background="{x:Null}"
 					BorderBrush="#FF938F8F"
-					Opacity="0.65" />
+					Opacity="0.65"
+					Value="20" />
 
 				<Button
 					x:Name="ProgressStopbtn"
@@ -714,6 +832,22 @@
 					FontFamily="Candara Light"
 					FontSize="17"
 					Foreground="White" />
+
+				<ScrollViewer
+					x:Name="OutputBlockScroll"
+					Margin="28,224,24,110"
+					Background="#FF000128"
+					Opacity="0.9">
+					<TextBlock
+						x:Name="OutputBlock"
+						Width="532"
+						Padding="5"
+						FontFamily="Consolas"
+						FontSize="11"
+						Foreground="White"
+						Opacity="0.8"
+						Text="Copy...." />
+				</ScrollViewer>
 				<!--  Visibility="Collapsed"  -->
 				<!--  ProgressPanel  -->
 			</Grid>
