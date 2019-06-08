@@ -200,7 +200,7 @@
 			<Label
 				HorizontalAlignment="Center"
 				VerticalAlignment="Center"
-				Content="Anzu [by Nelu and 601]"
+				Content="Anzu"
 				FontFamily="Candara Light"
 				FontSize="35"
 				Foreground="White" />
@@ -437,8 +437,7 @@
 			<Grid
 				x:Name="DesktopGrid"
 				Grid.Row="1"
-				Grid.Column="1"
-				Visibility="Collapsed">
+				Grid.Column="1">
 				<!--  Visibility="Collapsed"  -->
 
 				<!--  Desktop  -->
@@ -699,11 +698,10 @@
 			<Grid
 				x:Name="FolderGrid"
 				Grid.Row="1"
-				Grid.Column="1">
+				Grid.Column="1"
+				Visibility="Collapsed">
 
 				<!--  Visibility="Collapsed"  -->
-
-				<!--  Desktop  -->
 
 				<Border
 					Width="582"
@@ -754,7 +752,8 @@
 				x:Name="ProgressPanel"
 				Grid.Row="1"
 				Grid.Column="1"
-				x:FieldModifier="public">
+				x:FieldModifier="public"
+				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
@@ -769,8 +768,8 @@
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
-					Height="240"
-					Margin="0,196,0,0"
+					Height="255"
+					Margin="0,181,0,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center"
 					Background="#FF282E36"
@@ -788,7 +787,7 @@
 				<Label
 					Width="140"
 					Height="43"
-					Margin="0,190,0,0"
+					Margin="232,181,230,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Please, wait"
@@ -821,7 +820,15 @@
 					Content="Stop"
 					FontFamily="Candara Light"
 					FontSize="24"
-					Foreground="White" />
+					Foreground="White">
+					<Button.Effect>
+						<DropShadowEffect
+							BlurRadius="15"
+							Direction="-90"
+							RenderingBias="Quality"
+							ShadowDepth="2" />
+					</Button.Effect>
+				</Button>
 				<Label
 					x:Name="ProgressText"
 					Width="550"

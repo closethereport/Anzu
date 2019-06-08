@@ -6,6 +6,7 @@
 #endregion copyright
 
 using AnzuW;
+using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,7 +37,6 @@ internal class Desktop
 			//ОТОБРАЖЕНИЕ ПРОГРЕС БАРА В UI
 			//Создаем контроллер прогрес бара
 			var Progress = new ProgressController();
-
 			Progress.ShowProgressBar(); //ПОКАЗАТЬ БАР
 			Progress.AddLog("Begin backup"); //Добавить строку в лог
 
@@ -44,32 +44,60 @@ internal class Desktop
 			// Если юзер нажмет STOP на интерфейсе будет переход в catch (Так же если возникнут исключения)
 			try
 			{
-				//КОПИРУЕМ
+				string zipPath = AnzuW.Properties.Settings.Default.MainBackupFolder + "\\Desktop " + DateTime.Now.ToString("dd.MM.yyyy.hh.mm") + ".Backup.zip";
 				//Environment.SpecialFolder.DesktopDirectory - это путь до рабочего стола
+				Progress.AddLog("Backup to " + zipPath); //Добавить строку в лог
 
 				DirectoryInfo dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
 				var FileList = dir.GetFiles();
-
+				var DirectoriesList = dir.GetDirectories();
 				Progress.SetMax(FileList.Length + 1); //Устанавливает для бара максимальную шкалу (По стандарту от 0 до 100, но мы сделаем от 0 до кл-во файлов)
 				Progress.SetText("0/" + FileList.Length); //Установка текста над прогрес баром
 
-				for (int i = 0; i < FileList.Length; i++) //Проход по списку файлов
+				using (ZipFile zip = new ZipFile()) // Создаем объект для работы с архивом
 				{
-					FileInfo temp = (FileInfo)FileList[i];
+					zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression; // MAX степень сжатия
+					zip.UseUnicodeAsNecessary = true;
 
-					Progress.AddLog("Copy " + temp.FullName);   //Добавить строку в лог
+					for (int i = 0; i < FileList.Length; i++) //Проход по списку файлов
+					{
+						FileInfo temp = (FileInfo)FileList[i];
 
-					//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
+						Progress.AddLog("ZipFile " + temp.FullName);   //Добавить строку в лог
 
-					temp.CopyTo(AnzuW.Properties.Settings.Default.MainBackupFolder + "\\" + temp.Name, true); //копирование
+						//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
 
-					//File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
-					//File.Delete(temp.FullName.ToString());
+						zip.AddFile(temp.FullName, "");
 
-					Progress.Inc(); //увеличиваем прогресс бар на 1
-					Progress.SetText(i + "/" + FileList.Length); //Ставим новый текст над баром
+						//File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
+						//File.Delete(temp.FullName.ToString());
 
-					Progress.AddLog("done " + temp.FullName); //Добавить строку в лог
+						Progress.Inc(); //увеличиваем прогресс бар на 1
+						Progress.SetText(i + "/" + FileList.Length); //Ставим новый текст над баром
+
+						Progress.AddLog("done " + temp.FullName); //Добавить строку в лог
+						zip.Save(zipPath);  // Создаем архив
+					}
+
+					for (int i = 0; i < DirectoriesList.Length; i++) //Проход по списку файлов
+					{
+						var temp = DirectoriesList[i];
+
+						Progress.AddLog("ZipFile " + temp.FullName);   //Добавить строку в лог
+
+						//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
+
+						zip.AddDirectory(temp.FullName, "");
+
+						//File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
+						//File.Delete(temp.FullName.ToString());
+
+						Progress.Inc(); //увеличиваем прогресс бар на 1
+						Progress.SetText(i + "/" + FileList.Length); //Ставим новый текст над баром
+
+						Progress.AddLog("done " + temp.FullName); //Добавить строку в лог
+						zip.Save(zipPath);  // Создаем архив
+					}
 				}
 
 				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
