@@ -72,6 +72,7 @@ namespace AnzuW
 		/// <param name="e"></param>
 		private void Button_Click_Desktop(object sender, RoutedEventArgs e)
 		{
+			//TODO: Сделать нормально
 			SettingGrid.Visibility = Visibility.Collapsed;
 			DesktopGrid.Visibility = Visibility.Visible;
 			DownloadGrid.Visibility = Visibility.Collapsed;
@@ -117,10 +118,10 @@ namespace AnzuW
 			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
 			{
 				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
-					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath;
+					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath + @"\";
+				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+				Properties.Settings.Default.Save();
 			}
-			MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-			Properties.Settings.Default.Save();
 		}
 
 		/// <summary>

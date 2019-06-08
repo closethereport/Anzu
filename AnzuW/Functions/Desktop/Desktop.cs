@@ -38,73 +38,75 @@ internal class Desktop
 			//Создаем контроллер прогрес бара
 			var Progress = new ProgressController();
 			Progress.ShowProgressBar(); //ПОКАЗАТЬ БАР
-			Progress.AddLog("Begin backup"); //Добавить строку в лог
 
 			// try catch Нужно для остановки потока кнопкой STOP из UI
 			// Если юзер нажмет STOP на интерфейсе будет переход в catch (Так же если возникнут исключения)
 			try
 			{
-				string zipPath = AnzuW.Properties.Settings.Default.MainBackupFolder + "\\Desktop " + DateTime.Now.ToString("dd.MM.yyyy.hh.mm") + ".Backup.zip";
+				string zipPath = AnzuW.Properties.Settings.Default.MainBackupFolder + "Desktop " + DateTime.Now.ToString("dd.MM.yyyy (hh-mm)") + ".zip";
 				//Environment.SpecialFolder.DesktopDirectory - это путь до рабочего стола
 				Progress.AddLog("Backup to " + zipPath); //Добавить строку в лог
 
-				DirectoryInfo dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
-				var FileList = dir.GetFiles();
-				var DirectoriesList = dir.GetDirectories();
-				Progress.SetMax(FileList.Length + 1); //Устанавливает для бара максимальную шкалу (По стандарту от 0 до 100, но мы сделаем от 0 до кл-во файлов)
-				Progress.SetText("0/" + FileList.Length); //Установка текста над прогрес баром
+				//Лист с фалами
+				//List<FileInfo> FileList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetFiles().ToList();
+
+				//Чтобы ярлыки тоже были
+				//FileList.AddRange(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory)).GetFiles().ToList());
+
+				//Лист с директориями
+				//List<DirectoryInfo> DirectoryList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetDirectories().ToList();
+				int CountFiles = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetFiles().Length +
+				new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory)).GetFiles().Length;
+
+				Progress.SetMax(CountFiles + 1); //Устанавливает для бара максимальную шкалу (По стандарту от 0 до 100, но мы сделаем от 0 до кл-во файлов)
+				Progress.SetText("0/" + CountFiles); //Установка текста над прогрес баром
 
 				using (ZipFile zip = new ZipFile()) // Создаем объект для работы с архивом
 				{
 					zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression; // MAX степень сжатия
-					zip.UseUnicodeAsNecessary = true;
+					zip.AlternateEncoding = Encoding.UTF8;
+					zip.AlternateEncodingUsage = ZipOption.AsNecessary;
 
-					for (int i = 0; i < FileList.Length; i++) //Проход по списку файлов
+					//Можно тупо вот так. Вместо циклов
+
+					zip.SaveProgress += (sender, e) =>
 					{
-						FileInfo temp = (FileInfo)FileList[i];
+						switch (e.EventType)
+						{
+							case ZipProgressEventType.Saving_AfterRenameTempArchive:
+								Progress.AddLog("Done");
+								Progress.AddLog(new FileInfo(e.ArchiveName).Length.ToString());
+								break;
 
-						Progress.AddLog("ZipFile " + temp.FullName);   //Добавить строку в лог
+							case ZipProgressEventType.Saving_BeforeWriteEntry:
+								Progress.AddLog("add   " + e.CurrentEntry.FileName);
+								break;
 
-						//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
+							case ZipProgressEventType.Error_Saving:
+								Progress.AddLog("FFFFFFF   ");
+								break;
 
-						zip.AddFile(temp.FullName, "");
+							case ZipProgressEventType.Saving_AfterWriteEntry:
+								Progress.AddLog(e.CurrentEntry.FileName);
+								Progress.SetText(e.EntriesSaved + "/" + e.EntriesTotal);
+								Progress.SetProgress(e.EntriesSaved);
+								break;
+						}
+					};
 
-						//File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
-						//File.Delete(temp.FullName.ToString());
+					zip.AddDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory), "");
+					zip.AddDirectory(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "");
 
-						Progress.Inc(); //увеличиваем прогресс бар на 1
-						Progress.SetText(i + "/" + FileList.Length); //Ставим новый текст над баром
-
-						Progress.AddLog("done " + temp.FullName); //Добавить строку в лог
-						zip.Save(zipPath);  // Создаем архив
-					}
-
-					for (int i = 0; i < DirectoriesList.Length; i++) //Проход по списку файлов
-					{
-						var temp = DirectoriesList[i];
-
-						Progress.AddLog("ZipFile " + temp.FullName);   //Добавить строку в лог
-
-						//AnzuW.Properties.Settings.Default.MainBackupFolder  - это путь выбранный юзером в настройках проги (Папка бэкапа)
-
-						zip.AddDirectory(temp.FullName, "");
-
-						//File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
-						//File.Delete(temp.FullName.ToString());
-
-						Progress.Inc(); //увеличиваем прогресс бар на 1
-						Progress.SetText(i + "/" + FileList.Length); //Ставим новый текст над баром
-
-						Progress.AddLog("done " + temp.FullName); //Добавить строку в лог
-						zip.Save(zipPath);  // Создаем архив
-					}
+					zip.Save(zipPath);  // Создаем архив
 				}
 
-				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
+				//TODO: Удаление файлов
+
+				//	Progress.HideProgressBar(); //СКРЫВАЕМ БАР
 			}
 			catch (Exception ex)
 			{
-				Progress.HideProgressBar(); //Закрыть бар
+				//Progress.HideProgressBar(); //Закрыть бар
 			}
 		}));
 
