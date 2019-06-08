@@ -36,6 +36,18 @@ public class ProgressController
 	}
 
 	/// <summary>
+	/// Add value progress bar
+	/// </summary>
+	/// <param name="progress"></param>
+	public void AddProgress(int progress)
+	{
+		MainWindow.Dispatcher.Invoke(new Action(() =>
+		{
+			MainWindow.ProgressBar.Value += progress;
+		}));
+	}
+
+	/// <summary>
 	/// Set text above progress bar
 	/// </summary>
 	/// <param name="text">text</param>
@@ -78,6 +90,7 @@ public class ProgressController
 	{
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
+			MainWindow.DoneProgress.Visibility = Visibility.Collapsed;
 			MainWindow.ProgressBar.Maximum = 100;
 			MainWindow.ProgressBar.Minimum = 0;
 			MainWindow.ProgressBar.Value = 0;
@@ -89,15 +102,17 @@ public class ProgressController
 	}
 
 	/// <summary>
-	/// Hide progress bar in UI and show done MessageBox
+	/// Hide progress bar in UI and show done windows and custom text
 	/// </summary>
-	public void HideProgressBar()
+	/// <param name="text">Text message</param>
+	public void HideProgressBar(string text = "Successfully")
 	{
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
-			MainWindow.ProgressPanel.Visibility = Visibility.Collapsed;
-			MessageBox.Show("Successfully completed", "Successfully",
-				MessageBoxButton.OK, MessageBoxImage.None);
+			MainWindow.ProgressStopbtn.IsEnabled = false;
+			MainWindow.DoneProgress.Visibility = Visibility.Visible;
+			MainWindow.TextDoneProgress.Content = text;
+			MainWindow.ProgressBar.Value = MainWindow.ProgressBar.Maximum;
 		}));
 	}
 

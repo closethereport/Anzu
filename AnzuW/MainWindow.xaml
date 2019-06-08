@@ -752,8 +752,7 @@
 				x:Name="ProgressPanel"
 				Grid.Row="1"
 				Grid.Column="1"
-				x:FieldModifier="public"
-				Visibility="Collapsed">
+				x:FieldModifier="public">
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
@@ -763,9 +762,11 @@
 					Background="#FF282E36"
 					BorderBrush="#FF282E36"
 					BorderThickness="1"
-					Opacity="0.6" />
+					Opacity="0.6">
+				</Border>
 
 				<!--  Visibility="Collapsed"  -->
+
 				<Border
 					Width="602"
 					Height="255"
@@ -835,7 +836,7 @@
 					Margin="28,331,24,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
-					Content="Copy 2/50..."
+					Content=""
 					FontFamily="Candara Light"
 					FontSize="17"
 					Foreground="White" />
@@ -855,6 +856,48 @@
 						Opacity="0.8"
 						Text="Copy...." />
 				</ScrollViewer>
+				<Grid x:Name="DoneProgress" Margin="101,36,101,300">
+					<Border
+			Width="400"
+			Height="100"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Background="#FF282E36"
+			BorderBrush="#FF282E36"
+			BorderThickness="1"
+			Opacity="0.6">
+						<Border.Effect>
+							<DropShadowEffect
+					BlurRadius="15"
+					Direction="90"
+					RenderingBias="Quality"
+					ShadowDepth="2" />
+						</Border.Effect>
+					</Border>
+
+					<Label x:Name="TextDoneProgress" HorizontalContentAlignment="Center" Content="Successfully" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" FontFamily="Candara Light" Background="{x:Null}" Foreground="White" FontSize="28" />
+					<Button
+			Width="140"
+			Height="36"
+			Margin="131,53,0,0"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Background="#FF17191D"
+			BorderBrush="#FF17191D"
+			Click="Button_Click_HideProgress"
+			Content="Close"
+			FontFamily="Candara Light"
+			FontSize="24"
+			Foreground="White">
+						<Button.Effect>
+							<DropShadowEffect
+					BlurRadius="15"
+					Direction="-90"
+					RenderingBias="Quality"
+					ShadowDepth="2" />
+						</Button.Effect>
+					</Button>
+				</Grid>
 				<!--  Visibility="Collapsed"  -->
 				<!--  ProgressPanel  -->
 			</Grid>

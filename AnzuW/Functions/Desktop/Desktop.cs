@@ -48,65 +48,76 @@ internal class Desktop
 				Progress.AddLog("Backup to " + zipPath); //Добавить строку в лог
 
 				//Лист с фалами
-				//List<FileInfo> FileList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetFiles().ToList();
+				List<FileInfo> FileList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetFiles().ToList();
 
 				//Чтобы ярлыки тоже были
-				//FileList.AddRange(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory)).GetFiles().ToList());
+				FileList.AddRange(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory)).GetFiles().ToList());
 
 				//Лист с директориями
-				//List<DirectoryInfo> DirectoryList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetDirectories().ToList();
-				int CountFiles = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetFiles().Length +
-				new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory)).GetFiles().Length;
-
-				Progress.SetMax(CountFiles + 1); //Устанавливает для бара максимальную шкалу (По стандарту от 0 до 100, но мы сделаем от 0 до кл-во файлов)
-				Progress.SetText("0/" + CountFiles); //Установка текста над прогрес баром
+				List<DirectoryInfo> DirectoryList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetDirectories().ToList();
 
 				using (ZipFile zip = new ZipFile()) // Создаем объект для работы с архивом
 				{
 					zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression; // MAX степень сжатия
-					zip.AlternateEncoding = Encoding.UTF8;
-					zip.AlternateEncodingUsage = ZipOption.AsNecessary;
+					zip.AlternateEncoding = Encoding.UTF8; //Кодировка
+					zip.AlternateEncodingUsage = ZipOption.AsNecessary;  //Кодировка
 
-					//Можно тупо вот так. Вместо циклов
-
+					//Отслеживание событий (Прогресса архивирования )
 					zip.SaveProgress += (sender, e) =>
 					{
-						switch (e.EventType)
+						switch (e.EventType) //e - наше событие
 						{
-							case ZipProgressEventType.Saving_AfterRenameTempArchive:
-								Progress.AddLog("Done");
-								Progress.AddLog(new FileInfo(e.ArchiveName).Length.ToString());
+							case ZipProgressEventType.Saving_Started: //Начало
+								Progress.SetMax(e.EntriesTotal * 2); //Макс значения прогресс бара
 								break;
 
-							case ZipProgressEventType.Saving_BeforeWriteEntry:
-								Progress.AddLog("add   " + e.CurrentEntry.FileName);
+							case ZipProgressEventType.Saving_AfterRenameTempArchive: // конец всего архивиров
+								Progress.AddLog("Done"); //логи
+								Progress.AddLog("Archive size (byte):" + new FileInfo(e.ArchiveName).Length.ToString());
 								break;
 
-							case ZipProgressEventType.Error_Saving:
-								Progress.AddLog("FFFFFFF   ");
+							case ZipProgressEventType.Saving_BeforeWriteEntry: //Начало архивирование очередного файла
+								Progress.AddLog("Add:" + e.CurrentEntry.FileName);
 								break;
 
-							case ZipProgressEventType.Saving_AfterWriteEntry:
-								Progress.AddLog(e.CurrentEntry.FileName);
+							case ZipProgressEventType.Error_Saving: //Ошибка
+								Progress.AddLog("ERROR ");
+								break;
+
+							case ZipProgressEventType.Saving_AfterWriteEntry: //Конец архив очередного файла
+								Progress.AddLog("Done:" + e.CurrentEntry.FileName);
 								Progress.SetText(e.EntriesSaved + "/" + e.EntriesTotal);
 								Progress.SetProgress(e.EntriesSaved);
 								break;
 						}
 					};
 
+					//Добавляем к архиву папку рабочего стала (их две у винды)
 					zip.AddDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory), "");
 					zip.AddDirectory(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "");
 
 					zip.Save(zipPath);  // Создаем архив
 				}
 
-				//TODO: Удаление файлов
+				Progress.AddLog("///Start delete file///");
+				foreach (var current in FileList) //Удаляем файлы
+				{
+					Progress.AddLog(current.Name);
+					Progress.AddProgress(1);
+					current.Delete();
+				}
+				foreach (var current in DirectoryList) //удаляем папки
+				{
+					Progress.AddLog(current.Name);
+					Progress.AddProgress(1);
+					current.Delete(true);
+				}
 
-				//	Progress.HideProgressBar(); //СКРЫВАЕМ БАР
+				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
 			}
 			catch (Exception ex)
 			{
-				//Progress.HideProgressBar(); //Закрыть бар
+				Progress.HideProgressBar(); //Закрыть бар
 			}
 		}));
 

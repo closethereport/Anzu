@@ -159,5 +159,11 @@ namespace AnzuW
 		{
 			this.WindowState = WindowState.Minimized;
 		}
+
+		private void Button_Click_HideProgress(object sender, RoutedEventArgs e)
+		{
+			ProgressPanel.Visibility = Visibility.Collapsed;
+			DoneProgress.Visibility = Visibility.Collapsed;
+		}
 	}
 }
