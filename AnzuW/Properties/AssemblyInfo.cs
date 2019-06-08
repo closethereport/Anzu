@@ -1,4 +1,11 @@
-﻿using System.Reflection;
+﻿#region copyright
+
+// (c) 2019 Nelu & 601 (github.com/NeluQi)
+// This code is licensed under MIT license (see LICENSE for details)
+
+#endregion copyright
+
+using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -7,12 +14,12 @@ using System.Windows;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("AnzuW")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Anzu")]
+[assembly: AssemblyDescription("A set of tools for organizing files on Windows")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AnzuW")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("Nelu")]
+[assembly: AssemblyProduct("Anzu")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Nelu & 601")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,7 +37,6 @@ using System.Windows;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
-
 [assembly: ThemeInfo(
 	ResourceDictionaryLocation.None, //где расположены словари ресурсов по конкретным тематикам
 									 //(используется, если ресурс не найден на странице,
@@ -40,7 +46,6 @@ using System.Windows;
 											  // в приложении или в каких-либо словарях ресурсов для конкретной темы)
 )]
 
-
 // Сведения о версии для сборки включают четыре следующих значения:
 //
 //      Основной номер версии
@@ -48,7 +53,7 @@ using System.Windows;
 //      Номер сборки
 //      Номер редакции
 //
-// Можно задать все значения или принять номера сборки и редакции по умолчанию 
+// Можно задать все значения или принять номера сборки и редакции по умолчанию
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

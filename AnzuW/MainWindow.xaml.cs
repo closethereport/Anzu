@@ -1,10 +1,18 @@
-﻿using System;
+﻿#region copyright
+
+// (c) 2019 Nelu & 601 (github.com/NeluQi)
+// This code is licensed under MIT license (see LICENSE for details)
+
+#endregion copyright
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using WinForms = System.Windows.Forms;
 
 namespace AnzuW
@@ -15,11 +23,13 @@ namespace AnzuW
 	public partial class MainWindow : Window
 	{
 		/// <summary>
+		/// BG Thread
+		/// </summary>
+		public static Thread BGThread;
+
+		/// <summary>
 		/// MainWindow
 		/// </summary>
-		///
-		public static List<Thread> PoolThread = new List<Thread>();
-
 		public MainWindow()
 		{
 			if (Environment.GetCommandLineArgs().Length > 1)
@@ -30,7 +40,8 @@ namespace AnzuW
 			{
 				InitializeComponent();
 				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-				Application.Current.MainWindow = this;
+				ProgressPanel.Visibility = Visibility.Collapsed;
+				ProgressController.MainWindow = this;
 			}
 		}
 
@@ -61,8 +72,11 @@ namespace AnzuW
 		/// <param name="e"></param>
 		private void Button_Click_Desktop(object sender, RoutedEventArgs e)
 		{
+			//TODO: Сделать нормально
 			SettingGrid.Visibility = Visibility.Collapsed;
 			DesktopGrid.Visibility = Visibility.Visible;
+			DownloadGrid.Visibility = Visibility.Collapsed;
+			FolderGrid.Visibility = Visibility.Collapsed;
 		}
 
 		/// <summary>
@@ -74,6 +88,24 @@ namespace AnzuW
 		{
 			SettingGrid.Visibility = Visibility.Visible;
 			DesktopGrid.Visibility = Visibility.Collapsed;
+			DownloadGrid.Visibility = Visibility.Collapsed;
+			FolderGrid.Visibility = Visibility.Collapsed;
+		}
+
+		private void Button_Click_Download(object sender, RoutedEventArgs e)
+		{
+			SettingGrid.Visibility = Visibility.Collapsed;
+			DesktopGrid.Visibility = Visibility.Collapsed;
+			FolderGrid.Visibility = Visibility.Collapsed;
+			DownloadGrid.Visibility = Visibility.Visible;
+		}
+
+		private void Button_Click_Folder(object sender, RoutedEventArgs e)
+		{
+			SettingGrid.Visibility = Visibility.Collapsed;
+			DesktopGrid.Visibility = Visibility.Collapsed;
+			DownloadGrid.Visibility = Visibility.Collapsed;
+			FolderGrid.Visibility = Visibility.Visible;
 		}
 
 		/// <summary>
@@ -86,22 +118,52 @@ namespace AnzuW
 			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
 			{
 				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
-					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath;
+					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath + @"\";
+				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+				Properties.Settings.Default.Save();
 			}
-			MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-			Properties.Settings.Default.Save();
 		}
 
+		/// <summary>
+		/// Button in Desktop (Desktop Backup)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
 		{
-			//	var TDD = new TESTED();
-			//	TDD.BA(this);
+			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
+			{
+				MessageBox.Show("You need to install the main backup folder in the settings", "Error",
+				MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			else
+			{
+				var bk = new Desktop();
+				bk.Backup();
+			}
 		}
 
+		/// <summary>
+		/// Button in progress bar (STOP)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)
 		{
-			for (int i = 0; i < PoolThread.Count; i++)
-				PoolThread[i].Abort();
+			ProgressText.Content = "Wait for closing....";
+			ProgressStopbtn.IsEnabled = false;
+			BGThread.Abort();
+		}
+
+		private void Minimized(object sender, RoutedEventArgs e)
+		{
+			this.WindowState = WindowState.Minimized;
+		}
+
+		private void Button_Click_HideProgress(object sender, RoutedEventArgs e)
+		{
+			ProgressPanel.Visibility = Visibility.Collapsed;
+			DoneProgress.Visibility = Visibility.Collapsed;
 		}
 	}
 }
