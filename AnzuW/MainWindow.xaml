@@ -437,7 +437,8 @@
 			<Grid
 				x:Name="DesktopGrid"
 				Grid.Row="1"
-				Grid.Column="1">
+				Grid.Column="1"
+				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
 
 				<!--  Desktop  -->
@@ -576,12 +577,9 @@
 			<Grid
 				x:Name="DownloadGrid"
 				Grid.Row="1"
-				Grid.Column="1"
-				Visibility="Collapsed">
+				Grid.Column="1">
 
 				<!--  Visibility="Collapsed"  -->
-
-				<!--  Desktop  -->
 
 				<Border
 					Width="582"
@@ -611,7 +609,7 @@
 
 				<Label
 					Width="243"
-					Margin="10,10,349,0"
+					Margin="15,10,344,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Sort download folder"
@@ -625,6 +623,7 @@
 					VerticalAlignment="Top"
 					Background="#FF17191D"
 					BorderBrush="White"
+					Click="Button_Click_DownloadSort"
 					Content="Sort"
 					FontFamily="Candara Light"
 					FontSize="20"
@@ -687,11 +686,25 @@
 					FontFamily="Candara Light"
 					FontSize="13" />
 				<CheckBox
+					x:Name="nestingCheak"
 					Width="122"
-					Margin="336,63,0,0"
+					Margin="228,63,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Content="Use more nesting" />
+				<CheckBox
+					x:Name="DelFileCheak"
+					Width="122"
+					Margin="355,63,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Del file after" />
+				<CheckBox
+					Width="266"
+					Margin="258,22,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="стандартная блять папака (потом исправлю)" />
 			</Grid>
 
 			<!--  ============================Folder Grid============================  -->
@@ -752,7 +765,8 @@
 				x:Name="ProgressPanel"
 				Grid.Row="1"
 				Grid.Column="1"
-				x:FieldModifier="public">
+				x:FieldModifier="public"
+				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
@@ -762,8 +776,7 @@
 					Background="#FF282E36"
 					BorderBrush="#FF282E36"
 					BorderThickness="1"
-					Opacity="0.6">
-				</Border>
+					Opacity="0.6" />
 
 				<!--  Visibility="Collapsed"  -->
 
@@ -858,43 +871,53 @@
 				</ScrollViewer>
 				<Grid x:Name="DoneProgress" Margin="101,36,101,300">
 					<Border
-			Width="400"
-			Height="100"
-			HorizontalAlignment="Center"
-			VerticalAlignment="Center"
-			Background="#FF282E36"
-			BorderBrush="#FF282E36"
-			BorderThickness="1"
-			Opacity="0.6">
+						Width="400"
+						Height="100"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Background="#FF282E36"
+						BorderBrush="#FF282E36"
+						BorderThickness="1"
+						Opacity="0.6">
 						<Border.Effect>
 							<DropShadowEffect
-					BlurRadius="15"
-					Direction="90"
-					RenderingBias="Quality"
-					ShadowDepth="2" />
+								BlurRadius="15"
+								Direction="90"
+								RenderingBias="Quality"
+								ShadowDepth="2" />
 						</Border.Effect>
 					</Border>
 
-					<Label x:Name="TextDoneProgress" HorizontalContentAlignment="Center" Content="Successfully" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" FontFamily="Candara Light" Background="{x:Null}" Foreground="White" FontSize="28" />
+					<Label
+						x:Name="TextDoneProgress"
+						Width="400"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						HorizontalContentAlignment="Center"
+						Background="{x:Null}"
+						Content="Successfully"
+						FontFamily="Candara Light"
+						FontSize="28"
+						Foreground="White" />
 					<Button
-			Width="140"
-			Height="36"
-			Margin="131,53,0,0"
-			HorizontalAlignment="Left"
-			VerticalAlignment="Top"
-			Background="#FF17191D"
-			BorderBrush="#FF17191D"
-			Click="Button_Click_HideProgress"
-			Content="Close"
-			FontFamily="Candara Light"
-			FontSize="24"
-			Foreground="White">
+						Width="140"
+						Height="36"
+						Margin="131,53,0,0"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						Background="#FF17191D"
+						BorderBrush="#FF17191D"
+						Click="Button_Click_HideProgress"
+						Content="Close"
+						FontFamily="Candara Light"
+						FontSize="24"
+						Foreground="White">
 						<Button.Effect>
 							<DropShadowEffect
-					BlurRadius="15"
-					Direction="-90"
-					RenderingBias="Quality"
-					ShadowDepth="2" />
+								BlurRadius="15"
+								Direction="-90"
+								RenderingBias="Quality"
+								ShadowDepth="2" />
 						</Button.Effect>
 					</Button>
 				</Grid>

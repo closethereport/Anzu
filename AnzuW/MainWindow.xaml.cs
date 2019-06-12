@@ -7,7 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -140,6 +142,20 @@ namespace AnzuW
 			{
 				var bk = new Desktop();
 				bk.Backup();
+			}
+		}
+
+		private void Button_Click_DownloadSort(object sender, RoutedEventArgs e)
+		{
+			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
+			{
+				MessageBox.Show("You need to install the main backup folder in the settings", "Error",
+				MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			else
+			{
+				var bk = new DownloadFolder();
+				bk.Dfolder(DelFileCheak.IsChecked.Value, nestingCheak.IsChecked.Value);
 			}
 		}
 
