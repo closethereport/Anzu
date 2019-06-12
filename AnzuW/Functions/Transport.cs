@@ -15,38 +15,38 @@ using System.Security.AccessControl;
 
 internal class Transport
 {
-	/// <summary>
-	/// Функция переноса файла, измененного более года назад
-	/// </summary>
-	/// <param name="path"></param>
-	/// <param name="finishpath"></param>
-	public static void FileTransport(string path, string finishpath)
-	{
-		DirectoryInfo dir = new DirectoryInfo(@path);
+    /// <summary>
+    /// Функция переноса файла, измененного более года назад
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="finishpath"></param>
+    public static void FileTransport(string path, string finishpath)
+    {
+        DirectoryInfo dir = new DirectoryInfo(@path);
 
-		var FileList = dir.GetFiles();
+        var FileList = dir.GetFiles();
 
-		foreach (var temp in FileList)
-		{
-			if (File.GetLastWriteTime(temp.FullName) < DateTime.Now.Subtract(new TimeSpan(0, 1, 0, 0)))
-			{
-				temp.CopyTo(finishpath + "\\" + temp.Name);
-				File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
-				File.Delete(temp.FullName.ToString());
-			}
-		}
-	}
+        foreach (var temp in FileList)
+        {
+            if (File.GetLastWriteTime(temp.FullName) < DateTime.Now.Subtract(new TimeSpan(0, 1, 0, 0)))
+            {
+                temp.CopyTo(finishpath + "\\" + temp.Name);
+                File.SetAttributes(temp.FullName.ToString(), FileAttributes.Normal);
+                File.Delete(temp.FullName.ToString());
+            }
+        }
+    }
 
-	public static List<string> GetListFolder(string path)
-	{
-		List<string> FileList = new List<string>();
+    public static List<string> GetListFolder(string path)
+    {
+        List<string> FileList = new List<string>();
 
-		DirectoryInfo dir = new DirectoryInfo(@path);
-		foreach (var item in dir.GetDirectories())
-		{
-			FileList.Add(item.ToString());
-		}
+        DirectoryInfo dir = new DirectoryInfo(@path);
+        foreach (var item in dir.GetDirectories())
+        {
+            FileList.Add(item.ToString());
+        }
 
-		return FileList;
-	}
+        return FileList;
+    }
 }
