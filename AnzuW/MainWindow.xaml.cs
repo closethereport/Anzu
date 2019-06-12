@@ -141,7 +141,8 @@ namespace AnzuW
 			else
 			{
 				var bk = new Desktop();
-				bk.Backup();
+				//TODO: Сделать чекбокс на форме
+				bk.Backup(true);
 			}
 		}
 
@@ -155,7 +156,7 @@ namespace AnzuW
 			else
 			{
 				var bk = new DownloadFolder();
-				bk.Dfolder(DelFileCheak.IsChecked.Value, nestingCheak.IsChecked.Value);
+				bk.Dfolder(DelFiles.IsChecked.Value, SortExtended.IsChecked.Value);
 			}
 		}
 

@@ -686,14 +686,14 @@
 					FontFamily="Candara Light"
 					FontSize="13" />
 				<CheckBox
-					x:Name="nestingCheak"
+					x:Name="SortExtended"
 					Width="122"
 					Margin="228,63,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Content="Use more nesting" />
 				<CheckBox
-					x:Name="DelFileCheak"
+					x:Name="DelFiles"
 					Width="122"
 					Margin="355,63,0,0"
 					HorizontalAlignment="Left"

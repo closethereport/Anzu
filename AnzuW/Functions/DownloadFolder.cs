@@ -26,59 +26,79 @@ internal class DownloadFolder
 			try
 			{
 				//Создаем новую копию DirectoryInfo в которой будет храниться список файлов
-				DirectoryInfo dir = new DirectoryInfo(DownloadFold ?? KnownFolders.GetPath(KnownFolder.Downloads));
+				var dir = new DirectoryInfo(DownloadFold ?? KnownFolders.GetPath(KnownFolder.Downloads));
 				//Получаем список файлов в директории
 				var FileList = dir.GetFiles();
-				Progress.SetMax(FileList.Length);
+				Progress.SetMax(DeleteFile == true ? FileList.Length * 2 : FileList.Length);
 				//Начинаем забег по листу, для поиска и копирования необходимых файлов
+				string path = dir.FullName + "/SortFiles/";
 				if (!TypeFolder)
 				{
-					Directory.CreateDirectory(dir.FullName + "/TextFolder/");
-					Directory.CreateDirectory(dir.FullName + "/VideoFolder/");
-					Directory.CreateDirectory(dir.FullName + "/MusicFolder/");
-					Directory.CreateDirectory(dir.FullName + "/PicFolder/");
-					Directory.CreateDirectory(dir.FullName + "/OtherFolder/");
+					Directory.CreateDirectory(path + "/TextFolder/");
+					Directory.CreateDirectory(path + "/VideoFolder/");
+					Directory.CreateDirectory(path + "/MusicFolder/");
+					Directory.CreateDirectory(path + "/PicFolder/");
+					Directory.CreateDirectory(path + "/OtherFolder/");
 					foreach (var t in FileList)
 					{
-						File.SetAttributes(t.FullName.ToString(), FileAttributes.Normal);
-						Progress.AddLog(t.Name);
-						//Ищем файлы текстового формата с последующим копированием в выбранную директорию(TextFolder)
-						foreach (string x in new String[] { "*.txt", "*.rtf", "*.doc", "*.docx", "*.html", "*.pdf", "*.odt", "*.fb2", "*.epub", "*.mobi", "*.djvu" })
-							if (t.Extension == x)
-							{
-								t.CopyTo(dir.FullName + "/TextFolder/" + t.Name);
-							}
-						//Ищем видеофайлы с последющим копированием в выбранную директорию(VideoFolder)
-						foreach (string x in new String[] { "*.asf", "*.avi", "*.mp4", "*.m4v", "*.mov", "*.mpg", "*.mpeg", "*.swf", "*.wmv", "*.avi", "*.3g2" })
-							if (t.Extension == x)
-							{
-								t.CopyTo(dir.FullName + "/VideoFolder/" + t.Name);
-							}
-						//Ищем аудиофайлы с последующим копированием в выбранную директорию(MusicFolder)
-						foreach (string x in new String[] {"*.m4a", "*.aif", "*.aiff", "*.aifc", "*.aif", "*.mov", "*.moov", "*.qt", "*.alaw", "*.caf", "*.gsm", "*.wave", "*.wav", "*.mpa", "*.mp2v", "*.mp2", "*.mp3",
+						try
+						{
+							Progress.AddLog("Sort " + t.Name);
+							//Ищем файлы текстового формата с последующим копированием в выбранную директорию(TextFolder)
+							foreach (string x in new String[] { "*.txt", "*.rtf", "*.doc", "*.docx", "*.html", "*.pdf", "*.odt", "*.fb2", "*.epub", "*.mobi", "*.djvu" })
+								if (t.Extension == x)
+								{
+									t.CopyTo(path + "/TextFolder/" + t.Name, true);
+									continue;
+								}
+							//Ищем видеофайлы с последющим копированием в выбранную директорию(VideoFolder)
+							foreach (string x in new String[] { "*.asf", "*.avi", "*.mp4", "*.m4v", "*.mov", "*.mpg", "*.mpeg", "*.swf", "*.wmv", "*.avi", "*.3g2" })
+								if (t.Extension == x)
+								{
+									t.CopyTo(path + "/VideoFolder/" + t.Name, true);
+									continue;
+								}
+							//Ищем аудиофайлы с последующим копированием в выбранную директорию(MusicFolder)
+							foreach (string x in new String[] {"*.m4a", "*.aif", "*.aiff", "*.aifc", "*.aif", "*.mov", "*.moov", "*.qt", "*.alaw", "*.caf", "*.gsm", "*.wave", "*.wav", "*.mpa", "*.mp2v", "*.mp2", "*.mp3",
 					"*.mpeg","*.mpg","*.midi","*.mid","*.kar","*.rmi","*.wma","*.asf",})
-							if (t.Extension == x)
-							{
-								t.CopyTo(dir.FullName + "/MusicFolder/" + t.Name);
-							}
-						//Ищем картинки с последующим копированием в выбранную директорию(PictureFolder)
-						foreach (string x in new String[] { "*.jpg", "*.jpeg", "*.tif", "*.tiff", "*.png", "*.gif", "*.bmp", "*.dib", })
-							if (t.Extension == x)
-							{
-								t.CopyTo(dir.FullName + "/PicFolder/" + t.Name);
-							}
-						//Оставшиеся файлы копируем в выбранную директорию(OtherFolder)
-						t.CopyTo(dir.FullName + "/OtherFolder/" + t.Name);
-						Progress.AddProgress(1);
+								if (t.Extension == x)
+								{
+									t.CopyTo(path + "/MusicFolder/" + t.Name, true);
+									continue;
+								}
+							//Ищем картинки с последующим копированием в выбранную директорию(PictureFolder)
+							foreach (string x in new String[] { "*.jpg", "*.jpeg", "*.tif", "*.tiff", "*.png", "*.gif", "*.bmp", "*.dib", })
+								if (t.Extension == x)
+								{
+									t.CopyTo(path + "/PicFolder/" + t.Name, true);
+									continue;
+								}
+							//Оставшиеся файлы копируем в выбранную директорию(OtherFolder)
+							t.CopyTo(path + t.Name);
+							Progress.AddProgress(1);
+						}
+						catch (Exception ex)
+						{
+							Progress.AddLog("Error " + t.Name);
+							Progress.AddProgress(1);
+						}
 					}
 				}
 				else
 				{
 					foreach (var t in FileList)
 					{
-						Directory.CreateDirectory(dir.FullName + "/" + t.Extension.ToString().Replace(".", ""));
-						t.CopyTo(dir.FullName + "/" + t.Extension.ToString().Replace(".", "") + "/" + t.Name, true);
-						Progress.AddProgress(1);
+						try
+						{
+							Directory.CreateDirectory(path + t.Extension.ToString().Replace(".", ""));
+							t.CopyTo(path + t.Extension.ToString().Replace(".", "") + "/" + t.Name, true);
+							Progress.AddProgress(1);
+						}
+						catch (Exception ex)
+						{
+							Progress.AddLog("Error " + t.Name);
+							Progress.AddProgress(1);
+						}
 					}
 				}
 
@@ -97,7 +117,7 @@ internal class DownloadFolder
 			}
 			catch (Exception ex)
 			{
-				Progress.HideProgressBar(); //Закрыть бар
+				Progress.HideProgressBar("Error"); //Закрыть бар
 			}
 		}));
 
