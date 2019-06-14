@@ -12,6 +12,7 @@
 	ResizeMode="NoResize"
 	WindowStyle="None"
 	mc:Ignorable="d">
+
 	<Window.Resources>
 
 		<Style x:Key="FocusVisual">
@@ -89,6 +90,7 @@
 	</Window.Resources>
 	<!--  ==============================================================  -->
 	<Grid>
+
 		<!--  ==============================================================  -->
 		<!--  ==========================Button Side============================  -->
 		<Grid>
@@ -116,6 +118,7 @@
 				VerticalAlignment="Bottom">
 
 				<Button
+					x:Name="btnDesktop"
 					Height="50"
 					Margin="0,4"
 					Background="#FF17191D"
@@ -127,6 +130,7 @@
 					Foreground="White" />
 
 				<Button
+					x:Name="btnDownload"
 					Height="50"
 					Margin="0,4"
 					Background="#FF17191D"
@@ -138,6 +142,7 @@
 					Foreground="White" />
 
 				<Button
+					x:Name="btnFolder"
 					Height="50"
 					Margin="0,4"
 					Background="#FF17191D"
@@ -169,6 +174,7 @@
 					Foreground="White" />
 
 				<Button
+					x:Name="btnSetting"
 					Height="50"
 					Margin="0,4"
 					Background="#FF17191D"
@@ -443,6 +449,8 @@
 
 				<!--  Desktop  -->
 
+				<!--  Desktop  -->
+
 				<Border
 					Width="582"
 					Height="77"
@@ -457,16 +465,20 @@
 					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
 				</Border>
 
-				<!--  Desktop  -->
-
-				<Label
-					Width="178"
-					Margin="15,13,409,0"
-					HorizontalAlignment="Center"
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Desktop backup"
-					FontFamily="Candara Light"
-					FontSize="25" />
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+
+					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
+					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
+				</Border>
+
 				<Border
 					Width="582"
 					Height="77"
@@ -479,6 +491,17 @@
 					<Border.ToolTip>All files and folders from the desktop will be added to the archive placed in the main backup folder and after that all files from the desktop will be deleted.</Border.ToolTip>
 					<Label Margin="349,-1,-1,50" Content="*After backup, the desktop will be cleared" />
 				</Border>
+
+				<!--  Desktop  -->
+
+				<Label
+					Width="178"
+					Margin="12,13,412,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Desktop backup"
+					FontFamily="Candara Light"
+					FontSize="25" />
 				<Button
 					Width="100"
 					Height="36"
@@ -495,29 +518,16 @@
 
 				<Label
 					Width="274"
-					Margin="12,96,316,0"
+					Margin="12,93,316,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Desktop backup and sorting"
 					FontFamily="Candara Light"
 					FontSize="22" />
-				<Border
-					Width="582"
-					Height="77"
-					Margin="10,92,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-
-					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
-					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
-				</Border>
 
 				<Label
-					Margin="15,130,257,276"
-					Content="Files will be divided into folders according to their extension"
+					Margin="12,121,399,273"
+					Content="Files will be divided into folders &#xD;&#xA;according to their extension"
 					Opacity="0.7" />
 				<Button
 					Width="100"
@@ -533,15 +543,15 @@
 					Foreground="White" />
 
 				<CheckBox
-					Width="117"
-					Margin="360,145,0,0"
+					Width="176"
+					Margin="296,145,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Use more nesting" />
+					Content="Sort by folder with extension" />
 
 				<Label
-					Width="274"
-					Margin="10,174,318,0"
+					Width="142"
+					Margin="12,174,448,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Sort Desktop"
@@ -549,8 +559,8 @@
 					FontSize="22" />
 
 				<Label
-					Margin="10,211,262,195"
-					Content="Files will be divided into folders according to their extension"
+					Margin="10,201,412,195"
+					Content="Files will be divided into folders &#xD;&#xA;according to their extension"
 					Opacity="0.7" />
 				<Button
 					Width="100"
@@ -566,18 +576,19 @@
 					Foreground="White" />
 
 				<CheckBox
-					Width="117"
-					Margin="360,226,0,0"
+					Width="181"
+					Margin="296,226,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Use more nesting" />
+					Content="Sort by folder with extension" />
 			</Grid>
 
 			<!--  ============================Download Grid============================  -->
 			<Grid
 				x:Name="DownloadGrid"
 				Grid.Row="1"
-				Grid.Column="1">
+				Grid.Column="1"
+				Visibility="Collapsed">
 
 				<!--  Visibility="Collapsed"  -->
 
@@ -591,7 +602,10 @@
 					BorderBrush="#FF383838"
 					BorderThickness="1">
 					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
-					<Label Margin="9,32,322,-1" Content="Files will be divided into folders &#xD;&#xA;according to their extensions" />
+					<Label
+						Margin="9,32,313,-1"
+						Content="Files will be divided into folders according &#xD;&#xA;to their extensions"
+						Opacity="0.5" />
 				</Border>
 
 				<Border
@@ -604,12 +618,12 @@
 					BorderBrush="#FF383838"
 					BorderThickness="1">
 					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
-					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
+					<Label Margin="167,-1,9,50" Content="*Files whose date of change is higher than the selected one will be deleted" />
 				</Border>
 
 				<Label
 					Width="243"
-					Margin="15,10,344,0"
+					Margin="12,11,347,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Sort download folder"
@@ -630,30 +644,15 @@
 					Foreground="White" />
 
 				<Label
-					Width="274"
-					Margin="10,94,318,0"
+					Width="136"
+					Margin="13,96,453,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
-					Content="Delete old file"
+					Background="White"
+					Content="Delete old files"
 					FontFamily="Candara Light"
-					FontSize="20" />
-
-				<Label
-					Width="45"
-					Margin="288,135,269,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Content="Vaule"
-					FontFamily="Candara Light"
-					FontSize="15" />
-				<Label
-					Width="42"
-					Margin="98,135,462,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Content="Type"
-					FontFamily="Candara Light"
-					FontSize="15" />
+					FontSize="20"
+					Foreground="Black" />
 
 				<Button
 					Width="100"
@@ -667,44 +666,45 @@
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
-				<ComboBox
-					Width="120"
-					Margin="146,138,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top" />
-				<ComboBox
-					Width="120"
-					Margin="338,138,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top" />
 				<Label
-					Width="83"
-					Margin="15,135,504,0"
+					Width="79"
+					Margin="17,132,506,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
-					Content="Remove older"
+					Content="Older than "
 					FontFamily="Candara Light"
-					FontSize="13" />
+					FontSize="15" />
 				<CheckBox
 					x:Name="SortExtended"
-					Width="122"
-					Margin="228,63,0,0"
+					Width="172"
+					Margin="305,43,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Use more nesting" />
+					Content="Sort by folder with extension" />
 				<CheckBox
 					x:Name="DelFiles"
-					Width="122"
-					Margin="355,63,0,0"
+					Width="146"
+					Margin="331,63,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Del file after" />
-				<CheckBox
-					Width="266"
-					Margin="258,22,0,0"
+					Content="Delete files after sorting"
+					IsChecked="True" />
+				<TextBox
+					Width="61"
+					Height="19"
+					Margin="96,137,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="стандартная блять папака (потом исправлю)" />
+					Text="30"
+					TextWrapping="Wrap" />
+				<Label
+					Width="42"
+					Margin="162,132,398,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="days"
+					FontFamily="Candara Light"
+					FontSize="15" />
 			</Grid>
 
 			<!--  ============================Folder Grid============================  -->
@@ -765,8 +765,7 @@
 				x:Name="ProgressPanel"
 				Grid.Row="1"
 				Grid.Column="1"
-				x:FieldModifier="public"
-				Visibility="Collapsed">
+				x:FieldModifier="public">
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"
@@ -800,13 +799,13 @@
 				</Border>
 				<Label
 					Width="140"
-					Height="43"
-					Margin="232,181,230,0"
+					Height="38"
+					Margin="28,186,434,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
-					Content="Please, wait"
+					Content="Log:"
 					FontFamily="Candara Light"
-					FontSize="24"
+					FontSize="20"
 					Foreground="White" />
 				<ProgressBar
 					x:Name="ProgressBar"
@@ -869,10 +868,10 @@
 						Opacity="0.8"
 						Text="Copy...." />
 				</ScrollViewer>
-				<Grid x:Name="DoneProgress" Margin="101,36,101,300">
+				<Grid x:Name="DoneProgress" Margin="101,22,101,301">
 					<Border
 						Width="400"
-						Height="100"
+						Height="156"
 						HorizontalAlignment="Center"
 						VerticalAlignment="Center"
 						Background="#FF282E36"
@@ -887,10 +886,10 @@
 								ShadowDepth="2" />
 						</Border.Effect>
 					</Border>
-
 					<Label
 						x:Name="TextDoneProgress"
 						Width="400"
+						Height="43"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Top"
 						HorizontalContentAlignment="Center"
@@ -900,11 +899,11 @@
 						FontSize="28"
 						Foreground="White" />
 					<Button
-						Width="140"
+						Width="104"
 						Height="36"
-						Margin="131,53,0,0"
-						HorizontalAlignment="Left"
-						VerticalAlignment="Top"
+						Margin="148,0,148,10"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Bottom"
 						Background="#FF17191D"
 						BorderBrush="#FF17191D"
 						Click="Button_Click_HideProgress"

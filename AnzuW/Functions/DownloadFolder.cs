@@ -31,55 +31,101 @@ internal class DownloadFolder
 				var FileList = dir.GetFiles();
 				Progress.SetMax(DeleteFile == true ? FileList.Length * 2 : FileList.Length);
 				//Начинаем забег по листу, для поиска и копирования необходимых файлов
-				string path = dir.FullName + "/SortFiles/";
+				string path = dir.FullName + $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy (hh-mm)")})/";
 				if (!TypeFolder)
 				{
-					Directory.CreateDirectory(path + "/TextFolder/");
-					Directory.CreateDirectory(path + "/VideoFolder/");
-					Directory.CreateDirectory(path + "/MusicFolder/");
-					Directory.CreateDirectory(path + "/PicFolder/");
-					Directory.CreateDirectory(path + "/OtherFolder/");
+					Directory.CreateDirectory(path + "/Other/");
 					foreach (var t in FileList)
 					{
+						bool FileMove = false;
 						try
 						{
 							Progress.AddLog("Sort " + t.Name);
-							//Ищем файлы текстового формата с последующим копированием в выбранную директорию(TextFolder)
-							foreach (string x in new String[] { "*.txt", "*.rtf", "*.doc", "*.docx", "*.html", "*.pdf", "*.odt", "*.fb2", "*.epub", "*.mobi", "*.djvu" })
-								if (t.Extension == x)
+
+							foreach (string x in new String[] { ".txt", ".rtf", ".doc", ".docx", ".html", ".pdf", ".odt", ".fb2", ".epub", ".mobi", ".djvu", ".xlsx" })
+								if (t.Extension.ToLower() == x && !FileMove)
 								{
-									t.CopyTo(path + "/TextFolder/" + t.Name, true);
-									continue;
+									Directory.CreateDirectory(path + "/Text/");
+									t.CopyTo(path + "/Text/" + t.Name, true);
+									FileMove = true;
+									break;
 								}
-							//Ищем видеофайлы с последющим копированием в выбранную директорию(VideoFolder)
-							foreach (string x in new String[] { "*.asf", "*.avi", "*.mp4", "*.m4v", "*.mov", "*.mpg", "*.mpeg", "*.swf", "*.wmv", "*.avi", "*.3g2" })
-								if (t.Extension == x)
+
+							foreach (string x in new String[] { ".asf", ".avi", ".mp4", ".m4v", ".mov", ".mpg", ".mpeg", ".swf", ".wmv", ".avi", ".3g2" })
+								if (t.Extension.ToLower() == x && !FileMove)
 								{
-									t.CopyTo(path + "/VideoFolder/" + t.Name, true);
-									continue;
+									Directory.CreateDirectory(path + "/Video/");
+									t.CopyTo(path + "/Video/" + t.Name, true);
+									FileMove = true;
+									break;
 								}
-							//Ищем аудиофайлы с последующим копированием в выбранную директорию(MusicFolder)
-							foreach (string x in new String[] {"*.m4a", "*.aif", "*.aiff", "*.aifc", "*.aif", "*.mov", "*.moov", "*.qt", "*.alaw", "*.caf", "*.gsm", "*.wave", "*.wav", "*.mpa", "*.mp2v", "*.mp2", "*.mp3",
-					"*.mpeg","*.mpg","*.midi","*.mid","*.kar","*.rmi","*.wma","*.asf",})
-								if (t.Extension == x)
+
+							foreach (string x in new String[] {".m4a", ".aif", ".aiff", ".aifc", ".aif", ".mov", ".moov", ".qt", ".alaw", ".caf", ".gsm", ".wave", ".wav", ".mpa", ".mp2v", ".mp2", ".mp3",
+					".mpeg",".mpg",".midi",".mid",".kar",".rmi",".wma",".asf", ".mid"})
+								if (t.Extension.ToLower() == x && !FileMove)
 								{
-									t.CopyTo(path + "/MusicFolder/" + t.Name, true);
-									continue;
+									Directory.CreateDirectory(path + "/Music/");
+									t.CopyTo(path + "/Music/" + t.Name, true);
+									FileMove = true;
+									break;
 								}
-							//Ищем картинки с последующим копированием в выбранную директорию(PictureFolder)
-							foreach (string x in new String[] { "*.jpg", "*.jpeg", "*.tif", "*.tiff", "*.png", "*.gif", "*.bmp", "*.dib", })
-								if (t.Extension == x)
+
+							foreach (string x in new String[] { ".jpg", ".jpeg", ".tif", ".tiff", ".png", ".gif", ".bmp", ".dib", })
+								if (t.Extension.ToLower() == x && !FileMove)
 								{
+									Directory.CreateDirectory(path + "/Pic/");
 									t.CopyTo(path + "/PicFolder/" + t.Name, true);
-									continue;
+									FileMove = true;
+									break;
 								}
-							//Оставшиеся файлы копируем в выбранную директорию(OtherFolder)
-							t.CopyTo(path + t.Name);
+
+							//Файлы с данными
+							foreach (string x in new String[] { ".xslt", ".xsl", ".xml", ".one", ".mdf", ".mdb", ".dat", ".csv", ".bin" })
+								if (t.Extension.ToLower() == x && !FileMove)
+								{
+									Directory.CreateDirectory(path + "/Data/");
+									t.CopyTo(path + "/Data/" + t.Name, true);
+									FileMove = true;
+									break;
+								}
+
+							foreach (string x in new String[] { ".zip", ".jar", ".7z", ".rar", ".gz", ".tar", ".tar-gz", ".zipx", ".xar" })
+								if (t.Extension.ToLower() == x && !FileMove)
+								{
+									Directory.CreateDirectory(path + "/Archives/");
+									t.CopyTo(path + "/Archives/" + t.Name, true);
+									FileMove = true;
+									break;
+								}
+							foreach (string x in new String[] { ".msi", ".apk" })
+								if (t.Extension.ToLower() == x && !FileMove)
+								{
+									Directory.CreateDirectory(path + "/Installer/");
+									t.CopyTo(path + "/Installer/" + t.Name, true);
+									FileMove = true;
+									break;
+								}
+
+							foreach (string x in new String[] { ".exe", ".bat", ".cmd", ".com", ".gadget", ".msu", ".ps1", ".scr", ".vb", ".vbs", ".wsf" })
+								if (t.Extension.ToLower() == x && !FileMove)
+								{
+									Directory.CreateDirectory(path + "/ExecutedFiles/");
+									t.CopyTo(path + "/ExecutedFiles/" + t.Name, true);
+									FileMove = true;
+									break;
+								}
+
+							if (!FileMove)
+							{
+								t.CopyTo(path + "/Other/" + t.Name);
+							}
+
 							Progress.AddProgress(1);
 						}
 						catch (Exception ex)
 						{
 							Progress.AddLog("Error " + t.Name);
+							Progress.AddLog(ex.StackTrace.ToString());
 							Progress.AddProgress(1);
 						}
 					}
@@ -90,6 +136,7 @@ internal class DownloadFolder
 					{
 						try
 						{
+							Progress.AddLog("Sort " + t.Name);
 							Directory.CreateDirectory(path + t.Extension.ToString().Replace(".", ""));
 							t.CopyTo(path + t.Extension.ToString().Replace(".", "") + "/" + t.Name, true);
 							Progress.AddProgress(1);
@@ -97,27 +144,24 @@ internal class DownloadFolder
 						catch (Exception ex)
 						{
 							Progress.AddLog("Error " + t.Name);
+							Progress.AddLog(ex.StackTrace.ToString());
 							Progress.AddProgress(1);
 						}
 					}
 				}
 
-				if (DeleteFile)
+				if (DeleteFile)//TODO: Записывать файлы которые не переместилтсь  catch (Exception ex) и их НЕ УДАЛЯТЬ
 				{
 					foreach (FileInfo file in dir.GetFiles())
 					{
 						file.Delete();
-					}
-					foreach (DirectoryInfo di in dir.GetDirectories())
-					{
-						di.Delete(true);
 					}
 				}
 				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
 			}
 			catch (Exception ex)
 			{
-				Progress.HideProgressBar("Error"); //Закрыть бар
+				Progress.HideProgressBar("!Error!"); //Закрыть бар
 			}
 		}));
 

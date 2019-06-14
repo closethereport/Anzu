@@ -87,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="Common\KnownFolders.cs" />
     <Compile Include="Common\ProgressController.cs" />
+    <Compile Include="Common\WindowController.cs" />
     <Compile Include="Functions\Desktop.cs" />
     <Compile Include="Functions\DownloadFolder.cs" />
     <Compile Include="Functions\SearchFile.cs" />

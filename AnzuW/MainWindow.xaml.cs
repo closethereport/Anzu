@@ -44,6 +44,7 @@ namespace AnzuW
 				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
 				ProgressPanel.Visibility = Visibility.Collapsed;
 				ProgressController.MainWindow = this;
+				new WindowController(WindowController.Windows.Desktop);
 			}
 		}
 
@@ -74,11 +75,7 @@ namespace AnzuW
 		/// <param name="e"></param>
 		private void Button_Click_Desktop(object sender, RoutedEventArgs e)
 		{
-			//TODO: Сделать нормально
-			SettingGrid.Visibility = Visibility.Collapsed;
-			DesktopGrid.Visibility = Visibility.Visible;
-			DownloadGrid.Visibility = Visibility.Collapsed;
-			FolderGrid.Visibility = Visibility.Collapsed;
+			new WindowController(WindowController.Windows.Desktop);
 		}
 
 		/// <summary>
@@ -88,26 +85,27 @@ namespace AnzuW
 		/// <param name="e"></param>
 		private void Button_Click_Setting(object sender, RoutedEventArgs e)
 		{
-			SettingGrid.Visibility = Visibility.Visible;
-			DesktopGrid.Visibility = Visibility.Collapsed;
-			DownloadGrid.Visibility = Visibility.Collapsed;
-			FolderGrid.Visibility = Visibility.Collapsed;
+			new WindowController(WindowController.Windows.Settings);
 		}
 
+		/// <summary>
+		/// Button in the left side menu to enable the tab download
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_Download(object sender, RoutedEventArgs e)
 		{
-			SettingGrid.Visibility = Visibility.Collapsed;
-			DesktopGrid.Visibility = Visibility.Collapsed;
-			FolderGrid.Visibility = Visibility.Collapsed;
-			DownloadGrid.Visibility = Visibility.Visible;
+			new WindowController(WindowController.Windows.Download);
 		}
 
+		/// <summary>
+		/// Button in the left side menu to enable the tab folder
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_Folder(object sender, RoutedEventArgs e)
 		{
-			SettingGrid.Visibility = Visibility.Collapsed;
-			DesktopGrid.Visibility = Visibility.Collapsed;
-			DownloadGrid.Visibility = Visibility.Collapsed;
-			FolderGrid.Visibility = Visibility.Visible;
+			new WindowController(WindowController.Windows.Folder);
 		}
 
 		/// <summary>
@@ -146,6 +144,11 @@ namespace AnzuW
 			}
 		}
 
+		/// <summary>
+		/// btn in download page (Download Sort)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_DownloadSort(object sender, RoutedEventArgs e)
 		{
 			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
