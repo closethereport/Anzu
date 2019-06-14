@@ -6,15 +6,9 @@
 #endregion copyright
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using WinForms = System.Windows.Forms;
 
 namespace AnzuW
@@ -49,26 +43,6 @@ namespace AnzuW
 		}
 
 		/// <summary>
-		/// Drag and drop for program header
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			this.DragMove();
-		}
-
-		/// <summary>
-		/// Exit button
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Exit(object sender, RoutedEventArgs e)
-		{
-			System.Windows.Application.Current.Shutdown();
-		}
-
-		/// <summary>
 		/// Button in the left side menu to enable the tab desktop
 		/// </summary>
 		/// <param name="sender"></param>
@@ -76,52 +50,6 @@ namespace AnzuW
 		private void Button_Click_Desktop(object sender, RoutedEventArgs e)
 		{
 			new WindowController(WindowController.Windows.Desktop);
-		}
-
-		/// <summary>
-		/// Button in the left side menu to enable the tab setting
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Setting(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Settings);
-		}
-
-		/// <summary>
-		/// Button in the left side menu to enable the tab download
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Download(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Download);
-		}
-
-		/// <summary>
-		/// Button in the left side menu to enable the tab folder
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Folder(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Folder);
-		}
-
-		/// <summary>
-		/// Button in settings (Select folder)
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
-		{
-			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
-			{
-				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
-					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath + @"\";
-				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-				Properties.Settings.Default.Save();
-			}
 		}
 
 		/// <summary>
@@ -145,6 +73,16 @@ namespace AnzuW
 		}
 
 		/// <summary>
+		/// Button in the left side menu to enable the tab download
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_Download(object sender, RoutedEventArgs e)
+		{
+			new WindowController(WindowController.Windows.Download);
+		}
+
+		/// <summary>
 		/// btn in download page (Download Sort)
 		/// </summary>
 		/// <param name="sender"></param>
@@ -164,6 +102,48 @@ namespace AnzuW
 		}
 
 		/// <summary>
+		/// Button in the left side menu to enable the tab folder
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_Folder(object sender, RoutedEventArgs e)
+		{
+			new WindowController(WindowController.Windows.Folder);
+		}
+
+		private void Button_Click_HideProgress(object sender, RoutedEventArgs e)
+		{
+			ProgressPanel.Visibility = Visibility.Collapsed;
+			DoneProgress.Visibility = Visibility.Collapsed;
+		}
+
+		/// <summary>
+		/// Button in settings (Select folder)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
+		{
+			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
+			{
+				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath + @"\";
+				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+				Properties.Settings.Default.Save();
+			}
+		}
+
+		/// <summary>
+		/// Button in the left side menu to enable the tab setting
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Button_Click_Setting(object sender, RoutedEventArgs e)
+		{
+			new WindowController(WindowController.Windows.Settings);
+		}
+
+		/// <summary>
 		/// Button in progress bar (STOP)
 		/// </summary>
 		/// <param name="sender"></param>
@@ -175,15 +155,29 @@ namespace AnzuW
 			BGThread.Abort();
 		}
 
+		/// <summary>
+		/// Exit button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Exit(object sender, RoutedEventArgs e)
+		{
+			System.Windows.Application.Current.Shutdown();
+		}
+
 		private void Minimized(object sender, RoutedEventArgs e)
 		{
 			this.WindowState = WindowState.Minimized;
 		}
 
-		private void Button_Click_HideProgress(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Drag and drop for program header
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			ProgressPanel.Visibility = Visibility.Collapsed;
-			DoneProgress.Visibility = Visibility.Collapsed;
+			this.DragMove();
 		}
 	}
 }

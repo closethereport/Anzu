@@ -8,12 +8,9 @@
 using AnzuW;
 using Ionic.Zip;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 /// <summary>
 ///Класс для вкладки Desktop
@@ -24,16 +21,9 @@ internal class Desktop
 	{
 		MainWindow.BGThread = (new Thread(() =>
 		{
-			////////////////////ТЕЛО ПОТОКА////////////////////////
-			///
-
-			//ОТОБРАЖЕНИЕ ПРОГРЕС БАРА В UI
-			//Создаем контроллер прогрес бара
 			var Progress = new ProgressController();
-			Progress.ShowProgressBar(); //ПОКАЗАТЬ БАР
+			Progress.ShowProgressBar();
 
-			// try catch Нужно для остановки потока кнопкой STOP из UI
-			// Если юзер нажмет STOP на интерфейсе будет переход в catch (Так же если возникнут исключения)
 			try
 			{
 				string zipPath = AnzuW.Properties.Settings.Default.MainBackupFolder + "Desktop " + DateTime.Now.ToString("dd.MM.yyyy (hh-mm)") + ".zip";
@@ -68,7 +58,7 @@ internal class Desktop
 								break;
 
 							case ZipProgressEventType.Error_Saving: //Ошибка
-								Progress.AddLog("ERROR ");
+								Progress.AddLog("Error " + e.CurrentEntry);
 								break;
 
 							case ZipProgressEventType.Saving_AfterWriteEntry: //Конец архив очередного файла
@@ -79,7 +69,6 @@ internal class Desktop
 						}
 					};
 
-					//Добавляем к архиву папку рабочего стала (их две у винды)
 					zip.AddDirectory(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "");
 
 					zip.Save(zipPath);  // Создаем архив
@@ -105,7 +94,8 @@ internal class Desktop
 			}
 			catch (Exception ex)
 			{
-				Progress.HideProgressBar("Error"); //Закрыть бар
+				Progress.AddLog(ex.StackTrace);
+				Progress.HideProgressBar("!Error!"); //Закрыть бар
 			}
 		}));
 
