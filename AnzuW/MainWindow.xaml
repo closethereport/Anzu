@@ -152,27 +152,6 @@
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
 					Foreground="White" />
-
-				<Button
-					Height="50"
-					Margin="0,4"
-					Background="#FF17191D"
-					BorderBrush="#FF17191D"
-					Content="Soon..."
-					FontFamily="Microsoft YaHei UI Light"
-					FontSize="24"
-					Foreground="White" />
-
-				<Button
-					Height="50"
-					Margin="0,4"
-					Background="#FF17191D"
-					BorderBrush="#FF17191D"
-					Content="Soon..."
-					FontFamily="Microsoft YaHei UI Light"
-					FontSize="24"
-					Foreground="White" />
-
 				<Button
 					x:Name="btnSetting"
 					Height="50"
@@ -261,8 +240,7 @@
 			<Grid
 				x:Name="SettingGrid"
 				Grid.Row="1"
-				Grid.Column="1"
-				Visibility="Collapsed">
+				Grid.Column="1">
 				<!--  Visibility="Collapsed"  -->
 
 				<!--  SETTING  -->
@@ -340,16 +318,16 @@
 					Margin="33,173,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="Default"
 					FontFamily="Candara Light"
-					FontSize="15" />
+					FontSize="15" IsChecked="True" />
 				<CheckBox
 					Width="138"
 					Height="19"
 					Margin="432,149,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="ТАкое сжатие что пиздец"
+					Content="BestSpeed"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
@@ -358,7 +336,7 @@
 					Margin="33,154,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="ну так нормально"
+					Content="Nope"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
@@ -367,7 +345,7 @@
 					Margin="247,149,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="Level1"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
@@ -376,7 +354,7 @@
 					Margin="247,173,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="Level4"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
@@ -385,58 +363,11 @@
 					Margin="432,173,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Compression"
+					Content="BestCompression"
 					FontFamily="Candara Light"
 					FontSize="15" />
 
 				<!--  Приоритет  -->
-				<Label
-					Width="108"
-					Margin="247,209,247,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Content="File handling"
-					FontFamily="Candara Light"
-					FontSize="18" />
-
-				<Border
-					Width="582"
-					Height="93"
-					Margin="10,209,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-					<Border.ToolTip>Different algorithms and compression ratios affect compression speed and compressed file size.</Border.ToolTip>
-				</Border>
-				<CheckBox
-					Width="138"
-					Height="19"
-					Margin="33,274,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Content="Small size first"
-					FontFamily="Candara Light"
-					FontSize="15" />
-				<CheckBox
-					Width="138"
-					Height="19"
-					Margin="247,274,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Content="First large"
-					FontFamily="Candara Light"
-					FontSize="15" />
-				<CheckBox
-					Width="138"
-					Height="19"
-					Margin="441,274,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Content="Clever algorithm"
-					FontFamily="Candara Light"
-					FontSize="15" />
 			</Grid>
 
 			<!--  ============================DesktopGrid============================  -->
@@ -446,8 +377,6 @@
 				Grid.Column="1"
 				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
-
-				<!--  Desktop  -->
 
 				<!--  Desktop  -->
 
@@ -526,8 +455,8 @@
 					FontSize="22" />
 
 				<Label
-					Margin="12,121,399,273"
-					Content="Files will be divided into folders &#xD;&#xA;according to their extension"
+					Margin="12,118,329,276"
+					Content="Files will be divided into folders according &#xD;&#xA;to their extension"
 					Opacity="0.7" />
 				<Button
 					Width="100"
@@ -537,12 +466,14 @@
 					VerticalAlignment="Top"
 					Background="#FF17191D"
 					BorderBrush="White"
+					Click="Button_Click_DesktopBackupAndSort"
 					Content="Backup"
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
 
 				<CheckBox
+					x:Name="DBackSortExtension"
 					Width="176"
 					Margin="296,145,0,0"
 					HorizontalAlignment="Left"
@@ -559,8 +490,8 @@
 					FontSize="22" />
 
 				<Label
-					Margin="10,201,412,195"
-					Content="Files will be divided into folders &#xD;&#xA;according to their extension"
+					Margin="12,201,329,195"
+					Content="Files will be divided into folders according &#xD;&#xA;to their extension"
 					Opacity="0.7" />
 				<Button
 					Width="100"
@@ -570,12 +501,14 @@
 					VerticalAlignment="Top"
 					Background="#FF17191D"
 					BorderBrush="White"
+					Click="Button_Click_DesktopSort"
 					Content="Sort"
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
 
 				<CheckBox
+					x:Name="DSortExtension"
 					Width="181"
 					Margin="296,226,0,0"
 					HorizontalAlignment="Left"
@@ -587,8 +520,8 @@
 			<Grid
 				x:Name="DownloadGrid"
 				Grid.Row="1"
-				Grid.Column="1"
-				Visibility="Collapsed">
+				Visibility="Collapsed"
+				Grid.Column="1">
 
 				<!--  Visibility="Collapsed"  -->
 
@@ -662,6 +595,7 @@
 					VerticalAlignment="Top"
 					Background="#FF17191D"
 					BorderBrush="White"
+					Click="Button_Click_DownloadDelOld"
 					Content="Delete"
 					FontFamily="Candara Light"
 					FontSize="20"
@@ -690,6 +624,7 @@
 					Content="Delete files after sorting"
 					IsChecked="True" />
 				<TextBox
+					x:Name="OldDayTextBox"
 					Width="61"
 					Height="19"
 					Margin="96,137,0,0"
@@ -715,7 +650,35 @@
 				Visibility="Collapsed">
 
 				<!--  Visibility="Collapsed"  -->
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+					<Label
+						Width="148"
+						Margin="433,-1,-1,48"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Content="drag and drop folder"
+						FontFamily="Candara Light"
+						FontSize="15"
+						Opacity="0.4" />
+				</Border>
 
+				<!--  Visibility="Collapsed"  -->
+				<CheckBox
+					x:Name="SortExtendedFolder"
+					Width="172"
+					Margin="277,59,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Sort by folder with extension" />
 				<Border
 					Width="582"
 					Height="77"
@@ -726,26 +689,42 @@
 					BorderBrush="#FF383838"
 					BorderThickness="1">
 					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+					<Label
+						Width="148"
+						Margin="433,-1,-1,48"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Content="drag and drop folder"
+						FontFamily="Candara Light"
+						FontSize="15"
+						Opacity="0.4" />
 				</Border>
 
 				<Label
 					Width="243"
-					Margin="10,10,349,0"
+					Margin="10,13,349,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
-					Content="Archive folder"
+					Content="Sort Folder"
 					FontFamily="Candara Light"
 					FontSize="25" />
-
+				<TextBox
+					x:Name="FOldDayTextBox"
+					Width="61"
+					Height="19"
+					Margin="130,138,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Text="30"
+					TextWrapping="Wrap" />
 				<Label
-					Width="148"
-					Margin="228,32,226,0"
+					Width="42"
+					Margin="191,133,369,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
-					Content="drag and drop folder"
+					Content="days"
 					FontFamily="Candara Light"
-					FontSize="15"
-					Opacity="0.5" />
+					FontSize="15" />
 				<Button
 					Width="127"
 					Height="36"
@@ -754,10 +733,40 @@
 					VerticalAlignment="Top"
 					Background="#FF17191D"
 					BorderBrush="White"
+					Click="Button_Click_SortFolder"
 					Content="Select Folder"
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
+				<Label
+					Width="243"
+					Margin="10,92,349,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Delete old files"
+					FontFamily="Candara Light"
+					FontSize="25" />
+				<Button
+					Width="127"
+					Height="36"
+					Margin="455,123,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF17191D"
+					BorderBrush="White"
+					Click="Button_Click_DelOldFolder"
+					Content="Select Folder"
+					FontFamily="Candara Light"
+					FontSize="20"
+					Foreground="White" />
+				<Label
+					Width="110"
+					Margin="20,133,472,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Files older than"
+					FontFamily="Candara Light"
+					FontSize="15" />
 			</Grid>
 
 			<!--  ============================ProgressPanel============================  -->
@@ -765,7 +774,8 @@
 				x:Name="ProgressPanel"
 				Grid.Row="1"
 				Grid.Column="1"
-				x:FieldModifier="public">
+				x:FieldModifier="public"
+				Visibility="Collapsed">
 				<!--  Visibility="Collapsed"  -->
 				<Border
 					Width="602"

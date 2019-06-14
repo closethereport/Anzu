@@ -179,5 +179,25 @@ namespace AnzuW
 		{
 			this.DragMove();
 		}
+
+		private void Button_Click_DesktopSort(object sender, RoutedEventArgs e)
+		{
+		}
+
+		private void Button_Click_DesktopBackupAndSort(object sender, RoutedEventArgs e)
+		{
+		}
+
+		private void Button_Click_DownloadDelOld(object sender, RoutedEventArgs e)
+		{
+		}
+
+		private void Button_Click_SortFolder(object sender, RoutedEventArgs e)
+		{
+		}
+
+		private void Button_Click_DelOldFolder(object sender, RoutedEventArgs e)
+		{
+		}
 	}
 }

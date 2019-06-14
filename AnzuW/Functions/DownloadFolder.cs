@@ -27,7 +27,7 @@ internal class DownloadFolder
 					{
 						try
 						{
-							Progress.AddLog("Sort " + t.Name);
+							Progress.AddLog("Sort:" + t.Name);
 
 							Directory.CreateDirectory(path + TypeFiles.GetTypePath(t));
 							t.CopyTo(path + TypeFiles.GetTypePath(t) + t.Name, true);
@@ -36,7 +36,7 @@ internal class DownloadFolder
 						}
 						catch (Exception ex)
 						{
-							Progress.AddLog("Error " + t.Name);
+							Progress.AddLog("Error:" + t.Name);
 							Progress.AddLog(ex.StackTrace.ToString());
 							Progress.AddProgress(1);
 						}
@@ -48,14 +48,14 @@ internal class DownloadFolder
 					{
 						try
 						{
-							Progress.AddLog("Sort " + t.Name);
+							Progress.AddLog("Sort:" + t.Name);
 							Directory.CreateDirectory(path + t.Extension.ToString().Replace(".", ""));
 							t.CopyTo(path + t.Extension.ToString().Replace(".", "") + "/" + t.Name, true);
 							Progress.AddProgress(1);
 						}
 						catch (Exception ex)
 						{
-							Progress.AddLog("Error " + t.Name);
+							Progress.AddLog("Error:" + t.Name);
 							Progress.AddLog(ex.StackTrace.ToString());
 							Progress.AddProgress(1);
 						}
