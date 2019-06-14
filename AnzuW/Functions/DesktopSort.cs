@@ -1,25 +1,40 @@
-Ôªøusing AnzuW;
-using System;
-using System.IO;
-using System.Threading;
+#region copyright
 
-internal class DownloadFolder
+// (c) 2019 Nelu & 601 (github.com/NeluQi)
+// This code is licensed under MIT license (see LICENSE for details)
+
+#endregion copyright
+
+using AnzuW;
+using Ionic.Zip;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+/// <summary>
+///
+/// </summary>
+internal class DesktopSort
 {
-	public void Dfolder(bool DeleteFile, bool TypeFolder = false, string DownloadFold = null)
+	public void Sort(bool SortExtended) //‘ÛÌÍˆËˇ ·˝Í‡Ô‡
 	{
 		MainWindow.BGThread = (new Thread(() =>
 		{
-			////////////////////–¢–ï–õ–û –ü–û–¢–û–ö–ê////////////////////////
+			////////////////////“≈ÀŒ œŒ“Œ ¿////////////////////////
 			var Progress = new ProgressController();
-			Progress.ShowProgressBar(); //–ü–û–ö–ê–ó–ê–¢–¨ –ë–ê–†
+			Progress.ShowProgressBar(); //œŒ ¿«¿“‹ ¡¿–
 
 			try
 			{
-				var dir = new DirectoryInfo(DownloadFold ?? KnownFolders.GetPath(KnownFolder.Downloads));
+				var dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
 				var FileList = dir.GetFiles();
-				Progress.SetMax(DeleteFile == true ? FileList.Length * 2 : FileList.Length);
-				string path = dir.FullName + $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy (hh-mm)")})/";
-				if (!TypeFolder)
+				Progress.SetMax(FileList.Length);
+				string path = dir.FullName + $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy")})/";
+				if (!SortExtended)
 				{
 					Directory.CreateDirectory(path + "/Other/");
 					foreach (var t in FileList)
@@ -60,24 +75,20 @@ internal class DownloadFolder
 						}
 					}
 				}
-
-				if (DeleteFile)//TODO: –ó–∞–ø–∏—Å—ã–≤–∞—Ç—å —Ñ–∞–π–ª—ã –∫–æ—Ç–æ—Ä—ã–µ –Ω–µ –ø–µ—Ä–µ–º–µ—Å—Ç–∏–ª—Ç—Å—å  catch (Exception ex) –∏ –∏—Ö –ù–ï –£–î–ê–õ–Ø–¢–¨
+				foreach (FileInfo file in dir.GetFiles())
 				{
-					foreach (FileInfo file in dir.GetFiles())
-					{
-						file.Delete();
-					}
+					file.Delete();
 				}
-				Progress.HideProgressBar(); //–°–ö–†–´–í–ê–ï–ú –ë–ê–†
+				Progress.HideProgressBar(); //— –€¬¿≈Ã ¡¿–
 			}
 			catch (Exception ex)
 			{
 				Progress.AddLog(ex.StackTrace);
-				Progress.HideProgressBar("!Error!"); //–ó–∞–∫—Ä—ã—Ç—å –±–∞—Ä
+				Progress.HideProgressBar("!Error!"); //«‡Í˚Ú¸ ·‡
 			}
 		}));
 
-		MainWindow.BGThread.IsBackground = true; //–û–±—è–∑–∞—Ç–µ–ª—å–Ω–æ —É—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞—Ç—å –¥–ª—è –ø–æ—Ç–æ–∫–∞
-		MainWindow.BGThread.Start(); //–ó–∞–ø—É—Å–∫ –ø–æ—Ç–æ–∫–∞
+		MainWindow.BGThread.IsBackground = true; //Œ·ˇÁ‡ÚÂÎ¸ÌÓ ÛÒÚ‡Ì‡‚ÎË‚‡Ú¸ ‰Îˇ ÔÓÚÓÍ‡
+		MainWindow.BGThread.Start(); //«‡ÔÛÒÍ ÔÓÚÓÍ‡
 	}
 }

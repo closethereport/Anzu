@@ -7,10 +7,6 @@
 
 using AnzuW;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 /// <summary>
@@ -24,14 +20,15 @@ public class ProgressController
 	public static MainWindow MainWindow { get; set; }
 
 	/// <summary>
-	/// Set value progress bar
+	/// Add line to log panel
 	/// </summary>
-	/// <param name="progress">value</param>
-	public void SetProgress(int progress)
+	/// <param name="log">String</param>
+	public void AddLog(string log)
 	{
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
-			MainWindow.ProgressBar.Value = progress;
+			MainWindow.OutputBlock.Text += log + Environment.NewLine;
+			MainWindow.OutputBlockScroll.ScrollToEnd();
 		}));
 	}
 
@@ -44,60 +41,6 @@ public class ProgressController
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
 			MainWindow.ProgressBar.Value += progress;
-		}));
-	}
-
-	/// <summary>
-	/// Set text above progress bar
-	/// </summary>
-	/// <param name="text">text</param>
-	public void SetText(string text)
-	{
-		MainWindow.Dispatcher.Invoke(new Action(() =>
-		{
-			MainWindow.ProgressText.Content = text;
-		}));
-	}
-
-	/// <summary>
-	/// Set maximum for progress bar
-	/// </summary>
-	/// <param name="MAX">MAX</param>
-	public void SetMax(int MAX)
-	{
-		MainWindow.Dispatcher.Invoke(new Action(() =>
-		{
-			MainWindow.ProgressBar.Maximum = MAX;
-		}));
-	}
-
-	/// <summary>
-	/// Set minimum for progress bar
-	/// </summary>
-	/// <param name="MIN">MIN</param>
-	public void SetMin(int MIN)
-	{
-		MainWindow.Dispatcher.Invoke(new Action(() =>
-		{
-			MainWindow.ProgressBar.Minimum = MIN;
-		}));
-	}
-
-	/// <summary>
-	/// Show progress bar in UI
-	/// </summary>
-	public void ShowProgressBar()
-	{
-		MainWindow.Dispatcher.Invoke(new Action(() =>
-		{
-			MainWindow.DoneProgress.Visibility = Visibility.Collapsed;
-			MainWindow.ProgressBar.Maximum = 100;
-			MainWindow.ProgressBar.Minimum = 0;
-			MainWindow.ProgressBar.Value = 0;
-			MainWindow.ProgressText.Content = "";
-			MainWindow.ProgressStopbtn.IsEnabled = true;
-			MainWindow.OutputBlock.Text = "";
-			MainWindow.ProgressPanel.Visibility = Visibility.Visible;
 		}));
 	}
 
@@ -128,15 +71,68 @@ public class ProgressController
 	}
 
 	/// <summary>
-	/// Add line to log panel
+	/// Set maximum for progress bar
 	/// </summary>
-	/// <param name="log">String</param>
-	public void AddLog(string log)
+	/// <param name="MAX">MAX</param>
+	public void SetMax(int MAX)
 	{
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
-			MainWindow.OutputBlock.Text += log + Environment.NewLine;
-			MainWindow.OutputBlockScroll.ScrollToEnd();
+			MainWindow.ProgressBar.Maximum = MAX;
+		}));
+	}
+
+	/// <summary>
+	/// Set minimum for progress bar
+	/// </summary>
+	/// <param name="MIN">MIN</param>
+	public void SetMin(int MIN)
+	{
+		MainWindow.Dispatcher.Invoke(new Action(() =>
+		{
+			MainWindow.ProgressBar.Minimum = MIN;
+		}));
+	}
+
+	/// <summary>
+	/// Set value progress bar
+	/// </summary>
+	/// <param name="progress">value</param>
+	public void SetProgress(int progress)
+	{
+		MainWindow.Dispatcher.Invoke(new Action(() =>
+		{
+			MainWindow.ProgressBar.Value = progress;
+		}));
+	}
+
+	/// <summary>
+	/// Set text above progress bar
+	/// </summary>
+	/// <param name="text">text</param>
+	public void SetText(string text)
+	{
+		MainWindow.Dispatcher.Invoke(new Action(() =>
+		{
+			MainWindow.ProgressText.Content = text;
+		}));
+	}
+
+	/// <summary>
+	/// Show progress bar in UI
+	/// </summary>
+	public void ShowProgressBar()
+	{
+		MainWindow.Dispatcher.Invoke(new Action(() =>
+		{
+			MainWindow.DoneProgress.Visibility = Visibility.Collapsed;
+			MainWindow.ProgressBar.Maximum = 100;
+			MainWindow.ProgressBar.Minimum = 0;
+			MainWindow.ProgressBar.Value = 0;
+			MainWindow.ProgressText.Content = "";
+			MainWindow.ProgressStopbtn.IsEnabled = true;
+			MainWindow.OutputBlock.Text = "";
+			MainWindow.ProgressPanel.Visibility = Visibility.Visible;
 		}));
 	}
 }

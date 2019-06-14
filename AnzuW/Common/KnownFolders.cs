@@ -2,6 +2,26 @@ using System;
 using System.Runtime.InteropServices;
 
 /// <summary>
+/// Standard folders registered with the system. These folders are installed with Windows Vista
+/// and later operating systems, and a computer will have only folders appropriate to it
+/// installed.
+/// </summary>
+public enum KnownFolder
+{
+	Contacts,
+	Desktop,
+	Documents,
+	Downloads,
+	Favorites,
+	Links,
+	Music,
+	Pictures,
+	SavedGames,
+	SavedSearches,
+	Videos
+}
+
+/// <summary>
 /// Class containing methods to retrieve specific file system paths.
 /// </summary>
 public static class KnownFolders
@@ -20,6 +40,21 @@ public static class KnownFolders
         "{7D1D3A04-DEBB-4115-95CF-2F29DA2920DA}", // SavedSearches
         "{18989B1D-99B5-455B-841C-AB7C74E4DDFC}", // Videos
     };
+
+	[Flags]
+	private enum KnownFolderFlags : uint
+	{
+		SimpleIDList = 0x00000100,
+		NotParentRelative = 0x00000200,
+		DefaultPath = 0x00000400,
+		Init = 0x00000800,
+		NoAlias = 0x00001000,
+		DontUnexpand = 0x00002000,
+		DontVerify = 0x00004000,
+		Create = 0x00008000,
+		NoAppcontainerRedirection = 0x00010000,
+		AliasOnly = 0x80000000
+	}
 
 	/// <summary>
 	/// Gets the current path to the specified known folder as currently configured. This does
@@ -71,39 +106,4 @@ public static class KnownFolders
 	private static extern int SHGetKnownFolderPath(
 		[MarshalAs(UnmanagedType.LPStruct)]Guid rfid, uint dwFlags, IntPtr hToken,
 		out IntPtr ppszPath);
-
-	[Flags]
-	private enum KnownFolderFlags : uint
-	{
-		SimpleIDList = 0x00000100,
-		NotParentRelative = 0x00000200,
-		DefaultPath = 0x00000400,
-		Init = 0x00000800,
-		NoAlias = 0x00001000,
-		DontUnexpand = 0x00002000,
-		DontVerify = 0x00004000,
-		Create = 0x00008000,
-		NoAppcontainerRedirection = 0x00010000,
-		AliasOnly = 0x80000000
-	}
-}
-
-/// <summary>
-/// Standard folders registered with the system. These folders are installed with Windows Vista
-/// and later operating systems, and a computer will have only folders appropriate to it
-/// installed.
-/// </summary>
-public enum KnownFolder
-{
-	Contacts,
-	Desktop,
-	Documents,
-	Downloads,
-	Favorites,
-	Links,
-	Music,
-	Pictures,
-	SavedGames,
-	SavedSearches,
-	Videos
 }

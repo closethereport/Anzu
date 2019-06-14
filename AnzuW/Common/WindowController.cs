@@ -6,11 +6,6 @@
 #endregion copyright
 
 using AnzuW;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 /// <summary>
@@ -21,6 +16,15 @@ internal class WindowController
 	private static Windows ActiveWindow = Windows.NULL;
 	private MainWindow Form = Application.Current.Windows[0] as MainWindow;
 
+	public WindowController(Windows SelectWindow)
+	{
+		if (SelectWindow == ActiveWindow)
+			return;
+		Hide(ActiveWindow);
+		Show(SelectWindow);
+		ActiveWindow = SelectWindow;
+	}
+
 	public enum Windows
 	{
 		Desktop,
@@ -29,15 +33,6 @@ internal class WindowController
 		File,
 		Settings,
 		NULL
-	}
-
-	public WindowController(Windows SelectWindow)
-	{
-		if (SelectWindow == ActiveWindow)
-			return;
-		Hide(ActiveWindow);
-		Show(SelectWindow);
-		ActiveWindow = SelectWindow;
 	}
 
 	private void Hide(Windows win)
