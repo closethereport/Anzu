@@ -17,7 +17,7 @@ using System.Threading;
 /// </summary>
 internal class Desktop
 {
-	public void Backup(bool DelFile) //Функция бэкапа
+	public void Backup() //Функция бэкапа
 	{
 		MainWindow.BGThread = (new Thread(() =>
 		{
@@ -74,22 +74,20 @@ internal class Desktop
 					zip.Save(zipPath);  // Создаем архив
 				}
 
-				if (DelFile)
+				Progress.AddLog("///Start delete file///");
+				foreach (var current in FileList) //Удаляем файлы
 				{
-					Progress.AddLog("///Start delete file///");
-					foreach (var current in FileList) //Удаляем файлы
-					{
-						Progress.AddLog(current.Name);
-						Progress.AddProgress(1);
-						current.Delete();
-					}
-					foreach (var current in DirectoryList) //удаляем папки
-					{
-						Progress.AddLog(current.Name);
-						Progress.AddProgress(1);
-						current.Delete(true);
-					}
+					Progress.AddLog(current.Name);
+					Progress.AddProgress(1);
+					current.Delete();
 				}
+				foreach (var current in DirectoryList) //удаляем папки
+				{
+					Progress.AddLog(current.Name);
+					Progress.AddProgress(1);
+					current.Delete(true);
+				}
+
 				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
 			}
 			catch (Exception ex)

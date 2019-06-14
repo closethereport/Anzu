@@ -68,7 +68,7 @@ namespace AnzuW
 			{
 				var bk = new Desktop();
 				//TODO: Сделать чекбокс на форме
-				bk.Backup(true);
+				bk.Backup();
 			}
 		}
 
@@ -182,6 +182,8 @@ namespace AnzuW
 
 		private void Button_Click_DesktopSort(object sender, RoutedEventArgs e)
 		{
+			var bk = new DesktopSort();
+			bk.Sort(DSortExtension.IsChecked.Value);
 		}
 
 		private void Button_Click_DesktopBackupAndSort(object sender, RoutedEventArgs e)

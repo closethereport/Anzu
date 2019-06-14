@@ -20,7 +20,7 @@ internal class TypeFiles
 	".mpa", ".mp2v", ".mp2", ".mp3",".mpeg",".mpg",".midi",".mid",".kar",".rmi",".wma",".asf", ".mid"};
 
 	private static readonly string[] VectorGraphics = { ".ai", ".cdd", ".cdr", ".dem", ".eps", ".max", ".ps", ".svg", ".vsd", ".wmf" };
-	private static readonly string[] Video = { ".asf", ".avi", ".mp4", ".m4v", ".mov", ".mpg", ".mpeg", ".swf", ".wmv", ".avi", ".3g2" };
+	private static readonly string[] Video = { ".asf", ".avi", ".mp4", ".m4v", ".mov", ".mpg", ".mpeg", ".swf", ".wmv", ".avi", ".3g2", ".webm" };
 	private static readonly string[] GeoinformationSystems = { ".dem", ".gpx", ".kml", ".kmz", ".loc", ".mid", ".ov2", ".pps" };
 	private static readonly string[] Graphics = { ".cr2", ".cur", ".icns", ".pict", ".tex", ".ttf" };
 
