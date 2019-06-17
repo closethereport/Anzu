@@ -147,9 +147,6 @@
     <Resource Include="Resources\img\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\img\drop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\img\icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +158,19 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\cloud-computing.png" />
+    <Resource Include="Resources\img\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\desktop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\logi - Copy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
