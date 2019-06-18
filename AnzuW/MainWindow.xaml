@@ -709,8 +709,7 @@
 			<Grid
 				x:Name="FolderGrid"
 				Grid.Row="1"
-				Grid.Column="1"
-				Visibility="Collapsed">
+				Grid.Column="1">
 
 				<!--  Visibility="Collapsed"  -->
 				<Label
@@ -746,6 +745,33 @@
 					FontFamily="Candara Light"
 					FontSize="25" />
 				<Border
+					x:Name="DropSortFiles"
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FFE0E0E0"
+					BorderBrush="#FF383838"
+					BorderThickness="1"
+					Opacity="0.6"
+					Visibility="Collapsed">
+
+					<Border.ToolTip>drag and drop folder</Border.ToolTip>
+					<Image Opacity="0.5" Source="Resources/img/drop-down.png" />
+				</Border>
+				<!--  Visibility="Collapsed"  -->
+				<Label
+					Width="148"
+					Height="33"
+					Margin="223,174,231,229"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Content="drag and drop folder"
+					FontFamily="Candara Light"
+					FontSize="16"
+					Opacity="0.5" />
+				<Border
 					Width="582"
 					Height="77"
 					Margin="10,10,0,0"
@@ -759,33 +785,6 @@
 					DragLeave="Border_DragLeave"
 					Drop="Border_Drop" />
 
-				<!--  Visibility="Collapsed"  -->
-				<Label
-					Width="148"
-					Height="33"
-					Margin="223,174,231,229"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					Content="drag and drop folder"
-					FontFamily="Candara Light"
-					FontSize="16"
-					Opacity="0.5" />
-				<Border
-					x:Name="DropSortFiles"
-					Width="582"
-					Height="77"
-					Margin="10,10,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="#FFE0E0E0"
-					BorderBrush="#FF383838"
-					BorderThickness="1"
-					Visibility="Collapsed">
-
-					<Border.ToolTip>drag and drop folder</Border.ToolTip>
-					<Image Opacity="0.5" Source="Resources/img/drop-down.png" />
-				</Border>
-
 				<Border
 					x:Name="DropOldFiles"
 					Width="582"
@@ -796,6 +795,7 @@
 					Background="#FFE0E0E0"
 					BorderBrush="#FF383838"
 					BorderThickness="1"
+					Opacity="0.6"
 					Visibility="Collapsed">
 
 					<Border.ToolTip>drag and drop folder</Border.ToolTip>
