@@ -22,7 +22,7 @@ internal class TypeFiles
 	private static readonly string[] VectorGraphics = { ".ai", ".cdd", ".cdr", ".dem", ".eps", ".max", ".ps", ".svg", ".vsd", ".wmf" };
 	private static readonly string[] Video = { ".asf", ".avi", ".mp4", ".m4v", ".mov", ".mpg", ".mpeg", ".swf", ".wmv", ".avi", ".3g2", ".webm" };
 	private static readonly string[] GeoinformationSystems = { ".dem", ".gpx", ".kml", ".kmz", ".loc", ".mid", ".ov2", ".pps" };
-	private static readonly string[] Graphics = { ".cr2", ".cur", ".icns", ".pict", ".tex", ".ttf" };
+	private static readonly string[] Graphics = { ".cr2", ".cur", ".icns", ".pict", ".tex" };
 
 	private static readonly string[] Documents = {".doc", ".docx", ".odt", ".pdf", ".dotx", ".epub", ".fb2", ".ibooks", ".key", ".ppsm", ".pptx", ".rtf",
 	".wpd", ".wps",".xlr", ".xlsb",".xslx", ".xltx", };
@@ -33,7 +33,7 @@ internal class TypeFiles
 	private static readonly string[] Web = { ".asp", ".aspx", ".cer", ".cfm", ".chm", ".crdownload", ".csr", ".css", ".eml", ".flv", ".htm", ".html", ".jnlp",
 	".js", ".jsp", ".magnet", ".mht", ".mhtm", ".msg", ".php", ".rss", ".torrent", ".vcf", ".url", ".webarchive", ".webloc",".xhtml", ".xul" };
 
-	private static readonly string[] Executable = { ".apk", ".bat", ".cgi", ".cmd", ".com", ".hta", ".msi", ".paf.exe", ".pif", ".ps1", ".scr", ".vb", ".vbe", ".vbs", ".wsf" };
+	private static readonly string[] Executable = { ".apk", ".bat", ".cgi", ".cmd", ".com", ".hta", ".msi", ".paf.exe", ".pif", ".ps1", ".scr", ".vb", ".vbe", ".vbs", ".wsf", ".exe" };
 
 	private static readonly string[] Configuration = {".application", ".appref-ms", ".cfg", ".conf", ".config", ".cpl", ".cue", ".deskthemepack", ".inf", ".ini", ".pkg",
 	".prf", ".themepack", ".thm", };
@@ -51,8 +51,8 @@ internal class TypeFiles
 
 	private static readonly string[] Text = { ".err", ".log", ".pwi", ".tex", ".text", ".txt", ".csv" };
 	private static readonly string[] Database = { ".accdb", ".b2", ".dat", ".db", ".dbf", ".dbx", ".kdc", ".mdb", ".sdf", ".sis" };
-	private static readonly string[] Backup = { ".awb", ".bak", ".dmp", ".gho", ".ghs", ".json", ".sav", ".tmp", ".v2i" };
-	private static readonly string[] Fonts = { ".fnt", ".fon", ".otf" };
+	private static readonly string[] Backup = { ".awb", ".bak", ".dmp", ".gho", ".ghs", ".sav", ".v2i" };
+	private static readonly string[] Fonts = { ".fnt", ".fon", ".otf", ".ttf" };
 
 	public enum Type
 	{
@@ -78,63 +78,6 @@ internal class TypeFiles
 		Fonts,
 		Web,
 		Other
-	}
-
-	public Type GetType(FileInfo file)
-	{
-		string ex = file.Extension.ToLower();
-
-		if (CAD.Contains(ex))
-		{
-			return Type.CAD;
-		}
-
-		if (Archives.Contains(ex))
-		{
-			return Type.Archives;
-		}
-
-		if (Audio.Contains(ex))
-		{
-			return Type.Audio;
-		}
-
-		if (VectorGraphics.Contains(ex))
-		{
-			return Type.VectorGraphics;
-		}
-
-		if (Video.Contains(ex))
-		{
-			return Type.Video;
-		}
-
-		if (GeoinformationSystems.Contains(ex))
-		{
-			return Type.GeoinformationSystems;
-		}
-
-		if (Graphics.Contains(ex))
-		{
-			return Type.Graphics;
-		}
-
-		if (Documents.Contains(ex))
-		{
-			return Type.Documents;
-		}
-
-		if (Encrypted.Contains(ex))
-		{
-			return Type.Encrypted;
-		}
-
-		if (Web.Contains(ex))
-		{
-			return Type.Web;
-		}
-
-		return Type.Other;
 	}
 
 	public static string GetTypePath(FileInfo file)

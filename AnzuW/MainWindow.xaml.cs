@@ -6,6 +6,7 @@
 #endregion copyright
 
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
@@ -33,11 +34,7 @@ namespace AnzuW
 			{
 				var CommandLinePasre = new ControllerCommand(Environment.GetCommandLineArgs());
 
-				ConsoleHelper.Initialize();
-
-				Console.WriteLine("Hello, World!");
-				Console.Write("Press a key to continue...");
-				Console.Read();
+				System.Environment.Exit(0);
 			}
 			else
 			{
@@ -46,6 +43,32 @@ namespace AnzuW
 				ProgressPanel.Visibility = Visibility.Collapsed;
 				ProgressController.MainWindow = this;
 				new WindowController(WindowController.Windows.Desktop);
+				switch (Properties.Settings.Default.ComLvl)
+				{
+					case 0:
+						CompressionNope.IsChecked = true;
+						break;
+
+					case 1:
+						CompressionDefault.IsChecked = true;
+						break;
+
+					case 2:
+						CompressionLevel1.IsChecked = true;
+						break;
+
+					case 3:
+						CompressionLevel4.IsChecked = true;
+						break;
+
+					case 4:
+						CompressionBestSpeed.IsChecked = true;
+						break;
+
+					case 5:
+						CompressionBestCompression.IsChecked = true;
+						break;
+				}
 			}
 		}
 
@@ -75,7 +98,7 @@ namespace AnzuW
 			{
 				var bk = new Desktop();
 				//TODO: Сделать чекбокс на форме
-				bk.Backup();
+				bk.Backup(DBackDelete.IsChecked.Value);
 			}
 		}
 
@@ -187,20 +210,40 @@ namespace AnzuW
 			this.DragMove();
 		}
 
+		/// <summary>
+		/// Desktop Sort btn
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_DesktopSort(object sender, RoutedEventArgs e)
 		{
 			var bk = new DesktopSort();
 			bk.Sort(DSortExtension.IsChecked.Value);
 		}
 
+		/// <summary>
+		/// Desktop Sort and backup btn
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_DesktopBackupAndSort(object sender, RoutedEventArgs e)
 		{
 		}
 
+		/// <summary>
+		/// Download delete old files btn
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_DownloadDelOld(object sender, RoutedEventArgs e)
 		{
 		}
 
+		/// <summary>
+		/// Sort Folder
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Button_Click_SortFolder(object sender, RoutedEventArgs e)
 		{
 		}
@@ -229,6 +272,11 @@ namespace AnzuW
 			DropOldFiles.Visibility = Visibility.Collapsed;
 		}
 
+		/// <summary>
+		/// Drag and drop in Sort folder
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Border_Drop(object sender, DragEventArgs e)
 		{
 			string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
@@ -241,6 +289,11 @@ namespace AnzuW
 			}
 		}
 
+		/// <summary>
+		/// Drag and drop in old file folder
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Border_Drop_1(object sender, DragEventArgs e)
 		{
 			string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
@@ -251,6 +304,77 @@ namespace AnzuW
 				{
 				}
 			}
+		}
+
+		private void CompressionNope_Checked(object sender, RoutedEventArgs e)
+		{
+			CompressionDefault.IsChecked = false;
+			CompressionLevel1.IsChecked = false;
+			CompressionLevel4.IsChecked = false;
+			CompressionBestSpeed.IsChecked = false;
+			CompressionBestCompression.IsChecked = false;
+			Properties.Settings.Default.ComLvl = 0;
+			Properties.Settings.Default.Save();
+		}
+
+		private void CompressionDefault_Checked(object sender, RoutedEventArgs e)
+		{
+			CompressionNope.IsChecked = false;
+			CompressionLevel1.IsChecked = false;
+			CompressionLevel4.IsChecked = false;
+			CompressionBestSpeed.IsChecked = false;
+			CompressionBestCompression.IsChecked = false;
+			Properties.Settings.Default.ComLvl = 1;
+			Properties.Settings.Default.Save();
+		}
+
+		private void CompressionLevel1_Checked(object sender, RoutedEventArgs e)
+		{
+			CompressionNope.IsChecked = false;
+			CompressionDefault.IsChecked = false;
+			CompressionLevel4.IsChecked = false;
+			CompressionBestSpeed.IsChecked = false;
+			CompressionBestCompression.IsChecked = false;
+			Properties.Settings.Default.ComLvl = 2;
+			Properties.Settings.Default.Save();
+		}
+
+		private void CompressionLevel4_Checked(object sender, RoutedEventArgs e)
+		{
+			CompressionNope.IsChecked = false;
+			CompressionDefault.IsChecked = false;
+			CompressionLevel1.IsChecked = false;
+			CompressionBestSpeed.IsChecked = false;
+			CompressionBestCompression.IsChecked = false;
+			Properties.Settings.Default.ComLvl = 3;
+			Properties.Settings.Default.Save(); ;
+		}
+
+		private void CompressionBestSpeed_Checked(object sender, RoutedEventArgs e)
+		{
+			CompressionNope.IsChecked = false;
+			CompressionDefault.IsChecked = false;
+			CompressionLevel1.IsChecked = false;
+			CompressionLevel4.IsChecked = false;
+			CompressionBestCompression.IsChecked = false;
+			Properties.Settings.Default.ComLvl = 4;
+			Properties.Settings.Default.Save();
+		}
+
+		private void CompressionBestCompression_Checked(object sender, RoutedEventArgs e)
+		{
+			CompressionNope.IsChecked = false;
+			CompressionDefault.IsChecked = false;
+			CompressionLevel1.IsChecked = false;
+			CompressionLevel4.IsChecked = false;
+			CompressionBestSpeed.IsChecked = false;
+			Properties.Settings.Default.ComLvl = 5;
+			Properties.Settings.Default.Save();
+		}
+
+		private void Hyperlink_Click(object sender, RoutedEventArgs e)
+		{
+			Process.Start("https://github.com/NeluQi");
 		}
 	}
 }
