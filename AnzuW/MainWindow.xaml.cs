@@ -6,6 +6,7 @@
 #endregion copyright
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -31,6 +32,12 @@ namespace AnzuW
 			if (Environment.GetCommandLineArgs().Length > 1)
 			{
 				var CommandLinePasre = new ControllerCommand(Environment.GetCommandLineArgs());
+
+				ConsoleHelper.Initialize();
+
+				Console.WriteLine("Hello, World!");
+				Console.Write("Press a key to continue...");
+				Console.Read();
 			}
 			else
 			{
@@ -200,6 +207,50 @@ namespace AnzuW
 
 		private void Button_Click_DelOldFolder(object sender, RoutedEventArgs e)
 		{
+		}
+
+		private void Border_DragEnter(object sender, DragEventArgs e)
+		{
+			DropSortFiles.Visibility = Visibility.Visible;
+		}
+
+		private void Border_DragLeave(object sender, DragEventArgs e)
+		{
+			DropSortFiles.Visibility = Visibility.Collapsed;
+		}
+
+		private void Border_DragEnter_1(object sender, DragEventArgs e)
+		{
+			DropOldFiles.Visibility = Visibility.Visible;
+		}
+
+		private void Border_DragLeave_1(object sender, DragEventArgs e)
+		{
+			DropOldFiles.Visibility = Visibility.Collapsed;
+		}
+
+		private void Border_Drop(object sender, DragEventArgs e)
+		{
+			string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+			DropSortFiles.Visibility = Visibility.Collapsed;
+			foreach (var path in Args)
+			{
+				if (System.IO.Directory.Exists(path))
+				{
+				}
+			}
+		}
+
+		private void Border_Drop_1(object sender, DragEventArgs e)
+		{
+			string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+			DropOldFiles.Visibility = Visibility.Collapsed;
+			foreach (var path in Args)
+			{
+				if (System.IO.Directory.Exists(path))
+				{
+				}
+			}
 		}
 	}
 }

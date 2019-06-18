@@ -705,29 +705,48 @@
 				Grid.Column="1">
 
 				<!--  Visibility="Collapsed"  -->
-				<Border
-					Width="582"
-					Height="77"
-					Margin="10,10,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
-					<Label
+				<Label
 						Width="148"
-						Margin="215,163,217,-121"
+						Margin="223,174,231,229"
 						HorizontalAlignment="Center"
 						VerticalAlignment="Center"
 						Content="drag and drop folder"
 						FontFamily="Candara Light"
 						FontSize="16"
 						Opacity="0.5" Height="33" />
+				<Border x:Name="DropSortFiles"
+					Width="582"
+					Visibility="Collapsed"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FFE0E0E0"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+
+					<Border.ToolTip>drag and drop folder</Border.ToolTip>
+					<Image Source="Resources/img/drop-down.png" Opacity="0.5" />
+				</Border>
+
+				<Border x:Name="DropOldFiles"
+					Width="582"
+					Height="77"
+					Visibility="Collapsed"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FFE0E0E0"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+
+					<Border.ToolTip>drag and drop folder</Border.ToolTip>
+					<Image Source="Resources/img/drop-down.png" Opacity="0.5" />
 				</Border>
 
 				<!--  Visibility="Collapsed"  -->
 				<Border
+					AllowDrop="true"
 					Width="582"
 					Height="77"
 					Margin="10,92,0,0"
@@ -735,7 +754,7 @@
 					VerticalAlignment="Top"
 					Background="Transparent"
 					BorderBrush="#FF383838"
-					BorderThickness="1">
+					BorderThickness="1" DragEnter="Border_DragEnter_1" DragLeave="Border_DragLeave_1" Drop="Border_Drop_1">
 					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
 				</Border>
 
@@ -815,6 +834,19 @@
 					Content="Files older than"
 					FontFamily="Candara Light"
 					FontSize="15" />
+				<Border
+					AllowDrop="true"
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1" DragEnter="Border_DragEnter" DragLeave="Border_DragLeave" Drop="Border_Drop">
+
+					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+				</Border>
 			</Grid>
 
 			<!--  ============================ProgressPanel============================  -->
@@ -990,7 +1022,7 @@
 				RenderOptions.BitmapScalingMode="HighQuality"
 				RenderOptions.EdgeMode="Aliased"
 				SnapsToDevicePixels="True"
-				Source="Resources/img/logi - Copy.png"
+				Source="Resources/img/logo-window.png"
 				Stretch="Fill" />
 			<!--  ============================/ProgressPanel============================  -->
 		</Grid>
