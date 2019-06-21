@@ -20,7 +20,6 @@ internal class DownloadFolder
 				string path = dir.FullName + $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy (hh-mm)")})/";
 				if (!TypeFolder)
 				{
-					Directory.CreateDirectory(path + "/Other/");
 					foreach (var t in FileList)
 					{
 						try

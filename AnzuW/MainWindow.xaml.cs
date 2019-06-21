@@ -222,15 +222,6 @@ namespace AnzuW
 		}
 
 		/// <summary>
-		/// Desktop Sort and backup btn
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_DesktopBackupAndSort(object sender, RoutedEventArgs e)
-		{
-		}
-
-		/// <summary>
 		/// Download delete old files btn
 		/// </summary>
 		/// <param name="sender"></param>
@@ -246,6 +237,15 @@ namespace AnzuW
 		/// <param name="e"></param>
 		private void Button_Click_SortFolder(object sender, RoutedEventArgs e)
 		{
+			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
+			{
+				string path = null;
+				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+					path = dlg.SelectedPath + @"\";
+
+				var bk = new FolderSort();
+				bk.Sort(SortExtendedFolder.IsChecked.Value, path);
+			}
 		}
 
 		private void Button_Click_DelOldFolder(object sender, RoutedEventArgs e)
@@ -285,6 +285,9 @@ namespace AnzuW
 			{
 				if (System.IO.Directory.Exists(path))
 				{
+					var bk = new FolderSort();
+					bk.Sort(SortExtendedFolder.IsChecked.Value, path);
+					break;
 				}
 			}
 		}

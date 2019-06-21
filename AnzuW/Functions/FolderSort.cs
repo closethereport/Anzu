@@ -18,9 +18,9 @@ using System.Threading.Tasks;
 /// <summary>
 ///
 /// </summary>
-internal class DesktopSort
+internal class FolderSort
 {
-	public void Sort(bool SortExtended) //Функция бэкапа
+	public void Sort(bool SortExtended, string path) //Функция бэкапа
 	{
 		MainWindow.BGThread = (new Thread(() =>
 		{
@@ -29,10 +29,10 @@ internal class DesktopSort
 
 			try
 			{
-				var dir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+				var dir = new DirectoryInfo(path);
 				var FileList = dir.GetFiles();
 				Progress.SetMax(FileList.Length);
-				string path = dir.FullName + $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy")})/";
+				path += $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy")})/";
 				if (!SortExtended)
 				{
 					foreach (var t in FileList)
