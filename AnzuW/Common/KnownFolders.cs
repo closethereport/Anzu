@@ -2,22 +2,44 @@ using System;
 using System.Runtime.InteropServices;
 
 /// <summary>
-/// Standard folders registered with the system. These folders are installed with Windows Vista
+/// /// Standard folders registered with the system. These folders are installed with Windows Vista
 /// and later operating systems, and a computer will have only folders appropriate to it
 /// installed.
+/// <KnownFolder.Contacts></KnownFolder.Contacts>
 /// </summary>
 public enum KnownFolder
 {
+	///<summary>Contacts</summary>
 	Contacts,
+
+	///<summary>Desktop</summary>
 	Desktop,
+
+	///<summary>Documents</summary>
 	Documents,
+
+	///<summary>Downloads</summary>
 	Downloads,
+
+	///<summary>Favorites</summary>
 	Favorites,
+
+	///<summary>Links</summary>
 	Links,
+
+	///<summary>Music</summary>
 	Music,
+
+	///<summary>Pictures</summary>
 	Pictures,
+
+	///<summary>SavedGames</summary>
 	SavedGames,
+
+	///<summary>SavedSearches</summary>
 	SavedSearches,
+
+	///<summary>Videos</summary>
 	Videos
 }
 

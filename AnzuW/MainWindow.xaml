@@ -7,8 +7,12 @@
 	Title="Anzu"
 	Width="800"
 	Height="500"
+	HorizontalAlignment="Center"
+	VerticalAlignment="Center"
+	AllowsTransparency="True"
 	Background="White"
 	Icon="Resources/img/icon.png"
+	Opacity="0.97"
 	ResizeMode="NoResize"
 	WindowStyle="None"
 	mc:Ignorable="d">
@@ -35,9 +39,9 @@
 		<SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
 		<SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
 		<SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
-		<SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
-		<SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
-		<SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+		<SolidColorBrush x:Key="Button.Disabled.Background" Color="#FF111010" />
+		<SolidColorBrush x:Key="Button.Disabled.Border" Color="#FF111010" />
+		<SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF111010" />
 		<Style TargetType="{x:Type Button}">
 			<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
 			<Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
@@ -109,7 +113,6 @@
 						ShadowDepth="2" />
 				</Border.Effect>
 			</Border>
-
 			<StackPanel
 				Grid.Row="1"
 				Width="196"
@@ -124,10 +127,21 @@
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
 					Click="Button_Click_Desktop"
-					Content="Desktop"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
-					Foreground="White" />
+					Foreground="White">
+					<StackPanel Orientation="Horizontal">
+						<Image
+							Width="36"
+							Height="36"
+							Margin="0,0,15,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							RenderOptions.BitmapScalingMode="HighQuality"
+							Source="Resources/img/desktop.png" />
+						<TextBlock VerticalAlignment="Center" Text="  Desktop   " />
+					</StackPanel>
+				</Button>
 
 				<Button
 					x:Name="btnDownload"
@@ -136,10 +150,23 @@
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
 					Click="Button_Click_Download"
-					Content="Download"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
-					Foreground="White" />
+					Foreground="White">
+					<StackPanel Orientation="Horizontal">
+						<Image
+							Width="36"
+							Height="36"
+							Margin="0,0,15,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							RenderOptions.BitmapScalingMode="HighQuality"
+							RenderOptions.EdgeMode="Aliased"
+							SnapsToDevicePixels="True"
+							Source="Resources/img/cloud-computing.png" />
+						<TextBlock VerticalAlignment="Center" Text=" Download " />
+					</StackPanel>
+				</Button>
 
 				<Button
 					x:Name="btnFolder"
@@ -148,10 +175,23 @@
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
 					Click="Button_Click_Folder"
-					Content="Folder"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
-					Foreground="White" />
+					Foreground="White">
+					<StackPanel Orientation="Horizontal">
+						<Image
+							Width="36"
+							Height="37"
+							Margin="0,0,15,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							RenderOptions.BitmapScalingMode="HighQuality"
+							RenderOptions.EdgeMode="Aliased"
+							SnapsToDevicePixels="True"
+							Source="Resources/img/folder.png" />
+						<TextBlock VerticalAlignment="Center" Text="   Folder    " />
+					</StackPanel>
+				</Button>
 				<Button
 					x:Name="btnSetting"
 					Height="50"
@@ -159,10 +199,23 @@
 					Background="#FF17191D"
 					BorderBrush="#FF17191D"
 					Click="Button_Click_Setting"
-					Content="Setting"
 					FontFamily="Microsoft YaHei UI Light"
 					FontSize="24"
-					Foreground="White" />
+					Foreground="White">
+					<StackPanel Orientation="Horizontal">
+						<Image
+							Width="36"
+							Height="36"
+							Margin="0,0,15,0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top"
+							RenderOptions.BitmapScalingMode="HighQuality"
+							RenderOptions.EdgeMode="Aliased"
+							SnapsToDevicePixels="True"
+							Source="Resources/img/settings.png" />
+						<TextBlock VerticalAlignment="Center" Text="   Setting   " />
+					</StackPanel>
+				</Button>
 			</StackPanel>
 		</Grid>
 
@@ -246,27 +299,17 @@
 				<!--  SETTING  -->
 
 				<!--  Main Backup Folder  -->
-				<Label
-					Width="179"
-					Margin="20,14,403,0"
-					HorizontalAlignment="Center"
+				<Border
+					Width="582"
+					Height="93"
+					Margin="10,108,0,0"
+					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Main backup folder:"
-					FontFamily="Candara Light"
-					FontSize="18" />
-
-				<TextBox
-					x:Name="MainBackupFolderTextBox"
-					Width="424"
-					Height="28"
-					Margin="20,51,158,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Background="#FFCDCDCD"
-					FontSize="18"
-					IsEnabled="False"
-					Text="Folder..."
-					TextWrapping="NoWrap" />
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1">
+					<Border.ToolTip>Different algorithms and compression ratios affect compression speed and compressed file size.</Border.ToolTip>
+				</Border>
 				<Border
 					Width="582"
 					Height="93"
@@ -278,6 +321,30 @@
 					BorderThickness="1">
 					<Border.ToolTip>Backups will be made to this folder.</Border.ToolTip>
 				</Border>
+
+				<!--  Main Backup Folder  -->
+				<Label
+					Width="176"
+					Margin="10,12,416,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Main backup folder:"
+					FontFamily="Candara Light"
+					FontSize="20" />
+
+				<TextBox
+					x:Name="MainBackupFolderTextBox"
+					Width="424"
+					Height="28"
+					Margin="20,51,158,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Background="#FFCDCDCD"
+					FontFamily="Candara Light"
+					FontSize="18"
+					IsEnabled="False"
+					Text="Folder..."
+					TextWrapping="NoWrap" />
 				<Button
 					Width="113"
 					Height="28"
@@ -286,7 +353,7 @@
 					VerticalAlignment="Top"
 					Click="Button_Click_SelectMainBackupFolder"
 					Content="Select folder"
-					FontFamily="Candara"
+					FontFamily="Candara Light"
 					FontSize="18"
 					Foreground="#FF4B4A4A"
 					Style="{StaticResource ButtonContext}" />
@@ -301,71 +368,85 @@
 					FontFamily="Candara Light"
 					FontSize="18" />
 
-				<Border
-					Width="582"
-					Height="93"
-					Margin="10,108,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-					<Border.ToolTip>Different algorithms and compression ratios affect compression speed and compressed file size.</Border.ToolTip>
-				</Border>
 				<CheckBox
+					x:Name="CompressionDefault"
 					Width="138"
 					Height="19"
 					Margin="33,173,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					Checked="CompressionDefault_Checked"
 					Content="Default"
 					FontFamily="Candara Light"
-					FontSize="15" IsChecked="True" />
+					FontSize="15" />
 				<CheckBox
+					x:Name="CompressionBestSpeed"
 					Width="138"
 					Height="19"
 					Margin="432,149,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					Checked="CompressionBestSpeed_Checked"
 					Content="BestSpeed"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
+					x:Name="CompressionNope"
 					Width="138"
 					Height="19"
 					Margin="33,154,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					Checked="CompressionNope_Checked"
 					Content="Nope"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
+					x:Name="CompressionLevel1"
 					Width="138"
 					Height="19"
 					Margin="247,149,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					Checked="CompressionLevel1_Checked"
 					Content="Level1"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
+					x:Name="CompressionLevel4"
 					Width="138"
 					Height="19"
 					Margin="247,173,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					Checked="CompressionLevel4_Checked"
 					Content="Level4"
 					FontFamily="Candara Light"
 					FontSize="15" />
 				<CheckBox
+					x:Name="CompressionBestCompression"
 					Width="138"
 					Height="19"
 					Margin="432,173,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					Checked="CompressionBestCompression_Checked"
 					Content="BestCompression"
 					FontFamily="Candara Light"
 					FontSize="15" />
+				<Border Margin="10,206,10,10" BorderBrush="{x:Null}">
+					<TextBlock
+						Width="572"
+						Height="68"
+						Margin="10,145,0,7"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Center"
+						Opacity="0.6"
+						TextWrapping="Wrap"><Run Text=" " /><Run Text="The author is also not responsible for the modified or repackaged Anzu executable file, for any cases that " /><Run Text="  " /><Run Text="affect the integrity of the original Anzu executable file. Therefore, the author does not consent to code changes, modifications and other procedures affecting the original program code. The authors of the program are not responsible for the loss of important data. You do everything at your own peril and risk" /><LineBreak /><Run /><LineBreak /><Run /></TextBlock>
+				</Border>
+				<TextBlock Margin="487,206,10,208">
+					<Hyperlink Click="Hyperlink_Click" NavigateUri="https://github.com/NeluQi">github.com/NeluQi</Hyperlink>
+				</TextBlock>
 
 				<!--  Приоритет  -->
 			</Grid>
@@ -383,7 +464,7 @@
 				<Border
 					Width="582"
 					Height="77"
-					Margin="10,174,0,0"
+					Margin="10,95,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Background="Transparent"
@@ -391,21 +472,6 @@
 					BorderThickness="1">
 
 					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
-					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
-				</Border>
-
-				<Border
-					Width="582"
-					Height="77"
-					Margin="10,92,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-
-					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
-					<Label Margin="339,-1,9,50" Content="*After backup, the desktop will be cleared" />
 				</Border>
 
 				<Border
@@ -417,20 +483,20 @@
 					Background="Transparent"
 					BorderBrush="#FF383838"
 					BorderThickness="1">
-					<Border.ToolTip>All files and folders from the desktop will be added to the archive placed in the main backup folder and after that all files from the desktop will be deleted.</Border.ToolTip>
-					<Label Margin="349,-1,-1,50" Content="*After backup, the desktop will be cleared" />
+					<Border.ToolTip>All files and folders from the desktop will be added to the archive placed in the main backup folder and after that all files from the desktop will be deleted (if checkbox on).</Border.ToolTip>
 				</Border>
 
 				<!--  Desktop  -->
 
 				<Label
 					Width="178"
-					Margin="12,13,412,0"
+					Margin="12,10,412,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Desktop backup"
 					FontFamily="Candara Light"
-					FontSize="25" />
+					FontSize="25"
+					FontWeight="Bold" />
 				<Button
 					Width="100"
 					Height="36"
@@ -445,44 +511,19 @@
 					FontSize="20"
 					Foreground="White" />
 
-				<Label
-					Width="274"
-					Margin="12,93,316,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Content="Desktop backup and sorting"
-					FontFamily="Candara Light"
-					FontSize="22" />
-
-				<Label
-					Margin="12,118,329,276"
-					Content="Files will be divided into folders according &#xD;&#xA;to their extension"
-					Opacity="0.7" />
-				<Button
-					Width="100"
-					Height="36"
-					Margin="482,124,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="#FF17191D"
-					BorderBrush="White"
-					Click="Button_Click_DesktopBackupAndSort"
-					Content="Backup"
-					FontFamily="Candara Light"
-					FontSize="20"
-					Foreground="White" />
-
 				<CheckBox
-					x:Name="DBackSortExtension"
-					Width="176"
-					Margin="296,145,0,0"
+					x:Name="DBackDelete"
+					Width="167"
+					Margin="310,62,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Sort by folder with extension" />
+					Content="Delete files after backup"
+					FontFamily="Candara Light"
+					FontSize="14" />
 
 				<Label
 					Width="142"
-					Margin="12,174,448,0"
+					Margin="12,95,448,0"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Top"
 					Content="Sort Desktop"
@@ -490,13 +531,15 @@
 					FontSize="22" />
 
 				<Label
-					Margin="12,201,329,195"
+					Margin="12,129,329,267"
 					Content="Files will be divided into folders according &#xD;&#xA;to their extension"
+					FontFamily="Candara Light"
+					FontSize="14"
 					Opacity="0.7" />
 				<Button
 					Width="100"
 					Height="36"
-					Margin="482,205,0,0"
+					Margin="482,126,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Background="#FF17191D"
@@ -509,19 +552,27 @@
 
 				<CheckBox
 					x:Name="DSortExtension"
-					Width="181"
-					Margin="296,226,0,0"
+					Width="190"
+					Margin="287,147,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Sort by folder with extension" />
+					Content="Sort by folder with extension"
+					FontFamily="Candara Light"
+					FontSize="14" />
+				<Label
+					Margin="12,44,329,352"
+					Content="An archive will be created with files &#xD;&#xA;from the desktop"
+					FontFamily="Candara Light"
+					FontSize="14"
+					Opacity="0.7" />
 			</Grid>
 
 			<!--  ============================Download Grid============================  -->
 			<Grid
 				x:Name="DownloadGrid"
 				Grid.Row="1"
-				Visibility="Collapsed"
-				Grid.Column="1">
+				Grid.Column="1"
+				Visibility="Collapsed">
 
 				<!--  Visibility="Collapsed"  -->
 
@@ -534,11 +585,13 @@
 					Background="Transparent"
 					BorderBrush="#FF383838"
 					BorderThickness="1">
-					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+					<Border.ToolTip>Files will be divided into folders according &#xD;&#xA;to their extensions</Border.ToolTip>
 					<Label
-						Margin="9,32,313,-1"
+						Margin="-1,32,323,-1"
 						Content="Files will be divided into folders according &#xD;&#xA;to their extensions"
-						Opacity="0.5" />
+						FontFamily="Candara Light"
+						FontSize="14"
+						Opacity="0.7" />
 				</Border>
 
 				<Border
@@ -551,7 +604,11 @@
 					BorderBrush="#FF383838"
 					BorderThickness="1">
 					<Border.ToolTip>Files will be divided into folders according to their extension.</Border.ToolTip>
-					<Label Margin="167,-1,9,50" Content="*Files whose date of change is higher than the selected one will be deleted" />
+					<Label
+						Margin="157,-1,9,50"
+						Content="*Files whose date of change is higher than the selected one will be deleted"
+						FontFamily="Candara Light"
+						FontSize="13" />
 				</Border>
 
 				<Label
@@ -610,26 +667,32 @@
 					FontSize="15" />
 				<CheckBox
 					x:Name="SortExtended"
-					Width="172"
-					Margin="305,43,0,0"
+					Width="180"
+					Margin="297,43,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Sort by folder with extension" />
+					Content="Sort by folder with extension"
+					FontFamily="Candara Light"
+					FontSize="13" />
 				<CheckBox
 					x:Name="DelFiles"
-					Width="146"
-					Margin="331,63,0,0"
+					Width="157"
+					Margin="320,63,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
 					Content="Delete files after sorting"
+					FontFamily="Candara Light"
+					FontSize="13"
 					IsChecked="True" />
 				<TextBox
 					x:Name="OldDayTextBox"
 					Width="61"
-					Height="19"
-					Margin="96,137,0,0"
+					Height="23"
+					Margin="96,134,0,0"
 					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
+					FontFamily="Candara Light"
+					FontSize="15"
 					Text="30"
 					TextWrapping="Wrap" />
 				<Label
@@ -646,77 +709,9 @@
 			<Grid
 				x:Name="FolderGrid"
 				Grid.Row="1"
-				Grid.Column="1"
-				Visibility="Collapsed">
+				Grid.Column="1">
 
 				<!--  Visibility="Collapsed"  -->
-				<Border
-					Width="582"
-					Height="77"
-					Margin="10,92,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
-					<Label
-						Width="148"
-						Margin="433,-1,-1,48"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Center"
-						Content="drag and drop folder"
-						FontFamily="Candara Light"
-						FontSize="15"
-						Opacity="0.4" />
-				</Border>
-
-				<!--  Visibility="Collapsed"  -->
-				<CheckBox
-					x:Name="SortExtendedFolder"
-					Width="172"
-					Margin="277,59,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Content="Sort by folder with extension" />
-				<Border
-					Width="582"
-					Height="77"
-					Margin="10,10,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Background="Transparent"
-					BorderBrush="#FF383838"
-					BorderThickness="1">
-					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
-					<Label
-						Width="148"
-						Margin="433,-1,-1,48"
-						HorizontalAlignment="Center"
-						VerticalAlignment="Center"
-						Content="drag and drop folder"
-						FontFamily="Candara Light"
-						FontSize="15"
-						Opacity="0.4" />
-				</Border>
-
-				<Label
-					Width="243"
-					Margin="10,13,349,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Content="Sort Folder"
-					FontFamily="Candara Light"
-					FontSize="25" />
-				<TextBox
-					x:Name="FOldDayTextBox"
-					Width="61"
-					Height="19"
-					Margin="130,138,0,0"
-					HorizontalAlignment="Left"
-					VerticalAlignment="Top"
-					Text="30"
-					TextWrapping="Wrap" />
 				<Label
 					Width="42"
 					Margin="191,133,369,0"
@@ -725,6 +720,114 @@
 					Content="days"
 					FontFamily="Candara Light"
 					FontSize="15" />
+				<Label
+					Width="110"
+					Margin="20,133,472,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Files older than"
+					FontFamily="Candara Light"
+					FontSize="15" />
+				<Label
+					Width="167"
+					Margin="10,92,425,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Delete old files"
+					FontFamily="Candara Light"
+					FontSize="25" />
+				<Label
+					Width="140"
+					Margin="10,13,452,0"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Top"
+					Content="Sort Folder"
+					FontFamily="Candara Light"
+					FontSize="25" />
+				<Border
+					x:Name="DropSortFiles"
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FFE0E0E0"
+					BorderBrush="#FF383838"
+					BorderThickness="1"
+					Opacity="0.6"
+					Visibility="Collapsed">
+
+					<Border.ToolTip>drag and drop folder</Border.ToolTip>
+					<Image Opacity="0.5" Source="Resources/img/drop-down.png" />
+				</Border>
+				<!--  Visibility="Collapsed"  -->
+				<Label
+					Width="148"
+					Height="33"
+					Margin="223,174,231,229"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Content="drag and drop folder"
+					FontFamily="Candara Light"
+					FontSize="16"
+					Opacity="0.5" />
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,10,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					AllowDrop="true"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1"
+					DragEnter="Border_DragEnter"
+					DragLeave="Border_DragLeave"
+					Drop="Border_Drop" />
+
+				<Border
+					x:Name="DropOldFiles"
+					Width="582"
+					Height="77"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FFE0E0E0"
+					BorderBrush="#FF383838"
+					BorderThickness="1"
+					Opacity="0.6"
+					Visibility="Collapsed">
+
+					<Border.ToolTip>drag and drop folder</Border.ToolTip>
+					<Image Opacity="0.5" Source="Resources/img/drop-down.png" />
+				</Border>
+
+				<!--  Visibility="Collapsed"  -->
+				<Border
+					Width="582"
+					Height="77"
+					Margin="10,92,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					AllowDrop="true"
+					Background="Transparent"
+					BorderBrush="#FF383838"
+					BorderThickness="1"
+					DragEnter="Border_DragEnter_1"
+					DragLeave="Border_DragLeave_1"
+					Drop="Border_Drop_1">
+					<Border.ToolTip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Border.ToolTip>
+				</Border>
+				<!--  Visibility="Collapsed"  -->
+				<CheckBox
+					x:Name="SortExtendedFolder"
+					Width="180"
+					Margin="275,63,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Content="Sort by folder with extension"
+					FontFamily="Candara Light"
+					FontSize="13" />
 				<Button
 					Width="127"
 					Height="36"
@@ -738,14 +841,17 @@
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
-				<Label
-					Width="243"
-					Margin="10,92,349,0"
-					HorizontalAlignment="Center"
+				<TextBox
+					x:Name="FOldDayTextBox"
+					Width="61"
+					Height="23"
+					Margin="130,136,0,0"
+					HorizontalAlignment="Left"
 					VerticalAlignment="Top"
-					Content="Delete old files"
 					FontFamily="Candara Light"
-					FontSize="25" />
+					FontSize="15"
+					Text="30"
+					TextWrapping="Wrap" />
 				<Button
 					Width="127"
 					Height="36"
@@ -759,14 +865,6 @@
 					FontFamily="Candara Light"
 					FontSize="20"
 					Foreground="White" />
-				<Label
-					Width="110"
-					Margin="20,133,472,0"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Top"
-					Content="Files older than"
-					FontFamily="Candara Light"
-					FontSize="15" />
 			</Grid>
 
 			<!--  ============================ProgressPanel============================  -->
@@ -933,6 +1031,17 @@
 				<!--  Visibility="Collapsed"  -->
 				<!--  ProgressPanel  -->
 			</Grid>
+			<Image
+				Width="45"
+				Height="44"
+				Margin="10,10,0,0"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				RenderOptions.BitmapScalingMode="HighQuality"
+				RenderOptions.EdgeMode="Aliased"
+				SnapsToDevicePixels="True"
+				Source="Resources/img/logo-window.png"
+				Stretch="Fill" />
 			<!--  ============================/ProgressPanel============================  -->
 		</Grid>
 		<!--  =========================== /CONTEXT ========================  -->

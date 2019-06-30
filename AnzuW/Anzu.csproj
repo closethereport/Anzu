@@ -89,11 +89,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandLine\ConsoleHelper.cs" />
     <Compile Include="Common\KnownFolders.cs" />
     <Compile Include="Common\ProgressController.cs" />
     <Compile Include="Common\TypeFiles.cs" />
     <Compile Include="Common\WindowController.cs" />
     <Compile Include="Functions\Desktop.cs" />
+    <Compile Include="Functions\FolderSort.cs" />
     <Compile Include="Functions\DesktopSort.cs" />
     <Compile Include="Functions\DownloadFolder.cs" />
     <Compile Include="Functions\SearchFile.cs" />
@@ -147,9 +149,6 @@
     <Resource Include="Resources\img\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\img\drop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\img\icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +160,22 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\cloud-computing.png" />
+    <Resource Include="Resources\img\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\desktop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\logo-window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\drop-down.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

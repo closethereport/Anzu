@@ -17,7 +17,7 @@ using System.Threading;
 /// </summary>
 internal class Desktop
 {
-	public void Backup() //Функция бэкапа
+	public void Backup(bool DelFile = true)
 	{
 		MainWindow.BGThread = (new Thread(() =>
 		{
@@ -27,41 +27,39 @@ internal class Desktop
 			try
 			{
 				string zipPath = AnzuW.Properties.Settings.Default.MainBackupFolder + "Desktop " + DateTime.Now.ToString("dd.MM.yyyy (hh-mm)") + ".zip";
-				Progress.AddLog("Backup to " + zipPath); //Добавить строку в лог
+				Progress.AddLog("Backup to " + zipPath);
 
-				//Лист с фалами
 				var FileList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetFiles();
 				var DirectoryList = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)).GetDirectories();
 
-				using (ZipFile zip = new ZipFile()) // Создаем объект для работы с архивом
+				using (ZipFile zip = new ZipFile())
 				{
-					zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Level2; // MAX степень сжатия
-					zip.AlternateEncoding = Encoding.UTF8; //Кодировка
-					zip.AlternateEncodingUsage = ZipOption.AsNecessary;  //Кодировка
+					zip.CompressionLevel = GetComLvl();
+					zip.AlternateEncoding = Encoding.UTF8;
+					zip.AlternateEncodingUsage = ZipOption.AsNecessary;
 
-					//Отслеживание событий (Прогресса архивирования )
 					zip.SaveProgress += (sender, e) =>
 					{
-						switch (e.EventType) //e - наше событие
+						switch (e.EventType)
 						{
-							case ZipProgressEventType.Saving_Started: //Начало
-								Progress.SetMax(e.EntriesTotal * 2); //Макс значения прогресс бара
+							case ZipProgressEventType.Saving_Started:
+								Progress.SetMax(e.EntriesTotal * 2);
 								break;
 
-							case ZipProgressEventType.Saving_AfterRenameTempArchive: // конец всего архивиров
-								Progress.AddLog("Done"); //логи
+							case ZipProgressEventType.Saving_AfterRenameTempArchive:
+								Progress.AddLog("Done");
 								Progress.AddLog("Archive size (byte):" + new FileInfo(e.ArchiveName).Length.ToString());
 								break;
 
-							case ZipProgressEventType.Saving_BeforeWriteEntry: //Начало архивирование очередного файла
+							case ZipProgressEventType.Saving_BeforeWriteEntry:
 								Progress.AddLog("Add:" + e.CurrentEntry.FileName);
 								break;
 
-							case ZipProgressEventType.Error_Saving: //Ошибка
+							case ZipProgressEventType.Error_Saving:
 								Progress.AddLog("Error " + e.CurrentEntry);
 								break;
 
-							case ZipProgressEventType.Saving_AfterWriteEntry: //Конец архив очередного файла
+							case ZipProgressEventType.Saving_AfterWriteEntry:
 								Progress.AddLog("Done:" + e.CurrentEntry.FileName);
 								Progress.SetText(e.EntriesSaved + "/" + e.EntriesTotal);
 								Progress.SetProgress(e.EntriesSaved);
@@ -71,33 +69,62 @@ internal class Desktop
 
 					zip.AddDirectory(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "");
 
-					zip.Save(zipPath);  // Создаем архив
+					zip.Save(zipPath);
 				}
 
-				Progress.AddLog("///Start delete file///");
-				foreach (var current in FileList) //Удаляем файлы
+				if (DelFile)
 				{
-					Progress.AddLog(current.Name);
-					Progress.AddProgress(1);
-					current.Delete();
-				}
-				foreach (var current in DirectoryList) //удаляем папки
-				{
-					Progress.AddLog(current.Name);
-					Progress.AddProgress(1);
-					current.Delete(true);
+					Progress.AddLog("///Start delete file///");
+					foreach (var current in FileList)
+					{
+						Progress.AddLog(current.Name);
+						Progress.AddProgress(1);
+						current.Delete();
+					}
+					foreach (var current in DirectoryList)
+					{
+						Progress.AddLog(current.Name);
+						Progress.AddProgress(1);
+						current.Delete(true);
+					}
 				}
 
-				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
+				Progress.HideProgressBar();
 			}
 			catch (Exception ex)
 			{
 				Progress.AddLog(ex.StackTrace);
-				Progress.HideProgressBar("!Error!"); //Закрыть бар
+				Progress.HideProgressBar("!Error!");
 			}
 		}));
 
-		MainWindow.BGThread.IsBackground = true; //Обязательно устанавливать для потока
-		MainWindow.BGThread.Start(); //Запуск потока
+		MainWindow.BGThread.IsBackground = true;
+		MainWindow.BGThread.Start();
+	}
+
+	private Ionic.Zlib.CompressionLevel GetComLvl()
+	{
+		switch (AnzuW.Properties.Settings.Default.ComLvl)
+		{
+			case 0:
+				return Ionic.Zlib.CompressionLevel.None;
+
+			case 1:
+				return Ionic.Zlib.CompressionLevel.Default;
+
+			case 2:
+				return Ionic.Zlib.CompressionLevel.Level1;
+
+			case 3:
+				return Ionic.Zlib.CompressionLevel.Level4;
+
+			case 4:
+				return Ionic.Zlib.CompressionLevel.BestSpeed;
+
+			case 5:
+				return Ionic.Zlib.CompressionLevel.BestCompression;
+
+			default: return Ionic.Zlib.CompressionLevel.Default;
+		}
 	}
 }

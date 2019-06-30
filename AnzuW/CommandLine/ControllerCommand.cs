@@ -5,6 +5,8 @@
 
 #endregion copyright
 
+using System;
+
 /// <summary>
 ///Controller command args
 /// </summary>
@@ -14,12 +16,15 @@ internal class ControllerCommand
 
 	public ControllerCommand(string[] args)
 	{
-		//Commands = new Command[] {
-		//	new Command(new string[]{"--NoGUI", "-nogui"}, Execute)
-		//};
+		Commands = new Command[] {
+			new Command(new string[]{"--consolemode", "-con"}, ConsoleMode)
+		};
 	}
 
-	public void Parse()
+	//TODO: Parse com line
+	public void ConsoleMode()
 	{
+		ConsoleHelper.Initialize();
+		Console.WriteLine("Run console mode");
 	}
 }

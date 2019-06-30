@@ -25,6 +25,7 @@ public class ProgressController
 	/// <param name="log">String</param>
 	public void AddLog(string log)
 	{
+		Console.WriteLine(log);
 		MainWindow.Dispatcher.Invoke(new Action(() =>
 		{
 			MainWindow.OutputBlock.Text += log + Environment.NewLine;

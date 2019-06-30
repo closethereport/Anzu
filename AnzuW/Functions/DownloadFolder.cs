@@ -9,9 +9,8 @@ internal class DownloadFolder
 	{
 		MainWindow.BGThread = (new Thread(() =>
 		{
-			////////////////////ТЕЛО ПОТОКА////////////////////////
 			var Progress = new ProgressController();
-			Progress.ShowProgressBar(); //ПОКАЗАТЬ БАР
+			Progress.ShowProgressBar();
 
 			try
 			{
@@ -21,7 +20,6 @@ internal class DownloadFolder
 				string path = dir.FullName + $"/SortFiles({DateTime.Now.ToString("dd.MM.yyyy (hh-mm)")})/";
 				if (!TypeFolder)
 				{
-					Directory.CreateDirectory(path + "/Other/");
 					foreach (var t in FileList)
 					{
 						try
@@ -68,16 +66,16 @@ internal class DownloadFolder
 						file.Delete();
 					}
 				}
-				Progress.HideProgressBar(); //СКРЫВАЕМ БАР
+				Progress.HideProgressBar();
 			}
 			catch (Exception ex)
 			{
 				Progress.AddLog(ex.StackTrace);
-				Progress.HideProgressBar("!Error!"); //Закрыть бар
+				Progress.HideProgressBar("!Error!");
 			}
 		}));
 
-		MainWindow.BGThread.IsBackground = true; //Обязательно устанавливать для потока
-		MainWindow.BGThread.Start(); //Запуск потока
+		MainWindow.BGThread.IsBackground = true;
+		MainWindow.BGThread.Start();
 	}
 }
