@@ -15,369 +15,380 @@ using WinForms = System.Windows.Forms;
 
 namespace AnzuW
 {
-	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		/// <summary>
-		/// BG Thread
-		/// </summary>
-		public static Thread BGThread;
+    /// <summary>
+    /// Логика взаимодействия для MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        /// <summary>
+        /// BG Thread
+        /// </summary>
+        public static Thread BGThread;
 
-		/// <summary>
-		/// MainWindow
-		/// </summary>
-		public MainWindow()
-		{
-			if (Environment.GetCommandLineArgs().Length > 1)
-			{
-				var CommandLinePasre = new ControllerCommand(Environment.GetCommandLineArgs());
+        /// <summary>
+        /// MainWindow
+        /// </summary>
+        public MainWindow()
+        {
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                var CommandLinePasre = new ControllerCommand(Environment.GetCommandLineArgs());
 
-				System.Environment.Exit(0);
-			}
-			else
-			{
-				InitializeComponent();
-				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-				ProgressPanel.Visibility = Visibility.Collapsed;
-				ProgressController.MainWindow = this;
-				new WindowController(WindowController.Windows.Desktop);
-				switch (Properties.Settings.Default.ComLvl)
-				{
-					case 0:
-						CompressionNope.IsChecked = true;
-						break;
+                System.Environment.Exit(0);
+            }
+            else
+            {
+                InitializeComponent();
+                MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+                ProgressPanel.Visibility = Visibility.Collapsed;
+                ProgressController.MainWindow = this;
+                new WindowController(WindowController.Windows.Desktop);
+                switch (Properties.Settings.Default.ComLvl)
+                {
+                    case 0:
+                        CompressionNope.IsChecked = true;
+                        break;
 
-					case 1:
-						CompressionDefault.IsChecked = true;
-						break;
+                    case 1:
+                        CompressionDefault.IsChecked = true;
+                        break;
 
-					case 2:
-						CompressionLevel1.IsChecked = true;
-						break;
+                    case 2:
+                        CompressionLevel1.IsChecked = true;
+                        break;
 
-					case 3:
-						CompressionLevel4.IsChecked = true;
-						break;
+                    case 3:
+                        CompressionLevel4.IsChecked = true;
+                        break;
 
-					case 4:
-						CompressionBestSpeed.IsChecked = true;
-						break;
+                    case 4:
+                        CompressionBestSpeed.IsChecked = true;
+                        break;
 
-					case 5:
-						CompressionBestCompression.IsChecked = true;
-						break;
-				}
-			}
-		}
+                    case 5:
+                        CompressionBestCompression.IsChecked = true;
+                        break;
+                }
+            }
+        }
 
-		/// <summary>
-		/// Button in the left side menu to enable the tab desktop
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Desktop(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Desktop);
-		}
+        /// <summary>
+        /// Button in the left side menu to enable the tab desktop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Desktop(object sender, RoutedEventArgs e)
+        {
+            new WindowController(WindowController.Windows.Desktop);
+        }
 
-		/// <summary>
-		/// Button in Desktop (Desktop Backup)
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
-			{
-				MessageBox.Show("You need to install the main backup folder in the settings", "Error",
-				MessageBoxButton.OK, MessageBoxImage.Error);
-			}
-			else
-			{
-				var bk = new Desktop();
-				//TODO: Сделать чекбокс на форме
-				bk.Backup(DBackDelete.IsChecked.Value);
-			}
-		}
+        /// <summary>
+        /// Button in Desktop (Desktop Backup)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_DesktopBackup(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
+            {
+                MessageBox.Show("You need to install the main backup folder in the settings", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                var bk = new Desktop();
+                //TODO: Сделать чекбокс на форме
+                bk.Backup(DBackDelete.IsChecked.Value);
+            }
+        }
 
-		/// <summary>
-		/// Button in the left side menu to enable the tab download
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Download(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Download);
-		}
+        /// <summary>
+        /// Button in the left side menu to enable the tab download
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Download(object sender, RoutedEventArgs e)
+        {
+            new WindowController(WindowController.Windows.Download);
+        }
 
-		/// <summary>
-		/// btn in download page (Download Sort)
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_DownloadSort(object sender, RoutedEventArgs e)
-		{
-			if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
-			{
-				MessageBox.Show("You need to install the main backup folder in the settings", "Error",
-				MessageBoxButton.OK, MessageBoxImage.Error);
-			}
-			else
-			{
-				var bk = new DownloadFolder();
-				bk.Dfolder(DelFiles.IsChecked.Value, SortExtended.IsChecked.Value);
-			}
-		}
+        /// <summary>
+        /// btn in download page (Download Sort)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_DownloadSort(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(Properties.Settings.Default.MainBackupFolder))
+            {
+                MessageBox.Show("You need to install the main backup folder in the settings", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                var bk = new DownloadFolder();
+                bk.Dfolder(DelFiles.IsChecked.Value, SortExtended.IsChecked.Value);
+            }
+        }
 
-		/// <summary>
-		/// Button in the left side menu to enable the tab folder
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Folder(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Folder);
-		}
+        /// <summary>
+        /// Button in the left side menu to enable the tab folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Folder(object sender, RoutedEventArgs e)
+        {
+            new WindowController(WindowController.Windows.Folder);
+        }
 
-		private void Button_Click_HideProgress(object sender, RoutedEventArgs e)
-		{
-			ProgressPanel.Visibility = Visibility.Collapsed;
-			DoneProgress.Visibility = Visibility.Collapsed;
-		}
+        private void Button_Click_HideProgress(object sender, RoutedEventArgs e)
+        {
+            ProgressPanel.Visibility = Visibility.Collapsed;
+            DoneProgress.Visibility = Visibility.Collapsed;
+        }
 
-		/// <summary>
-		/// Button in settings (Select folder)
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
-		{
-			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
-			{
-				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
-					Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath + @"\";
-				MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
-				Properties.Settings.Default.Save();
-			}
-		}
+        /// <summary>
+        /// Button in settings (Select folder)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_SelectMainBackupFolder(object sender, RoutedEventArgs e)
+        {
+            using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
+            {
+                if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+                    Properties.Settings.Default.MainBackupFolder = dlg.SelectedPath + @"\";
+                MainBackupFolderTextBox.Text = Properties.Settings.Default.MainBackupFolder;
+                Properties.Settings.Default.Save();
+            }
+        }
 
-		/// <summary>
-		/// Button in the left side menu to enable the tab setting
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_Setting(object sender, RoutedEventArgs e)
-		{
-			new WindowController(WindowController.Windows.Settings);
-		}
+        /// <summary>
+        /// Button in the left side menu to enable the tab setting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_Setting(object sender, RoutedEventArgs e)
+        {
+            new WindowController(WindowController.Windows.Settings);
+        }
 
-		/// <summary>
-		/// Button in progress bar (STOP)
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)
-		{
-			ProgressText.Content = "Wait for closing....";
-			ProgressStopbtn.IsEnabled = false;
-			BGThread.Abort();
-		}
+        /// <summary>
+        /// Button in progress bar (STOP)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_StopOtherThread(object sender, RoutedEventArgs e)
+        {
+            ProgressText.Content = "Wait for closing....";
+            ProgressStopbtn.IsEnabled = false;
+            BGThread.Abort();
+        }
 
-		/// <summary>
-		/// Exit button
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Exit(object sender, RoutedEventArgs e)
-		{
-			System.Windows.Application.Current.Shutdown();
-		}
+        /// <summary>
+        /// Exit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
 
-		private void Minimized(object sender, RoutedEventArgs e)
-		{
-			this.WindowState = WindowState.Minimized;
-		}
+        private void Minimized(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
 
-		/// <summary>
-		/// Drag and drop for program header
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-		{
-			this.DragMove();
-		}
+        /// <summary>
+        /// Drag and drop for program header
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
 
-		/// <summary>
-		/// Desktop Sort btn
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_DesktopSort(object sender, RoutedEventArgs e)
-		{
-			var bk = new DesktopSort();
-			bk.Sort(DSortExtension.IsChecked.Value);
-		}
+        /// <summary>
+        /// Desktop Sort btn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_DesktopSort(object sender, RoutedEventArgs e)
+        {
+            var bk = new DesktopSort();
+            bk.Sort(DSortExtension.IsChecked.Value);
+        }
 
-		/// <summary>
-		/// Download delete old files btn
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_DownloadDelOld(object sender, RoutedEventArgs e)
-		{
-		}
+        /// <summary>
+        /// Download delete old files btn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_DownloadDelOld(object sender, RoutedEventArgs e)
+        {
+            var dk = new DownloadOldFilesFromDownloadFolder();
+            dk.DeleteFDFolder(Convert.ToInt32(OldDayTextBox.Text));
+        }
 
-		/// <summary>
-		/// Sort Folder
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Button_Click_SortFolder(object sender, RoutedEventArgs e)
-		{
-			using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
-			{
-				string path = null;
-				if (dlg.ShowDialog() == WinForms.DialogResult.OK)
-					path = dlg.SelectedPath + @"\";
+        /// <summary>
+        /// Sort Folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_SortFolder(object sender, RoutedEventArgs e)
+        {
+            using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
+            {
+                string path = null;
+                if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+                    path = dlg.SelectedPath + @"\";
 
-				var bk = new FolderSort();
-				bk.Sort(SortExtendedFolder.IsChecked.Value, path);
-			}
-		}
+                var bk = new FolderSort();
+                bk.Sort(SortExtendedFolder.IsChecked.Value, path);
+            }
+        }
 
-		private void Button_Click_DelOldFolder(object sender, RoutedEventArgs e)
-		{
-		}
+        private void Button_Click_DelOldFolder(object sender, RoutedEventArgs e)
+        {
+            using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
+            {
+                string path = null;
+                if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+                    path = dlg.SelectedPath + @"\";
 
-		private void Border_DragEnter(object sender, DragEventArgs e)
-		{
-			DropSortFiles.Visibility = Visibility.Visible;
-		}
+                var sk = new DownloadOldFilesFromDownloadFolder();
+                sk.DeleteFDFolder(Convert.ToInt32(FOldDayTextBox.Text), path);
+            }
+        }
 
-		private void Border_DragLeave(object sender, DragEventArgs e)
-		{
-			DropSortFiles.Visibility = Visibility.Collapsed;
-		}
+        private void Border_DragEnter(object sender, DragEventArgs e)
+        {
+            DropSortFiles.Visibility = Visibility.Visible;
+        }
 
-		private void Border_DragEnter_1(object sender, DragEventArgs e)
-		{
-			DropOldFiles.Visibility = Visibility.Visible;
-		}
+        private void Border_DragLeave(object sender, DragEventArgs e)
+        {
+            DropSortFiles.Visibility = Visibility.Collapsed;
+        }
 
-		private void Border_DragLeave_1(object sender, DragEventArgs e)
-		{
-			DropOldFiles.Visibility = Visibility.Collapsed;
-		}
+        private void Border_DragEnter_1(object sender, DragEventArgs e)
+        {
+            DropOldFiles.Visibility = Visibility.Visible;
+        }
 
-		/// <summary>
-		/// Drag and drop in Sort folder
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Border_Drop(object sender, DragEventArgs e)
-		{
-			string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
-			DropSortFiles.Visibility = Visibility.Collapsed;
-			foreach (var path in Args)
-			{
-				if (System.IO.Directory.Exists(path))
-				{
-					var bk = new FolderSort();
-					bk.Sort(SortExtendedFolder.IsChecked.Value, path);
-					break;
-				}
-			}
-		}
+        private void Border_DragLeave_1(object sender, DragEventArgs e)
+        {
+            DropOldFiles.Visibility = Visibility.Collapsed;
+        }
 
-		/// <summary>
-		/// Drag and drop in old file folder
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void Border_Drop_1(object sender, DragEventArgs e)
-		{
-			string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
-			DropOldFiles.Visibility = Visibility.Collapsed;
-			foreach (var path in Args)
-			{
-				if (System.IO.Directory.Exists(path))
-				{
-				}
-			}
-		}
+        /// <summary>
+        /// Drag and drop in Sort folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Border_Drop(object sender, DragEventArgs e)
+        {
+            string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+            DropSortFiles.Visibility = Visibility.Collapsed;
+            foreach (var path in Args)
+            {
+                if (System.IO.Directory.Exists(path))
+                {
+                    var bk = new FolderSort();
+                    bk.Sort(SortExtendedFolder.IsChecked.Value, path);
+                    break;
+                }
+            }
+        }
 
-		private void CompressionNope_Checked(object sender, RoutedEventArgs e)
-		{
-			CompressionDefault.IsChecked = false;
-			CompressionLevel1.IsChecked = false;
-			CompressionLevel4.IsChecked = false;
-			CompressionBestSpeed.IsChecked = false;
-			CompressionBestCompression.IsChecked = false;
-			Properties.Settings.Default.ComLvl = 0;
-			Properties.Settings.Default.Save();
-		}
+        /// <summary>
+        /// Drag and drop in old file folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Border_Drop_1(object sender, DragEventArgs e)
+        {
+            string[] Args = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+            DropOldFiles.Visibility = Visibility.Collapsed;
+            foreach (var path in Args)
+            {
+                if (System.IO.Directory.Exists(path))
+                {
+                }
+            }
+        }
 
-		private void CompressionDefault_Checked(object sender, RoutedEventArgs e)
-		{
-			CompressionNope.IsChecked = false;
-			CompressionLevel1.IsChecked = false;
-			CompressionLevel4.IsChecked = false;
-			CompressionBestSpeed.IsChecked = false;
-			CompressionBestCompression.IsChecked = false;
-			Properties.Settings.Default.ComLvl = 1;
-			Properties.Settings.Default.Save();
-		}
+        private void CompressionNope_Checked(object sender, RoutedEventArgs e)
+        {
+            CompressionDefault.IsChecked = false;
+            CompressionLevel1.IsChecked = false;
+            CompressionLevel4.IsChecked = false;
+            CompressionBestSpeed.IsChecked = false;
+            CompressionBestCompression.IsChecked = false;
+            Properties.Settings.Default.ComLvl = 0;
+            Properties.Settings.Default.Save();
+        }
 
-		private void CompressionLevel1_Checked(object sender, RoutedEventArgs e)
-		{
-			CompressionNope.IsChecked = false;
-			CompressionDefault.IsChecked = false;
-			CompressionLevel4.IsChecked = false;
-			CompressionBestSpeed.IsChecked = false;
-			CompressionBestCompression.IsChecked = false;
-			Properties.Settings.Default.ComLvl = 2;
-			Properties.Settings.Default.Save();
-		}
+        private void CompressionDefault_Checked(object sender, RoutedEventArgs e)
+        {
+            CompressionNope.IsChecked = false;
+            CompressionLevel1.IsChecked = false;
+            CompressionLevel4.IsChecked = false;
+            CompressionBestSpeed.IsChecked = false;
+            CompressionBestCompression.IsChecked = false;
+            Properties.Settings.Default.ComLvl = 1;
+            Properties.Settings.Default.Save();
+        }
 
-		private void CompressionLevel4_Checked(object sender, RoutedEventArgs e)
-		{
-			CompressionNope.IsChecked = false;
-			CompressionDefault.IsChecked = false;
-			CompressionLevel1.IsChecked = false;
-			CompressionBestSpeed.IsChecked = false;
-			CompressionBestCompression.IsChecked = false;
-			Properties.Settings.Default.ComLvl = 3;
-			Properties.Settings.Default.Save(); ;
-		}
+        private void CompressionLevel1_Checked(object sender, RoutedEventArgs e)
+        {
+            CompressionNope.IsChecked = false;
+            CompressionDefault.IsChecked = false;
+            CompressionLevel4.IsChecked = false;
+            CompressionBestSpeed.IsChecked = false;
+            CompressionBestCompression.IsChecked = false;
+            Properties.Settings.Default.ComLvl = 2;
+            Properties.Settings.Default.Save();
+        }
 
-		private void CompressionBestSpeed_Checked(object sender, RoutedEventArgs e)
-		{
-			CompressionNope.IsChecked = false;
-			CompressionDefault.IsChecked = false;
-			CompressionLevel1.IsChecked = false;
-			CompressionLevel4.IsChecked = false;
-			CompressionBestCompression.IsChecked = false;
-			Properties.Settings.Default.ComLvl = 4;
-			Properties.Settings.Default.Save();
-		}
+        private void CompressionLevel4_Checked(object sender, RoutedEventArgs e)
+        {
+            CompressionNope.IsChecked = false;
+            CompressionDefault.IsChecked = false;
+            CompressionLevel1.IsChecked = false;
+            CompressionBestSpeed.IsChecked = false;
+            CompressionBestCompression.IsChecked = false;
+            Properties.Settings.Default.ComLvl = 3;
+            Properties.Settings.Default.Save(); ;
+        }
 
-		private void CompressionBestCompression_Checked(object sender, RoutedEventArgs e)
-		{
-			CompressionNope.IsChecked = false;
-			CompressionDefault.IsChecked = false;
-			CompressionLevel1.IsChecked = false;
-			CompressionLevel4.IsChecked = false;
-			CompressionBestSpeed.IsChecked = false;
-			Properties.Settings.Default.ComLvl = 5;
-			Properties.Settings.Default.Save();
-		}
+        private void CompressionBestSpeed_Checked(object sender, RoutedEventArgs e)
+        {
+            CompressionNope.IsChecked = false;
+            CompressionDefault.IsChecked = false;
+            CompressionLevel1.IsChecked = false;
+            CompressionLevel4.IsChecked = false;
+            CompressionBestCompression.IsChecked = false;
+            Properties.Settings.Default.ComLvl = 4;
+            Properties.Settings.Default.Save();
+        }
 
-		private void Hyperlink_Click(object sender, RoutedEventArgs e)
-		{
-			Process.Start("https://github.com/NeluQi");
-		}
-	}
+        private void CompressionBestCompression_Checked(object sender, RoutedEventArgs e)
+        {
+            CompressionNope.IsChecked = false;
+            CompressionDefault.IsChecked = false;
+            CompressionLevel1.IsChecked = false;
+            CompressionLevel4.IsChecked = false;
+            CompressionBestSpeed.IsChecked = false;
+            Properties.Settings.Default.ComLvl = 5;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/NeluQi");
+        }
+    }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Common\TypeFiles.cs" />
     <Compile Include="Common\WindowController.cs" />
     <Compile Include="Functions\Desktop.cs" />
+    <Compile Include="Functions\DownloadOldFilesFromDownloadFolder.cs" />
     <Compile Include="Functions\FolderSort.cs" />
     <Compile Include="Functions\DesktopSort.cs" />
     <Compile Include="Functions\DownloadFolder.cs" />
